@@ -1,0 +1,16 @@
+{
+  "name": "repemorizer_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/akhant/repemorizer.git",
+  "author": "akhant <a.khantelev@mail.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "^6.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4"
+  }
+}
