@@ -4,9 +4,13 @@ import { Provider } from "react-redux";
 import createBrowserHistory from "history/createBrowserHistory";
 import configureStore from "../store";
 import Main from "./Main";
+import Header from './Header';
+import LoginPage from './LoginPage'
+import SignupPage from './SignupPage'
 
 import "../assets/js";
 //import "../assets/styles/bootstrap.css";
+import 'semantic-ui-css/semantic.min.css';
 import "../assets/styles/styles.sass";
 
 const history = createBrowserHistory();
@@ -18,7 +22,11 @@ const App = () => (
   <Provider store={store}>
     <Router history={history}>
       <div>
+        <Header />
         <Route path="/" exact component={Main} />
+        <Route path="/login" exact component={LoginPage} />
+        <Route path="/signup" exact component={SignupPage} />
+        
       </div>
     </Router>
   </Provider>

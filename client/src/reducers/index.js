@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import data from "./data";
+import words from "./words";
+import dictionary from './dictionary'
+
 
 export default combineReducers({
-  data
+  dictionary, words
 });

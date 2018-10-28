@@ -27,9 +27,12 @@ module.exports = {
         use: "babel-loader"
       },
      
+     
       {
         test: /\.s?(a|c)ss$/,
-        exclude: /node_modules/,
+        include: [path.resolve(__dirname, "./src/assets/"),
+      path.resolve(__dirname, './node_modules/semantic-ui-css')
+      ],
         use: [
           "style-loader",
           "css-loader",
@@ -50,8 +53,10 @@ module.exports = {
 
       {
         test: /\.(gif|woff(2)?|eot|ttf|png|jpg|jpeg|svg)$/,
-        exclude: /node_modules/,
-        include: path.resolve(__dirname, "./src/assets/"),
+        
+        include: [path.resolve(__dirname, "./src/assets/"),
+      path.resolve(__dirname, './node_modules/semantic-ui-css')
+      ],
         use: "url-loader?limit=10000"
       }
     ]
@@ -73,5 +78,6 @@ module.exports = {
     inline: true,
     hot: true,
     host: "127.0.0.1"
-  }
+  },
+  mode: "development"
 };
