@@ -7,27 +7,24 @@ const Data = store => next => action => {
 
   switch (type) {
     case TRANSLATE:
-      axios
+      return axios
         .post(`${serverUrl}/translate`, { text: payload })
-        .then(res => {
-          return next({
+        .then(res =>
+          next({
             type: TRANSLATE,
-            data: { text: payload, translation: res.data.text }
-          });
-        })
+            data: {
+              text: res.data.text,
+              translation: res.data.translation,
+              wordId: res.data._id
+            }
+          })
+        )
         .catch(err => {
           console.log("Error post TRANSLATE", err);
         });
     default:
       return next(action);
   }
-  /*  if (type === TRANSLATE) {
-    axios.post(`${serverUrl}/translate`, { text: payload }).then(res => {
-      return next({ type: TRANSLATE, ...res.data});
-    }).catch(err => {
-      console.log("Error post TRANSLATE", err)
-    })
-  } */
 
   console.log("STORE", store.getState());
 };

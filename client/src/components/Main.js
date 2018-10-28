@@ -10,9 +10,12 @@ class Main extends Component {
     translation: ""
   };
 
+  
+  
+
   componentDidUpdate(prevProps) {
     const {words} = this.props
-    if (words.length !== prevProps.words.length) {
+    if (words.length && (words.length !== prevProps.words.length)) {
       this.setState({
         translation: words[words.length - 1].translation
       });
@@ -34,7 +37,7 @@ class Main extends Component {
   };
   onSubmit = () => {
     this.props.translateRequest(this.state.formValue);
-    //console.log(this.state.formValue)
+    
   };
   addToRepetition = () => {
     this.props.addToRepetition(this.state.formValue);
@@ -81,8 +84,8 @@ class Main extends Component {
             <div>
               <h2>Recently words</h2>
               <div>
-                {this.props.words.map(({ text, translation }) => (
-                  <p key={text}>{`${text} - ${translation}`}</p>
+                {this.props.words.map(({ text, translation, wordId }) => (
+                  <p key={wordId}>{`${text} - ${translation}`}</p>
                 ))}
               </div>
             </div>

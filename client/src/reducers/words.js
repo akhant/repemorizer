@@ -5,7 +5,19 @@ export default (state = [], action) => {
 
   switch (type) {
     case TRANSLATE:
-      if (data) return [...state, data];
+      if (
+        state.every(d => {
+          if (d) {
+            return d.wordId !== data.wordId;
+          } else {
+            return true;
+          }
+        })
+      ) {
+        return [...state, data];
+      }
+      return state;
+      /* return [...state, data]; */
 
     default:
       return state;
