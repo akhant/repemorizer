@@ -1,4 +1,4 @@
-import { TRANSLATE, GET_DICTIONARY } from "../constants";
+import { TRANSLATE, GET_DICTIONARY,REMOVE_TEXT, GET_FIFTY } from "../constants";
 import axios from "axios";
 const serverUrl = "http://localhost:3000/api";
 
@@ -15,12 +15,27 @@ const Data = store => next => action => {
             data: {
               text: res.data.text,
               translation: res.data.translation,
-              _id: res.data._id
+              _id: res.data._id,
+              addedTime: res.data.addedTime
             }
           })
         )
         .catch(err => {
           console.log("Error post TRANSLATE", err);
+        });
+    case GET_FIFTY:
+      return axios
+        .get(`${serverUrl}/get_fifty`)
+        .then(res =>
+          next({
+            type: GET_FIFTY,
+            data: {
+              dictionary: res.data
+            }
+          })
+        )
+        .catch(err => {
+          console.log("Error get GET_FIFTY", err);
         });
     case GET_DICTIONARY:
       return axios
@@ -34,13 +49,26 @@ const Data = store => next => action => {
           })
         )
         .catch(err => {
-          console.log("Error get GET_DICTIONARY", err);
+          console.log("Error get GET_FIFTY", err);
         });
+    case REMOVE_TEXT:
+      return axios
+        .post(`${serverUrl}/remove_text`, {id: payload})
+        .then(res =>
+          next({
+            type: REMOVE_TEXT,
+            data: {
+              removedElement: res.data
+            }
+          })
+        )
+        .catch(err => {
+          console.log("Error post REMOVE_TEXT", err);
+        });
+      
     default:
       return next(action);
   }
-
-  
 };
 
 export default Data;

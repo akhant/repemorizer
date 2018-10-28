@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
+import {Link} from 'react-router-dom'
 import * as actions from "../actions";
 
 
@@ -24,7 +25,7 @@ class Main extends Component {
   }
   componentDidMount = () => {
     
-    this.props.getDictionary()
+    this.props.getFifty()
   };
 
   onChangeInput = e => {
@@ -41,6 +42,10 @@ class Main extends Component {
     this.props.addToRepetition(this.state.formValue);
   };
 
+ /*  showAll = () => {
+    this.props.getDictionary()
+  } */
+  
   render() {
     return (
       <Grid className="main-page">
@@ -72,15 +77,17 @@ class Main extends Component {
               />
             </Form>
           </Grid.Column>
-          <Grid.Column width={4}>
-            <div>
-              <h2>Dictionary</h2>
+          <Grid.Column  width={4}>
+            <div className="dictionary">
+              <h2>Last added words</h2>
               <div>
                 {this.props.dictionary.map(({ text, translation, _id }) => (
                   <p key={_id}>{`${text} - ${translation}`}</p>
                 ))}
               </div>
+              
             </div>
+            <Link to="/dictionary" onClick={this.showAll} >Show all</Link>
             
           </Grid.Column>
         </Grid.Row>

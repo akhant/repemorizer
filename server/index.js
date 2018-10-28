@@ -19,8 +19,9 @@ app.use(bodyParser.json())
 
 
 app.post('/api/translate', route.translate)
+app.get('/api/get_fifty', route.getFifty)
 app.get('/api/get_dictionary', route.getDictionary)
-
+app.post('/api/remove_text', route.removeText)
 
 
 app.get("/", (req, res) => {

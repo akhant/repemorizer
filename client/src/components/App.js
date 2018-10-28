@@ -7,6 +7,7 @@ import Main from "./Main";
 import Header from './Header';
 import LoginPage from './LoginPage'
 import SignupPage from './SignupPage'
+import Dictionary from './Dictionary'
 
 import "../assets/js";
 //import "../assets/styles/bootstrap.css";
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={LoginPage} />
         <Route path="/signup" exact component={SignupPage} />
+        <Route path="/dictionary" exact component={Dictionary} />
         
       </div>
     </Router>

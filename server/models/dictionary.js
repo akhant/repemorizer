@@ -6,7 +6,8 @@ const Dictionary = new Schema({
     text: String,
     translation: String,
     repeatStage: Number,
-    done: Boolean
+    done: Boolean,
+    addedTime: String
     //userId: { type: Schema.Types.ObjectId, ref: "User"}
 });
 
