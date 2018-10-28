@@ -1,4 +1,4 @@
-import {TRANSLATE, ADD_TO_REPETITION} from '../constants'
+import {TRANSLATE, ADD_TO_REPETITION, GET_DICTIONARY} from '../constants'
 
 export const translateRequest = (text) => ({
   type: TRANSLATE,
@@ -8,5 +8,9 @@ export const translateRequest = (text) => ({
 export const addToRepetition = (text) => ({
     type: ADD_TO_REPETITION,
     payload: text
+  })
+
+  export const getDictionary = () => ({
+    type: GET_DICTIONARY
   })
   

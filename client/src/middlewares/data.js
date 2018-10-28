@@ -1,4 +1,4 @@
-import { TRANSLATE } from "../constants";
+import { TRANSLATE, GET_DICTIONARY } from "../constants";
 import axios from "axios";
 const serverUrl = "http://localhost:3000/api";
 
@@ -15,18 +15,32 @@ const Data = store => next => action => {
             data: {
               text: res.data.text,
               translation: res.data.translation,
-              wordId: res.data._id
+              _id: res.data._id
             }
           })
         )
         .catch(err => {
           console.log("Error post TRANSLATE", err);
         });
+    case GET_DICTIONARY:
+      return axios
+        .get(`${serverUrl}/get_dictionary`)
+        .then(res =>
+          next({
+            type: GET_DICTIONARY,
+            data: {
+              dictionary: res.data
+            }
+          })
+        )
+        .catch(err => {
+          console.log("Error get GET_DICTIONARY", err);
+        });
     default:
       return next(action);
   }
 
-  console.log("STORE", store.getState());
+  
 };
 
 export default Data;

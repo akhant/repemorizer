@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { translateRequest, addToRepetition } from "../actions";
+import * as actions from "../actions";
+
 
 class Main extends Component {
   state = {
@@ -14,26 +15,23 @@ class Main extends Component {
   
 
   componentDidUpdate(prevProps) {
-    const {words} = this.props
-    if (words.length && (words.length !== prevProps.words.length)) {
+    const {dictionary} = this.props
+    if (this.state.formValue && (dictionary.length !== prevProps.dictionary.length)) {
       this.setState({
-        translation: words[words.length - 1].translation
+        translation: dictionary[dictionary.length - 1].translation
       });
     }
   }
- /*  componentDidMount = () => {
-    const { words } = this.props;
-    if (words.length) {
-      this.setState({
-        translation: words[words.length - 1].translation
-      });
-    }
-  }; */
+  componentDidMount = () => {
+    
+    this.props.getDictionary()
+  };
 
   onChangeInput = e => {
     this.setState({
       formValue: e.target.value
     });
+    
   };
   onSubmit = () => {
     this.props.translateRequest(this.state.formValue);
@@ -61,13 +59,7 @@ class Main extends Component {
                   <Button type="sumbit" className="btn" primary>
                     Translate
                   </Button>
-                  <Button
-                    onClick={this.addToRepetition}
-                    className="btn"
-                    primary
-                  >
-                    Translate and add to repetiton
-                  </Button>
+                  
                 </Form.Group>
               </Form.Group>
 
@@ -82,21 +74,14 @@ class Main extends Component {
           </Grid.Column>
           <Grid.Column width={4}>
             <div>
-              <h2>Recently words</h2>
+              <h2>Dictionary</h2>
               <div>
-                {this.props.words.map(({ text, translation, wordId }) => (
-                  <p key={wordId}>{`${text} - ${translation}`}</p>
+                {this.props.dictionary.map(({ text, translation, _id }) => (
+                  <p key={_id}>{`${text} - ${translation}`}</p>
                 ))}
               </div>
             </div>
-            <div>
-              <h2>Words to repeat</h2>
-              <div>
-                {this.props.dictionary.map(word => (
-                  <p key={word}>{word}</p>
-                ))}
-              </div>
-            </div>
+            
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -105,9 +90,8 @@ class Main extends Component {
 }
 
 export default connect(
-  ({ dictionary, words }) => ({
-    dictionary,
-    words
+  ({ dictionary }) => ({
+    dictionary
   }),
-  { translateRequest, addToRepetition }
+  { ...actions }
 )(Main);

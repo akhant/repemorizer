@@ -19,6 +19,7 @@ app.use(bodyParser.json())
 
 
 app.post('/api/translate', route.translate)
+app.get('/api/get_dictionary', route.getDictionary)
 
 
 

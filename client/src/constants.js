@@ -1,2 +1,3 @@
 export const TRANSLATE = 'TRANSLATE'
 export const ADD_TO_REPETITION = 'ADD_TO_REPETITION'
+export const GET_DICTIONARY = 'GET_DICTIONARY'
