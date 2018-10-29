@@ -2,7 +2,9 @@ import {
   TRANSLATE,
   GET_DICTIONARY,
   REMOVE_TEXT,
-  GET_FIFTY
+  GET_FIFTY,
+  GET_WORDS_TO_REPEAT,
+  CHECK_WORDS_TO_REPEAT
 } from "../constants";
 import axios from "axios";
 const serverUrl = "http://localhost:3000/api";
@@ -62,6 +64,24 @@ const Data = store => next => action => {
           })
         )
         .catch(err => console.log("Error post REMOVE_TEXT", err));
+    case GET_WORDS_TO_REPEAT:
+      return axios
+        .get(`${serverUrl}/get_words_to_repeat`, )
+        .then(res =>
+          next({
+            type: GET_WORDS_TO_REPEAT,
+            data: {
+              wordsToRepeat: res.data
+            }
+          })
+        )
+        .catch(err => console.log("Error post GET_WORDS_TO_REPEAT", err));
+    
+        case CHECK_WORDS_TO_REPEAT:
+      return axios
+        .get(`${serverUrl}/check_words_to_repeat` )
+        
+        .catch(err => console.log("Error get CHECK_WORDS_TO_REPEAT", err));
 
     default:
       return next(action);

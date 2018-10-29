@@ -16,6 +16,7 @@ const Dictionary = new Schema({
 
 Dictionary.methods.checkRepeatTime = function (){
     this.isRepeatTime = ( Date.now() - Date.parse(this.lastRepeat) ) > STAGE[this.stage]  ? true : false
+    return this;
     /* if (stage[this.repeatStage] > Date.now()) return true  
     else return false */
 }

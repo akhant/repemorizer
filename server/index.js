@@ -22,6 +22,8 @@ app.post('/api/translate', route.translate)
 app.get('/api/get_fifty', route.getFifty)
 app.get('/api/get_dictionary', route.getDictionary)
 app.post('/api/remove_text', route.removeText)
+app.get('/api/get_words_to_repeat', route.getWordsToRepeat)
+app.get('/api/check_words_to_repeat', route.checkWordsToRepeat)
 
 
 app.get("/", (req, res) => {

@@ -5,9 +5,11 @@ import { connect } from "react-redux";
 import {Link} from 'react-router-dom'
 import * as actions from "../actions";
 
+
 //TODO: protect form
 //TODO: separate the component
 class Main extends Component {
+  
   state = {
     formValue: "",
     translation: ""
@@ -23,8 +25,7 @@ class Main extends Component {
     }
   }
   componentDidMount = () => {
-    
-    this.props.getFifty()
+      this.props.getFifty()
   };
 
   onChangeInput = e => {
@@ -92,6 +93,11 @@ class Main extends Component {
     );
   }
 }
+
+Main.propTypes = {
+  dictionary: PropTypes.array,
+}
+
 
 export default connect(
   ({ dictionary }) => ({

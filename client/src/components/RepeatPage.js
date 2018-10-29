@@ -4,17 +4,20 @@ import { Grid, Table, Button } from "semantic-ui-react";
 import {getWordsToRepeat} from "../actions";
 
 export class RepeatPage extends Component {
-  /* componentDidMount = () => {
+  componentDidMount = () => {
     this.props.getWordsToRepeat();
-  }; */
+  };
  render() {
+     console.log(this.props.words)
     return (
       <div>
         <Grid>
           <Grid.Row>
             <Grid.Column>
               <h1>Memory check!</h1>
-              <h2>Words for repetition</h2>
+              {this.props.words.map(({text,translation,_id}) => {
+                  return <p key={_id}>{`${text} - ${translation}`}</p>
+              })}
               
             </Grid.Column>
           </Grid.Row>
@@ -24,9 +27,11 @@ export class RepeatPage extends Component {
   }
 }
 
+
+
 export default connect(
-  ({ dictionary }) => ({
-    dictionary
+  ({ words }) => ({
+    words
   }),
   { getWordsToRepeat }
 )(RepeatPage);

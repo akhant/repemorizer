@@ -1,7 +1,7 @@
 import axios from "axios";
 require("dotenv").config();
 import Dictionary from "../models/dictionary";
-import {STAGE} from '../constants'
+import { STAGE } from "../constants";
 /* https://translate.yandex.net/api/v1.5/tr.json/translate
 ? [key=<API-ключ>]
 & [text=<переводимый текст>]
@@ -9,7 +9,6 @@ import {STAGE} from '../constants'
 & [format=<формат текста>]
 & [options=<опции перевода>]
 & [callback=<имя callback-функции>] */
-
 
 //const stageMedium = [25, 1200, 28800, 86400, 1209600, 4838400, 31536000];
 
@@ -74,22 +73,25 @@ export function removeText(req, res) {
 }
 
 export function getWordsToRepeat(req, res) {
-  Dictionary.find({})
-    .then(words => {
-      const wLength = words.length;
-      for (let i = 0; i < wLength; i++) {
-        words[i].checkRepeatTime();
-      }
+  // .then(() => {
+  Dictionary.find({ isRepeatTime: true })
+    .then(repeatWords => {
+      //console.log(repeatWords)
+      if (repeatWords.length) return res.send(repeatWords);
+      return res.send([]);
     })
-    .then(() => {
-      Dictionary.find({ isRepeatTime: true })
-        .then(repeatWords => {
-          if (repeatWords.length) return res.send(repeatWords);
-          return res.send("There is no words to repeat");
-        })
-        .catch(err => console.log("error DB wordsToRepeat", err));
-    })
-    .catch(err => console.log("error DB wordsToRepeat", err));
+    .catch(err => console.log("error DB getwordsToRepeat", err));
+  //})
+  // .catch(err => console.log("error DB wordsToRepeat", err));
+}
+
+export function checkWordsToRepeat(req, res) {
+  Dictionary.find({}).then(words => {
+    for (let i = 0; i < words.length; i++) {
+      words[i].checkRepeatTime().save();
+    }
+    res.status(200)
+  }).catch(err => console.log("error DB checkWordsToRepeat"))
 }
 
 //after repeat we find word by id, set lastRepeat = new Date(),

@@ -2,7 +2,8 @@ import {
   TRANSLATE,
   GET_FIFTY,
   GET_DICTIONARY,
-  REMOVE_TEXT
+  REMOVE_TEXT,
+  GET_WORDS_TO_REPEAT
 } from "../constants";
 
 export default (state = [], action) => {
@@ -40,7 +41,9 @@ export default (state = [], action) => {
 
     case REMOVE_TEXT:
       return state.filter(word => word._id !== data.removedElement._id);
-    default:
+
+    
+      default:
       return state;
   }
 };

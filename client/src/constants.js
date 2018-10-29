@@ -3,6 +3,8 @@ export const ADD_TO_REPETITION = 'ADD_TO_REPETITION'
 export const GET_DICTIONARY = 'GET_DICTIONARY'
 export const GET_FIFTY = 'GET_FIFTY'
 export const REMOVE_TEXT = 'REMOVE_TEXT'
+export const GET_WORDS_TO_REPEAT = 'GET_WORDS_TO_REPEAT'
+export const CHECK_WORDS_TO_REPEAT = 'CHECK_WORDS_TO_REPEAT'
 
 
 export const STAGE = [

@@ -11,6 +11,8 @@ export default class Header extends Component {
             <Grid.Column  width={2} floated="right">
               <Link to="/login">Login</Link> |
               <Link to="/signup">Signup</Link> |
+              <Link to="/dictionary">Dictionary</Link> |
+              <Link to="/repeat">Repeat</Link> |
               <Link to="/">Main</Link>
             </Grid.Column>
           </Grid.Row>
