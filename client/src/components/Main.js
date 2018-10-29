@@ -5,15 +5,14 @@ import { connect } from "react-redux";
 import {Link} from 'react-router-dom'
 import * as actions from "../actions";
 
-
+//TODO: protect form
+//TODO: separate the component
 class Main extends Component {
   state = {
     formValue: "",
     translation: ""
   };
-
-  
-  
+ 
 
   componentDidUpdate(prevProps) {
     const {dictionary} = this.props
@@ -42,9 +41,7 @@ class Main extends Component {
     this.props.addToRepetition(this.state.formValue);
   };
 
- /*  showAll = () => {
-    this.props.getDictionary()
-  } */
+
   
   render() {
     return (
@@ -87,7 +84,7 @@ class Main extends Component {
               </div>
               
             </div>
-            <Link to="/dictionary" onClick={this.showAll} >Show all</Link>
+            <Link to="/dictionary"  >Show all</Link>
             
           </Grid.Column>
         </Grid.Row>

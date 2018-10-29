@@ -1,17 +1,42 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, Table, Button } from "semantic-ui-react";
-import {getDictionary, removeText} from "../actions";
+import { getDictionary, removeText } from "../actions";
+import { STAGE } from "../constants";
 
 export class Dictionary extends Component {
   componentDidMount = () => {
     this.props.getDictionary();
   };
 
-  onRemoveClick = (e) => {
-      
-      this.props.removeText(e.target.id)
-  }
+  onRemoveClick = e => {
+    this.props.removeText(e.target.id);
+  };
+  renderAddTime = time => {
+    if (!time) return "";
+    const t = new Date(time);
+    return `${t.toLocaleDateString()} at ${t.toLocaleTimeString()}`;
+  };
+  renderNextRepeatIn = (lastRepeat, stage, isRepeatTime) => {
+    if (isRepeatTime) return "Ready to repeat";
+    const s = Math.floor(
+      (Date.parse(lastRepeat) + STAGE[stage] - Date.now()) / 1000
+    );
+    return s > 0 ? this.renderTime(s) : "Ready to repeat";
+  };
+
+  renderTime = time => {
+    let S = `${time % 60} sec `;
+    let D = time < 86400 ? "" : `${~~(time / 86400)} d `;
+    let H = time < 3600 ? "" : `${~~(time / 3600)} h `;
+    let M = time < 60 ? "" : `${~~(time / 60)} min `;
+
+    return (
+      <div className="add-time">
+        {D} {H} {M} {S}
+      </div>
+    );
+  };
   renderTable = () => {
     return (
       <Table textAlign="center" celled selectable>
@@ -28,15 +53,19 @@ export class Dictionary extends Component {
 
         <Table.Body>
           {this.props.dictionary.map(
-            ({ text, translation, _id, addedTime, stage }) => (
+            ({ text, translation, _id, addTime, stage, lastRepeat }) => (
               <Table.Row key={_id}>
-                <Table.Cell >{text}</Table.Cell>
+                <Table.Cell>{text}</Table.Cell>
                 <Table.Cell>{translation}</Table.Cell>
-                <Table.Cell width={2}>{addedTime}</Table.Cell>
+                <Table.Cell width={2}>{this.renderAddTime(addTime)}</Table.Cell>
                 <Table.Cell width={1}>{stage}</Table.Cell>
-                <Table.Cell width={2}>2h53m</Table.Cell>
+                <Table.Cell width={2}>
+                  {this.renderNextRepeatIn(lastRepeat, stage)}
+                </Table.Cell>
                 <Table.Cell width={1}>
-                  <Button onClick={this.onRemoveClick} color="red" id={_id}>[X]</Button>
+                  <Button onClick={this.onRemoveClick} color="red" id={_id}>
+                    [X]
+                  </Button>
                 </Table.Cell>
               </Table.Row>
             )

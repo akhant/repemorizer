@@ -3,3 +3,17 @@ export const ADD_TO_REPETITION = 'ADD_TO_REPETITION'
 export const GET_DICTIONARY = 'GET_DICTIONARY'
 export const GET_FIFTY = 'GET_FIFTY'
 export const REMOVE_TEXT = 'REMOVE_TEXT'
+
+
+export const STAGE = [
+    25000,
+    120000,
+    600000,
+    3600000,
+    18000000,
+    86400000,
+    432000000,
+    2160000000,
+    10800000000,
+    64800000000
+  ];

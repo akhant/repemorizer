@@ -1,14 +1,24 @@
 import mongoose from "mongoose";
-
+import {STAGE} from '../constants'
 const { Schema } = mongoose;
 
 const Dictionary = new Schema({
     text: String,
     translation: String,
-    repeatStage: Number,
+    stage: {type: Number, default: 0},
     done: Boolean,
-    addedTime: String
+    addTime: Object, 
+    lastRepeat: Object,
+    isRepeatTime: {type: Boolean, default: false}
     //userId: { type: Schema.Types.ObjectId, ref: "User"}
 });
+
+
+Dictionary.methods.checkRepeatTime = function (){
+    this.isRepeatTime = ( Date.now() - Date.parse(this.lastRepeat) ) > STAGE[this.stage]  ? true : false
+    /* if (stage[this.repeatStage] > Date.now()) return true  
+    else return false */
+}
+
 
 export default mongoose.model("Dictionary", Dictionary);

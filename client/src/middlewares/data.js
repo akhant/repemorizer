@@ -1,7 +1,15 @@
-import { TRANSLATE, GET_DICTIONARY,REMOVE_TEXT, GET_FIFTY } from "../constants";
+import {
+  TRANSLATE,
+  GET_DICTIONARY,
+  REMOVE_TEXT,
+  GET_FIFTY
+} from "../constants";
 import axios from "axios";
 const serverUrl = "http://localhost:3000/api";
 
+
+// TODO: change error handling to send error to server and
+// write to log, don't show to client
 const Data = store => next => action => {
   const { type, payload } = action;
 
@@ -9,20 +17,15 @@ const Data = store => next => action => {
     case TRANSLATE:
       return axios
         .post(`${serverUrl}/translate`, { text: payload })
-        .then(res =>
+        .then(res => 
           next({
             type: TRANSLATE,
             data: {
-              text: res.data.text,
-              translation: res.data.translation,
-              _id: res.data._id,
-              addedTime: res.data.addedTime
+              ...res.data
             }
           })
         )
-        .catch(err => {
-          console.log("Error post TRANSLATE", err);
-        });
+        .catch(err => console.log("Error post TRANSLATE", err));
     case GET_FIFTY:
       return axios
         .get(`${serverUrl}/get_fifty`)
@@ -34,9 +37,7 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => {
-          console.log("Error get GET_FIFTY", err);
-        });
+        .catch(err => console.log("Error get GET_FIFTY", err));
     case GET_DICTIONARY:
       return axios
         .get(`${serverUrl}/get_dictionary`)
@@ -48,12 +49,10 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => {
-          console.log("Error get GET_FIFTY", err);
-        });
+        .catch(err => console.log("Error get GET_FIFTY", err));
     case REMOVE_TEXT:
       return axios
-        .post(`${serverUrl}/remove_text`, {id: payload})
+        .post(`${serverUrl}/remove_text`, { id: payload })
         .then(res =>
           next({
             type: REMOVE_TEXT,
@@ -62,10 +61,8 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => {
-          console.log("Error post REMOVE_TEXT", err);
-        });
-      
+        .catch(err => console.log("Error post REMOVE_TEXT", err));
+
     default:
       return next(action);
   }
