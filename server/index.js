@@ -23,8 +23,8 @@ app.get('/api/get_fifty', route.getFifty)
 app.get('/api/get_dictionary', route.getDictionary)
 app.post('/api/remove_text', route.removeText)
 app.get('/api/get_words_to_repeat', route.getWordsToRepeat)
-app.get('/api/check_words_to_repeat', route.checkWordsToRepeat)
-
+app.patch('/api/check_words_to_repeat', route.checkWordsToRepeat)
+app.patch('/api/next_stage', route.nextStage)
 
 app.get("/", (req, res) => {
     res.send("Hi from server") 

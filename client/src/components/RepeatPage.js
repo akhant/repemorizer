@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Grid, Table, Button } from "semantic-ui-react";
-import {getWordsToRepeat} from "../actions";
+import { Grid} from "semantic-ui-react";
+import PropTypes from 'prop-types'
+import * as actions from "../actions";
+import Word from './Word'
 
-export class RepeatPage extends Component {
+ class RepeatPage extends Component {
+  
   componentDidMount = () => {
     this.props.getWordsToRepeat();
   };
+
+  showResult = (_id, success) => {
+    this.props.nextStage(_id, success)
+  }
+  
  render() {
-     console.log(this.props.words)
+     
     return (
       <div>
         <Grid>
@@ -16,7 +24,7 @@ export class RepeatPage extends Component {
             <Grid.Column>
               <h1>Memory check!</h1>
               {this.props.words.map(({text,translation,_id}) => {
-                  return <p key={_id}>{`${text} - ${translation}`}</p>
+                  return <Word text={text} translation={translation} _id={_id} key={_id} showResult={this.showResult}/>
               })}
               
             </Grid.Column>
@@ -27,11 +35,17 @@ export class RepeatPage extends Component {
   }
 }
 
+RepeatPage.propTypes = {
+  words: PropTypes.array,
+  getWordsToRepeat: PropTypes.func,
+  nextStage: PropTypes.func
+}
+
 
 
 export default connect(
   ({ words }) => ({
     words
   }),
-  { getWordsToRepeat }
+  { ...actions }
 )(RepeatPage);

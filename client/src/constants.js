@@ -5,6 +5,7 @@ export const GET_FIFTY = 'GET_FIFTY'
 export const REMOVE_TEXT = 'REMOVE_TEXT'
 export const GET_WORDS_TO_REPEAT = 'GET_WORDS_TO_REPEAT'
 export const CHECK_WORDS_TO_REPEAT = 'CHECK_WORDS_TO_REPEAT'
+export const NEXT_STAGE = 'NEXT_STAGE'
 
 
 export const STAGE = [

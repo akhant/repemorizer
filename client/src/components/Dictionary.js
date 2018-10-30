@@ -10,12 +10,16 @@ import PropTypes from 'prop-types'
 export class Dictionary extends Component {
   componentDidMount = () => {
     this.props.getDictionary();
+    this.props.getWordsToRepeat()
   };
 
   componentWillUnmount = () => {
     this.props.checkWordsToRepeat();
   }
-  
+
+  updateNextRepeatIn = () => {
+    this.props.checkWordsToRepeat();
+  }
 
   onRemoveClick = e => {
     this.props.removeText(e.target.id);
@@ -60,7 +64,7 @@ export class Dictionary extends Component {
             <Table.HeaderCell>Translation</Table.HeaderCell>
             <Table.HeaderCell>Time added</Table.HeaderCell>
             <Table.HeaderCell>Stage</Table.HeaderCell>
-            <Table.HeaderCell>Next repeat in</Table.HeaderCell>
+            <Table.HeaderCell>Next repeat in <Button onClick={this.updateNextRepeatIn}>Update</Button></Table.HeaderCell>
             <Table.HeaderCell>Remove</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -93,9 +97,22 @@ export class Dictionary extends Component {
     return (
       <div>
         <Grid>
+        <Grid.Row>
+            <Grid.Column>
+            <h1>Dictionary</h1>
+              
+            </Grid.Column>
+          </Grid.Row>
+        
+        <Grid.Row>
+            <Grid.Column>
+              <div>Words in dictionary:  {this.props.dictionary.length}</div>
+              <div>Ready to repeat: {this.props.words.length}</div>
+            </Grid.Column>
+          </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <h1>Dictionary</h1>
+              
               {this.renderTable()}
             </Grid.Column>
           </Grid.Row>
@@ -111,8 +128,8 @@ Dictionary.propTypes = {
 
 
 export default connect(
-  ({ dictionary }) => ({
-    dictionary
+  ({ dictionary, words }) => ({
+    dictionary, words
   }),
   { ...actions }
 )(Dictionary);

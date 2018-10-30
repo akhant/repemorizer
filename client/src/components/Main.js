@@ -2,48 +2,46 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import * as actions from "../actions";
-
 
 //TODO: protect form
 //TODO: separate the component
 class Main extends Component {
-  
   state = {
     formValue: "",
     translation: ""
   };
- 
 
   componentDidUpdate(prevProps) {
-    const {dictionary} = this.props
-    if (this.state.formValue && (dictionary.length !== prevProps.dictionary.length)) {
+    const { dictionary } = this.props;
+    if (
+      this.state.formValue &&
+      dictionary.length !== prevProps.dictionary.length
+    ) {
       this.setState({
         translation: dictionary[dictionary.length - 1].translation
       });
     }
   }
   componentDidMount = () => {
-      this.props.getFifty()
+    this.props.checkWordsToRepeat();
+    this.props.getFifty();
+    this.props.getWordsToRepeat();
   };
 
   onChangeInput = e => {
     this.setState({
       formValue: e.target.value
     });
-    
   };
   onSubmit = () => {
     this.props.translateRequest(this.state.formValue);
-    
   };
   addToRepetition = () => {
     this.props.addToRepetition(this.state.formValue);
   };
 
-
-  
   render() {
     return (
       <Grid className="main-page">
@@ -62,7 +60,6 @@ class Main extends Component {
                   <Button type="sumbit" className="btn" primary>
                     Translate
                   </Button>
-                  
                 </Form.Group>
               </Form.Group>
 
@@ -75,7 +72,7 @@ class Main extends Component {
               />
             </Form>
           </Grid.Column>
-          <Grid.Column  width={4}>
+          <Grid.Column width={4}>
             <div className="dictionary">
               <h2>Last added words</h2>
               <div>
@@ -83,10 +80,24 @@ class Main extends Component {
                   <p key={_id}>{`${text} - ${translation}`}</p>
                 ))}
               </div>
-              
             </div>
-            <Link to="/dictionary"  >Show all</Link>
-            
+            <Link to="/dictionary">Show all</Link>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column>
+            <div>
+              {this.props.words.length ? (
+                <div>
+                  <span>
+                    You have {this.props.words.length} words to repeat -> 
+                  </span>
+                  <Link to="/repeat">Repeat words</Link>
+                </div>
+              ) : (
+                <div>You don't have words to repeat</div>
+              )}
+            </div>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -95,13 +106,13 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  dictionary: PropTypes.array,
-}
-
+  dictionary: PropTypes.array
+};
 
 export default connect(
-  ({ dictionary }) => ({
-    dictionary
+  ({ dictionary, words }) => ({
+    dictionary,
+    words
   }),
   { ...actions }
 )(Main);

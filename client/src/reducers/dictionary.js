@@ -3,7 +3,8 @@ import {
   GET_FIFTY,
   GET_DICTIONARY,
   REMOVE_TEXT,
-  GET_WORDS_TO_REPEAT
+  CHECK_WORDS_TO_REPEAT
+  
 } from "../constants";
 
 export default (state = [], action) => {
@@ -11,15 +12,7 @@ export default (state = [], action) => {
 
   switch (type) {
     case TRANSLATE:
-      console.log(
-        state.every(d => {
-          if (d) {
-            return d._id !== data._id;
-          } else {
-            return true;
-          }
-        })
-      );
+      
       if (
         state.every(d => {
           if (d) {
@@ -32,7 +25,7 @@ export default (state = [], action) => {
         return [...state, data];
       }
       return state;
-    
+
     case GET_FIFTY:
       if (data.dictionary) return (state = data.dictionary);
 
@@ -42,8 +35,16 @@ export default (state = [], action) => {
     case REMOVE_TEXT:
       return state.filter(word => word._id !== data.removedElement._id);
 
-    
-      default:
+    case CHECK_WORDS_TO_REPEAT:
+      return data.updatedDictionary;
+
+ /*    case NEXT_STAGE:
+      return state.map(w => {
+        if (w._id === data.updatedWord._id) return data.updatedWord;
+        return w;
+      }); */
+
+    default:
       return state;
   }
 };

@@ -4,11 +4,11 @@ import {
   REMOVE_TEXT,
   GET_FIFTY,
   GET_WORDS_TO_REPEAT,
-  CHECK_WORDS_TO_REPEAT
+  CHECK_WORDS_TO_REPEAT,
+  NEXT_STAGE
 } from "../constants";
 import axios from "axios";
 const serverUrl = "http://localhost:3000/api";
-
 
 // TODO: change error handling to send error to server and
 // write to log, don't show to client
@@ -19,7 +19,7 @@ const Data = store => next => action => {
     case TRANSLATE:
       return axios
         .post(`${serverUrl}/translate`, { text: payload })
-        .then(res => 
+        .then(res =>
           next({
             type: TRANSLATE,
             data: {
@@ -66,7 +66,7 @@ const Data = store => next => action => {
         .catch(err => console.log("Error post REMOVE_TEXT", err));
     case GET_WORDS_TO_REPEAT:
       return axios
-        .get(`${serverUrl}/get_words_to_repeat`, )
+        .get(`${serverUrl}/get_words_to_repeat`)
         .then(res =>
           next({
             type: GET_WORDS_TO_REPEAT,
@@ -76,12 +76,34 @@ const Data = store => next => action => {
           })
         )
         .catch(err => console.log("Error post GET_WORDS_TO_REPEAT", err));
-    
-        case CHECK_WORDS_TO_REPEAT:
+
+    case CHECK_WORDS_TO_REPEAT:
       return axios
-        .get(`${serverUrl}/check_words_to_repeat` )
-        
-        .catch(err => console.log("Error get CHECK_WORDS_TO_REPEAT", err));
+        .patch(`${serverUrl}/check_words_to_repeat`)
+        .then(res =>
+          next({
+            type: CHECK_WORDS_TO_REPEAT,
+            data: {
+              updatedDictionary: res.data
+            }
+          })
+        )
+
+        .catch(err => console.log("Error patch CHECK_WORDS_TO_REPEAT", err));
+    case NEXT_STAGE:
+    
+      return axios
+        .patch(`${serverUrl}/next_stage`, { ...payload })
+        .then(res =>
+          next({
+            type: NEXT_STAGE,
+            data: {
+              updatedWord: res.data
+            }
+          })
+        )
+
+        .catch(err => console.log("Error patch NEXT_STAGE", err));
 
     default:
       return next(action);
