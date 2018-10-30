@@ -5,9 +5,11 @@ import {
   GET_FIFTY,
   GET_WORDS_TO_REPEAT,
   CHECK_WORDS_TO_REPEAT,
-  NEXT_STAGE
+  NEXT_STAGE,
+  SIGNUP
 } from "../constants";
 import axios from "axios";
+import {createBrowserHistory} from "history";
 const serverUrl = "http://localhost:3000/api";
 
 // TODO: change error handling to send error to server and
@@ -91,7 +93,6 @@ const Data = store => next => action => {
 
         .catch(err => console.log("Error patch CHECK_WORDS_TO_REPEAT", err));
     case NEXT_STAGE:
-    
       return axios
         .patch(`${serverUrl}/next_stage`, { ...payload })
         .then(res =>
@@ -102,8 +103,24 @@ const Data = store => next => action => {
             }
           })
         )
-
         .catch(err => console.log("Error patch NEXT_STAGE", err));
+
+    case SIGNUP:
+      return axios
+        .post(`${serverUrl}/signup`, { ...payload })
+        .then(res => {
+          
+          localStorage.JWT = res.data.token;
+          next({
+            type: USER_LOGGED_IN,
+            data: {
+              user: res.data
+            }
+          })
+          //window.location = "/";
+        })
+          
+        .catch(err => console.log("Error post signup", err));
 
     default:
       return next(action);

@@ -6,6 +6,8 @@ export const REMOVE_TEXT = 'REMOVE_TEXT'
 export const GET_WORDS_TO_REPEAT = 'GET_WORDS_TO_REPEAT'
 export const CHECK_WORDS_TO_REPEAT = 'CHECK_WORDS_TO_REPEAT'
 export const NEXT_STAGE = 'NEXT_STAGE'
+export const SIGNUP = 'SIGNUP'
+export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 
 
 export const STAGE = [

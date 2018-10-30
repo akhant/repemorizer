@@ -19,6 +19,9 @@ const history = createBrowserHistory();
 
 const store = configureStore();
 
+if (localStorage.JWT) {
+  
+}
 
 const App = () => (
   <Provider store={store}>

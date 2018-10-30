@@ -106,7 +106,12 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  dictionary: PropTypes.array
+  dictionary: PropTypes.array,
+  getWordsToRepeat: PropTypes.func,
+  getFifty: PropTypes.func,
+  checkWordsToRepeat: PropTypes.func
+  
+
 };
 
 export default connect(

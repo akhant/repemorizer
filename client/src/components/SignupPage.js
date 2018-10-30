@@ -1,60 +1,113 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   Button,
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-const SignupPage = () => (
-  <div className="signup-form">
-    {/*
-      Heads up! The styles below are necessary for the correct render of this example.
-      You can do same with CSS, the main idea is that all the elements up to the `Grid`
-      below must have a height of 100%.
-    */}
-    <style>{`
-      body > div,
-      body > div > div,
-      body > div > div > div.signup-form {
-        height: 100%;
+import { connect } from "react-redux";
+import { signup } from "../actions";
+
+export class SignupPage extends Component {
+  state = {
+    data: {
+      email: "",
+      password: "",
+      username: ""
+    }
+  };
+
+  usernameHandler = e => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        username: e.target.value
       }
-    `}</style>
-    <Grid textAlign="center" style={{ height: "100%" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
-          Sign up!
-        </Header>
-        <Form size="large">
-          <Segment stacked>
-            <Form.Input
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
-            />
-            <Form.Input
-              fluid
-              icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              type="password"
-            />
+    });
+  };
 
-            <Button color="teal" fluid size="large">
-              signup
-            </Button>
-          </Segment>
-        </Form>
-        <Message>
-          Already have account? <Link to="/login">Log in</Link>
-        </Message>
-      </Grid.Column>
-    </Grid>
-  </div>
-);
+  emailHandler = e => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        email: e.target.value
+      }
+    });
+  };
 
-export default SignupPage;
+  passwordHandler = e => {
+    this.setState({
+      data: {
+        ...this.state.data,
+        password: e.target.value
+      }
+    });
+  };
+
+  onSubmit = e => {
+    //TODO: verify data
+    this.props.signup(this.state.data);
+  };
+
+  render() {
+    return (
+      <div className="signup-form">
+        <Grid
+          textAlign="center"
+          style={{ height: "100%" }}
+          verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as="h2" color="teal" textAlign="center">
+              Sign up
+            </Header>
+            <Form onSubmit={this.onSubmit} size="large">
+              <Segment stacked>
+                <Form.Input
+                  onChange={this.usernameHandler}
+                  value={this.state.data.username}
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="Your name"
+                />
+                <Form.Input
+                  onChange={this.emailHandler}
+                  value={this.state.data.email}
+                  fluid
+                  icon="mail"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                />
+                <Form.Input
+                  onChange={this.passwordHandler}
+                  value={this.state.data.password}
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+
+                <Button type="submit" color="teal" fluid size="large">
+                  SIGN UP!
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+              Already have account? <Link to="/login">Log in</Link>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      </div>
+    );
+  }
+}
+
+export default connect(
+  null,
+  { signup }
+)(SignupPage);

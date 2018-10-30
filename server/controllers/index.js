@@ -1,6 +1,7 @@
 import axios from "axios";
 require("dotenv").config();
 import Dictionary from "../models/dictionary";
+import User from "../models/user";
 
 /* https://translate.yandex.net/api/v1.5/tr.json/translate
 ? [key=<API-ключ>]
@@ -57,7 +58,7 @@ export function getFifty(req, res) {
 //get all dictionary
 export function getDictionary(req, res) {
   Dictionary.find()
-    
+
     .then(dictionary => {
       res.send(dictionary);
     })
@@ -86,27 +87,47 @@ export function getWordsToRepeat(req, res) {
 }
 
 export function checkWordsToRepeat(req, res) {
-  Dictionary.find().then(words => {
-    for (let i = 0; i < words.length; i++) {
-      words[i].checkRepeatTime().save();
-    }
-    res.send(words)
-  }).catch(err => console.log("error DB checkWordsToRepeat", err))
+  Dictionary.find()
+    .then(words => {
+      for (let i = 0; i < words.length; i++) {
+        words[i].checkRepeatTime().save();
+      }
+      res.send(words);
+    })
+    .catch(err => console.log("error DB checkWordsToRepeat", err));
 }
 
 //after repeat we find word by id, set lastRepeat = new Date(),
 // stage += 1, isRepeatTime = false
-export function nextStage(req,res) {
+export function nextStage(req, res) {
+  Dictionary.findOne({ _id: req.body._id })
+    .then(word => {
+      if (req.body.success) word.stage += 1;
 
-  
-  Dictionary.findOne({ _id: req.body._id }).then(word => {
-   
-    if (req.body.success) word.stage += 1;
-    
-    word.lastRepeat = new Date();
-    word.isRepeatTime = false;
-    word.save().then(w => {
-      res.send(w)
+      word.lastRepeat = new Date();
+      word.isRepeatTime = false;
+      word.save().then(w => {
+        res.send(w);
+      });
     })
-  }).catch(err => console.log("error DB nextStage", err))
+    .catch(err => console.log("error DB nextStage", err));
+}
+
+export function signup(req, res) {
+  const { email, password, username } = req.body;
+
+  const user = new User({ email, username });
+  user.setPassword(password);
+  user.setConfirmationToken()
+  user
+    .save()
+    .then(u => {
+      res.send({
+        email: u.email,
+        username: u.username,
+        confirmed: u.confirmed,
+        token: u.generateJWT()
+      });
+    })
+    .catch(err => console.log("error DB signup", err));
 }

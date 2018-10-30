@@ -25,6 +25,7 @@ app.post('/api/remove_text', route.removeText)
 app.get('/api/get_words_to_repeat', route.getWordsToRepeat)
 app.patch('/api/check_words_to_repeat', route.checkWordsToRepeat)
 app.patch('/api/next_stage', route.nextStage)
+app.post('/api/signup', route.signup)
 
 app.get("/", (req, res) => {
     res.send("Hi from server") 
