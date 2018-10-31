@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../actions";
 
-export default class Header extends Component {
+class Header extends Component {
+  onLogout = () => {
+    this.props.logout();
+  };
   render() {
+    const { token } = this.props.user;
     return (
       <div>
         <Grid>
           <Grid.Row className="header">
-            <Grid.Column  width={2} floated="right">
-              <Link to="/login">Login</Link> |
-              <Link to="/signup">Signup</Link> |
-              <Link to="/dictionary">Dictionary</Link> |
+            <Grid.Column width={4} floated="right">
+              {token ? (
+                <span className="logout-link" onClick={this.onLogout}>
+                  Logout
+                </span>
+              ) : (
+                <span>
+                  <Link to="/login">Login</Link> |
+                  <Link to="/signup">Signup</Link>
+                </span>
+              )}
+              |<Link to="/dictionary">Dictionary</Link> |
               <Link to="/repeat">Repeat</Link> |
-              <Link to="/">Main</Link>
+              <Link to="/dashboard">Dashboard</Link> |<Link to="/">Home</Link>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -21,3 +35,10 @@ export default class Header extends Component {
     );
   }
 }
+
+export default connect(
+  ({ user }) => ({
+    user
+  }),
+  { logout }
+)(Header);

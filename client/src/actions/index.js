@@ -1,5 +1,16 @@
-import { TRANSLATE, SIGNUP, GET_FIFTY,REMOVE_TEXT, GET_DICTIONARY, GET_WORDS_TO_REPEAT, CHECK_WORDS_TO_REPEAT, NEXT_STAGE } from "../constants";
-
+import {
+  TRANSLATE,
+  SIGNUP,
+  LOGOUT,
+  LOGIN,
+  GET_FIFTY,
+  REMOVE_TEXT,
+  GET_DICTIONARY,
+  GET_WORDS_TO_REPEAT,
+  CHECK_WORDS_TO_REPEAT,
+  NEXT_STAGE,
+  FETCH_CURRENT_USER
+} from "../constants";
 
 export const translateRequest = text => ({
   type: TRANSLATE,
@@ -14,24 +25,37 @@ export const getDictionary = () => ({
   type: GET_DICTIONARY
 });
 
-export const removeText = (id) => ({
+export const removeText = id => ({
   type: REMOVE_TEXT,
   payload: id
-})
+});
 
 export const getWordsToRepeat = () => ({
   type: GET_WORDS_TO_REPEAT
-})
+});
 
 export const checkWordsToRepeat = () => ({
   type: CHECK_WORDS_TO_REPEAT
-})
+});
 export const nextStage = (_id, success) => ({
   type: NEXT_STAGE,
-  payload: {_id, success}
-})
+  payload: { _id, success }
+});
 
-export const signup = (data) => ({
+export const signup = data => ({
   type: SIGNUP,
   payload: data
-})
+});
+
+export const fetchCurrentUser = () => ({
+  type: FETCH_CURRENT_USER
+});
+
+export const logout = () => ({
+  type: LOGOUT
+});
+
+export const login = data => ({
+  type: LOGIN,
+  payload: data
+});

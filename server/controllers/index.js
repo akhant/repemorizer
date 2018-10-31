@@ -118,16 +118,41 @@ export function signup(req, res) {
 
   const user = new User({ email, username });
   user.setPassword(password);
-  user.setConfirmationToken()
+  //user.setConfirmationToken()
   user
     .save()
     .then(u => {
-      res.send({
-        email: u.email,
-        username: u.username,
-        confirmed: u.confirmed,
-        token: u.generateJWT()
-      });
+      const userWithToken = u.withToken()
+      res.send(...userWithToken);
     })
     .catch(err => console.log("error DB signup", err));
 }
+
+
+export function fetchCurrentUser(req,res) {
+  const user = req.body.user
+  
+  res.send({
+    email: user.email,
+    username: user.username,
+    confirmed: user.confirmed,
+    token: user.generateJWT()
+  })
+}
+
+export function login(req,res) {
+  const {email, password} = req.body
+  
+  User.findOne({ email: email }).then(user => {
+    
+    if (user && user.isValidPassword(password)) {
+      const userWithToken = user.withToken()
+      res.send({ ...userWithToken })
+    } else {
+      res.status(401).send({ error: "Invalid credentials"})
+    }
+  })
+  
+  
+}
+

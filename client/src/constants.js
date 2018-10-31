@@ -8,6 +8,9 @@ export const CHECK_WORDS_TO_REPEAT = 'CHECK_WORDS_TO_REPEAT'
 export const NEXT_STAGE = 'NEXT_STAGE'
 export const SIGNUP = 'SIGNUP'
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
+export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
 
 
 export const STAGE = [

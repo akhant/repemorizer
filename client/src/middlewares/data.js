@@ -6,10 +6,15 @@ import {
   GET_WORDS_TO_REPEAT,
   CHECK_WORDS_TO_REPEAT,
   NEXT_STAGE,
-  SIGNUP
+  SIGNUP,
+  FETCH_CURRENT_USER,
+  USER_LOGGED_IN,
+  LOGIN,
+  LOGOUT
 } from "../constants";
 import axios from "axios";
-import {createBrowserHistory} from "history";
+import setAuthHeader from "../utils/setAuthHeader";
+
 const serverUrl = "http://localhost:3000/api";
 
 // TODO: change error handling to send error to server and
@@ -117,10 +122,42 @@ const Data = store => next => action => {
               user: res.data
             }
           })
-          //window.location = "/";
-        })
+          window.location = "/dashboard";
+        })          
+        .catch(err => console.log("Error post SIGNUP", err));
+
+case FETCH_CURRENT_USER:
+      return axios
+        .get(`${serverUrl}/fetch_current_user`,)
+        .then(res => {
           
-        .catch(err => console.log("Error post signup", err));
+          next({
+            type: USER_LOGGED_IN,
+            data: {
+              user: res.data
+            }
+          })
+          
+        })          
+        .catch(err => console.log("Error get FETCH_CURRENT_USER", err));
+
+        case LOGIN:
+      return axios
+        .post(`${serverUrl}/login`, { ...payload })
+        .then(res => {
+          const {token} = res.data
+          localStorage.JWT = token
+          setAuthHeader(token);
+          window.location = "/dashboard"
+          next({
+            type: USER_LOGGED_IN,
+            data: {
+              user: res.data
+            }
+          })
+          
+        })          
+        .catch(err => console.log("Error post LOGIN", err));
 
     default:
       return next(action);

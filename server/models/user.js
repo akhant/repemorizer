@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-require('dotenv').config()
+
 
 const { Schema } = mongoose;
 
@@ -22,12 +22,24 @@ const User = new Schema({
 
 
 User.methods.setPassword = function(password){
-  console.log(password)
   this.passwordHash = bcrypt.hashSync(password, 10)
 }
 
 User.methods.setConfirmationToken = function(){
   this.confirmationToken = this.generateJWT()
+}
+
+User.methods.isValidPassword = function(password){
+  return bcrypt.compareSync(password, this.passwordHash)
+}
+
+User.methods.withToken  = function (){
+  return {
+    username: this.username,
+    email: this.email,
+    confirmed: this.confirmed,
+    token: this.generateJWT()
+  }
 }
 
 User.methods.generateJWT = function (){
