@@ -122,7 +122,7 @@ const Data = store => next => action => {
               user: res.data
             }
           })
-          window.location = "/dashboard";
+          window.location = "/login";
         })          
         .catch(err => console.log("Error post SIGNUP", err));
 

@@ -15,19 +15,23 @@ class Main extends Component {
 
   componentDidUpdate(prevProps) {
     const { dictionary } = this.props;
-    if (
-      this.state.formValue &&
-      dictionary.length !== prevProps.dictionary.length
-    ) {
-      this.setState({
-        translation: dictionary[dictionary.length - 1].translation
-      });
+    if (dictionary) {
+      if (
+        this.state.formValue &&
+        dictionary.length !== prevProps.dictionary.length
+      ) {
+        this.setState({
+          translation: dictionary[dictionary.length - 1].translation
+        });
+      }
     }
   }
   componentDidMount = () => {
-    this.props.checkWordsToRepeat();
-    this.props.getFifty();
-    this.props.getWordsToRepeat();
+    
+      this.props.checkWordsToRepeat();
+      this.props.getFifty();
+      this.props.getWordsToRepeat();
+    
   };
 
   onChangeInput = e => {
@@ -90,7 +94,7 @@ class Main extends Component {
               {this.props.words.length ? (
                 <div>
                   <span>
-                    You have {this.props.words.length} words to repeat -> 
+                    You have {this.props.words.length} words to repeat ->
                   </span>
                   <Link to="/repeat">Repeat words</Link>
                 </div>
@@ -110,14 +114,13 @@ Main.propTypes = {
   getWordsToRepeat: PropTypes.func,
   getFifty: PropTypes.func,
   checkWordsToRepeat: PropTypes.func
-  
-
 };
 
 export default connect(
-  ({ dictionary, words }) => ({
+  ({ dictionary, words, user }) => ({
     dictionary,
-    words
+    words,
+    user
   }),
   { ...actions }
 )(Main);

@@ -23,13 +23,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.post("/api/translate", route.translate);
-app.get("/api/get_fifty", route.getFifty);
-app.get("/api/get_dictionary", route.getDictionary);
-app.post("/api/remove_text", route.removeText);
-app.get("/api/get_words_to_repeat", route.getWordsToRepeat);
-app.patch("/api/check_words_to_repeat", route.checkWordsToRepeat);
-app.patch("/api/next_stage", route.nextStage);
+app.post("/api/translate",authenticate,  authenticate, route.translate);
+app.get("/api/get_fifty", authenticate, route.getFifty);
+app.get("/api/get_dictionary",authenticate,  route.getDictionary);
+app.post("/api/remove_text",authenticate,  route.removeText);
+app.get("/api/get_words_to_repeat",authenticate,  route.getWordsToRepeat);
+app.patch("/api/check_words_to_repeat",authenticate,  route.checkWordsToRepeat);
+app.patch("/api/next_stage",authenticate,  route.nextStage);
 app.post("/api/signup", route.signup);
 app.get("/api/fetch_current_user", authenticate, route.fetchCurrentUser);
 app.post("/api/login", route.login);

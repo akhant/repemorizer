@@ -13,6 +13,8 @@ import HomePage from "./HomePage";
 import setAuthHeader from "../utils/setAuthHeader";
 import { fetchCurrentUser, logout } from "../actions";
 import NotFoundPage from "./NotFoundPage";
+import AuthRoute from './routes/AuthRoute'
+import ConfirmationPage from './ConfirmationPage'
 
 import "../assets/js";
 //import "../assets/styles/bootstrap.css";
@@ -40,8 +42,9 @@ const App = () => (
           <Route path="/dashboard" exact component={Main} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SignupPage} />
-          <Route path="/dictionary" exact component={Dictionary} />
-          <Route path="/repeat" exact component={RepeatPage} />
+          <Route path="/confirmation" exact component={ConfirmationPage} />
+          <AuthRoute path="/dictionary" exact component={Dictionary} />
+          <AuthRoute path="/repeat" exact component={RepeatPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

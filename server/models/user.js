@@ -47,7 +47,8 @@ User.methods.generateJWT = function (){
     {
       email: this.email,
       username: this.username,
-      confirmed: this.confirmed
+      confirmed: this.confirmed,
+      userId: this._id
     },
     process.env.JWT_SECRET
   );

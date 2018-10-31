@@ -2,6 +2,8 @@ import axios from "axios";
 require("dotenv").config();
 import Dictionary from "../models/dictionary";
 import User from "../models/user";
+import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
+
 
 /* https://translate.yandex.net/api/v1.5/tr.json/translate
 ? [key=<API-ключ>]
@@ -18,10 +20,10 @@ const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
 }`;
 
 //TODO: set right time, because of defference between client and server
-
 export function translate(req, res) {
   const reqText = req.body.text.toLowerCase();
-  Dictionary.findOne({ text: reqText })
+
+  Dictionary.findOne({ userId: req.body.user._id, text: reqText })
     .then(found => {
       if (found) {
         res.send(found);
@@ -35,7 +37,8 @@ export function translate(req, res) {
               addTime: new Date(),
               lastRepeat: new Date(),
               repeatStage: 0,
-              isRepeatTime: false
+              isRepeatTime: false,
+              userId: req.body.user._id
             });
             word.save().then(w => res.send(w));
           })
@@ -47,7 +50,7 @@ export function translate(req, res) {
 
 //get last 50 words
 export function getFifty(req, res) {
-  Dictionary.find()
+  Dictionary.find({ userId: req.body.user._id })
     .limit(50)
     .then(dictionary => {
       res.send(dictionary);
@@ -57,8 +60,8 @@ export function getFifty(req, res) {
 
 //get all dictionary
 export function getDictionary(req, res) {
-  Dictionary.find()
-
+  
+  Dictionary.find({ userId: req.body.user._id })
     .then(dictionary => {
       res.send(dictionary);
     })
@@ -66,7 +69,10 @@ export function getDictionary(req, res) {
 }
 
 export function removeText(req, res) {
-  Dictionary.findOneAndRemove({ _id: req.body.id })
+  Dictionary.findOneAndRemove({
+    userId: req.body.user._id,
+    _id: req.body.id
+  })
     .then(removedElement => {
       res.send(removedElement);
     })
@@ -75,7 +81,7 @@ export function removeText(req, res) {
 
 export function getWordsToRepeat(req, res) {
   // .then(() => {
-  Dictionary.find({ isRepeatTime: true })
+  Dictionary.find({ userId: req.body.user._id, isRepeatTime: true })
     .then(repeatWords => {
       //console.log(repeatWords)
       if (repeatWords.length) return res.send(repeatWords);
@@ -87,7 +93,7 @@ export function getWordsToRepeat(req, res) {
 }
 
 export function checkWordsToRepeat(req, res) {
-  Dictionary.find()
+  Dictionary.find({ userId: req.body.user._id })
     .then(words => {
       for (let i = 0; i < words.length; i++) {
         words[i].checkRepeatTime().save();
@@ -100,7 +106,7 @@ export function checkWordsToRepeat(req, res) {
 //after repeat we find word by id, set lastRepeat = new Date(),
 // stage += 1, isRepeatTime = false
 export function nextStage(req, res) {
-  Dictionary.findOne({ _id: req.body._id })
+  Dictionary.findOne({ userId: req.body.user.userId, _id: req.body._id })
     .then(word => {
       if (req.body.success) word.stage += 1;
 
@@ -122,37 +128,33 @@ export function signup(req, res) {
   user
     .save()
     .then(u => {
-      const userWithToken = u.withToken()
+      const userWithToken = u.withToken();
       res.send(...userWithToken);
     })
     .catch(err => console.log("error DB signup", err));
 }
 
+export function fetchCurrentUser(req, res) {
+  const user = req.body.user;
 
-export function fetchCurrentUser(req,res) {
-  const user = req.body.user
-  
   res.send({
     email: user.email,
     username: user.username,
     confirmed: user.confirmed,
-    token: user.generateJWT()
-  })
+    token: user.generateJWT(),
+    userId: user._id
+  });
 }
 
-export function login(req,res) {
-  const {email, password} = req.body
-  
+export function login(req, res) {
+  const { email, password } = req.body;
+
   User.findOne({ email: email }).then(user => {
-    
     if (user && user.isValidPassword(password)) {
-      const userWithToken = user.withToken()
-      res.send({ ...userWithToken })
+      const userWithToken = user.withToken();
+      res.send({ ...userWithToken });
     } else {
-      res.status(401).send({ error: "Invalid credentials"})
+      res.status(401).send({ error: "Invalid credentials" });
     }
-  })
-  
-  
+  });
 }
-

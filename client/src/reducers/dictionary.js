@@ -3,7 +3,8 @@ import {
   GET_FIFTY,
   GET_DICTIONARY,
   REMOVE_TEXT,
-  CHECK_WORDS_TO_REPEAT
+  CHECK_WORDS_TO_REPEAT,
+  LOGOUT
   
 } from "../constants";
 
@@ -38,6 +39,8 @@ export default (state = [], action) => {
     case CHECK_WORDS_TO_REPEAT:
       return data.updatedDictionary;
 
+      case LOGOUT:
+      return []
  /*    case NEXT_STAGE:
       return state.map(w => {
         if (w._id === data.updatedWord._id) return data.updatedWord;
