@@ -53,4 +53,16 @@ User.methods.generateJWT = function (){
     process.env.JWT_SECRET
   );
 }
+
+User.methods.generateConfirmationUrl = function generateConfirmationUrl() {
+  return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
+};
+
+User.methods.generateResetPasswordLink = function generateResetPasswordLink() {
+  return `${
+    process.env.HOST 
+  }/reset_password/${this.generateResetPasswordToken()}`;
+};
+
+
 export default mongoose.model("User", User);

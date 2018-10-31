@@ -124,7 +124,8 @@ export function signup(req, res) {
 
   const user = new User({ email, username });
   user.setPassword(password);
-  //user.setConfirmationToken()
+  user.setConfirmationToken()
+  sendConfirmationEmail(user)
   user
     .save()
     .then(u => {
@@ -158,3 +159,9 @@ export function login(req, res) {
     }
   });
 }
+
+export function confirmation(req, res) {
+ console.log(req)
+}
+
+

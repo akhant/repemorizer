@@ -17,7 +17,7 @@ class Main extends Component {
     const { dictionary } = this.props;
     if (dictionary) {
       if (
-        this.state.formValue &&
+        this.state.formValue && dictionary.length &&
         dictionary.length !== prevProps.dictionary.length
       ) {
         this.setState({

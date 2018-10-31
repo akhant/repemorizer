@@ -148,7 +148,7 @@ case FETCH_CURRENT_USER:
           const {token} = res.data
           localStorage.JWT = token
           setAuthHeader(token);
-          window.location = "/dashboard"
+          window.location = "/"
           next({
             type: USER_LOGGED_IN,
             data: {

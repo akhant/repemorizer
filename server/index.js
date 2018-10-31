@@ -14,7 +14,7 @@ mongoose.connect(
   {
     useNewUrlParser: true
   }
-);
+); 
 
 app.use(cors());
 // parse application/x-www-form-urlencoded
@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-
 app.post("/api/translate",authenticate,  authenticate, route.translate);
 app.get("/api/get_fifty", authenticate, route.getFifty);
 app.get("/api/get_dictionary",authenticate,  route.getDictionary);
@@ -33,9 +32,12 @@ app.patch("/api/next_stage",authenticate,  route.nextStage);
 app.post("/api/signup", route.signup);
 app.get("/api/fetch_current_user", authenticate, route.fetchCurrentUser);
 app.post("/api/login", route.login);
+app.get('/api/confirmation', route.confirmation)
+
+
 
 app.get("/", (req, res) => {
-  res.send("Hi from server");
+  res.send("This is API for repemorizer app. ");
 });
 
 app.listen(process.env.PORT, () => console.log("server running"));

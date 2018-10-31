@@ -9,7 +9,8 @@ import {
   GET_WORDS_TO_REPEAT,
   CHECK_WORDS_TO_REPEAT,
   NEXT_STAGE,
-  FETCH_CURRENT_USER
+  FETCH_CURRENT_USER,
+  CONFIRMATION
 } from "../constants";
 
 export const translateRequest = text => ({
@@ -58,4 +59,9 @@ export const logout = () => ({
 export const login = data => ({
   type: LOGIN,
   payload: data
+});
+
+export const confirm = token => ({
+  type: CONFIRMATION,
+  payload: token
 });

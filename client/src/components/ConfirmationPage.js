@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import confirm from '../actions'
 
-export class ConfirmationPage extends Component {
+class ConfirmationPage extends Component {
+    componentDidMount() {
+        console.log(this.props.match)
+        //this.props.confirm(this.props.match.params.token)
+          
+      }
   render() {
     return (
       <div>
@@ -11,4 +18,4 @@ export class ConfirmationPage extends Component {
   }
 }
 
-export default ConfirmationPage
+export default connect(null, {confirm})(ConfirmationPage)
