@@ -10,7 +10,8 @@ import {
   CHECK_WORDS_TO_REPEAT,
   NEXT_STAGE,
   FETCH_CURRENT_USER,
-  CONFIRMATION
+  RESET_PASSWORD,
+  FORGOT_PASSWORD
 } from "../constants";
 
 export const translateRequest = text => ({
@@ -61,7 +62,12 @@ export const login = data => ({
   payload: data
 });
 
-export const confirm = token => ({
-  type: CONFIRMATION,
-  payload: token
+export const forgotPassword = data => ({
+  type: FORGOT_PASSWORD,
+  payload: data
+});
+
+export const resetPassword = data => ({
+  type: RESET_PASSWORD,
+  payload: data
 });

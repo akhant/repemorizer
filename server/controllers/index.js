@@ -1,9 +1,9 @@
 import axios from "axios";
 require("dotenv").config();
+import jwt from "jsonwebtoken";
 import Dictionary from "../models/dictionary";
 import User from "../models/user";
 import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
-
 
 /* https://translate.yandex.net/api/v1.5/tr.json/translate
 ? [key=<API-ключ>]
@@ -14,7 +14,7 @@ import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
 & [callback=<имя callback-функции>] */
 
 //const stageMedium = [25, 1200, 28800, 86400, 1209600, 4838400, 31536000];
-
+//TODO: check exist of userId
 const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
   process.env.YANDEX_API_KEY
 }`;
@@ -60,7 +60,6 @@ export function getFifty(req, res) {
 
 //get all dictionary
 export function getDictionary(req, res) {
-  
   Dictionary.find({ userId: req.body.user._id })
     .then(dictionary => {
       res.send(dictionary);
@@ -124,8 +123,9 @@ export function signup(req, res) {
 
   const user = new User({ email, username });
   user.setPassword(password);
-  user.setConfirmationToken()
-  sendConfirmationEmail(user)
+  user.setConfirmationToken();
+  user.setResetPasswordToken();
+  sendConfirmationEmail(user);
   user
     .save()
     .then(u => {
@@ -161,7 +161,42 @@ export function login(req, res) {
 }
 
 export function confirmation(req, res) {
- console.log(req)
+  const { token } = req.params;
+  User.findOneAndUpdate(
+    { confirmationToken: token },
+    { confirmationToken: "", confirmed: true }
+  ).then(user => {
+    if (user) {
+      res.redirect(`${process.env.HOST}/`);
+    } else {
+      res.send({ error: "Invalid confirmation" });
+    }
+  });
+}
+export function forgotPassword(req, res) {
+  const { email } = req.body;
+  User.findOne({ email: email }).then(user => {
+    if (user) {
+      sendResetPasswordEmail(user);
+      res.send({});
+    } else {
+      res.send({ error: "There is no user with such email" });
+    }
+  });
 }
 
+export function resetPassword(req, res) {
+  const { token, password } = req.body;
 
+  User.findOne({ resetPasswordToken: token }).then(user => {
+    if (user) {
+      user.setPassword(password);
+      user.setResetPasswordToken();
+      user.save().then(u => {
+        const userWithToken= u.withToken()
+        res.send(...userWithToken)});
+    } else {
+      res.send({ error: "Invalid data" });
+    }
+  });
+}

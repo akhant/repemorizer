@@ -35,11 +35,11 @@ export function sendResetPasswordEmail(user) {
   const email = {
     from,
     to: user.email,
-    subject: "Reset Password",
+    subject: "Repemorizer reset password",
     html: `
     <h1>To reset password follow this link:</h1> 
 
-    <a href="${user.generateResetPasswordLink()}">Reset<a>
+    <a href="${user.generateResetPasswordUrl()}">Reset<a>
     `
   };
 

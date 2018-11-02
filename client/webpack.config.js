@@ -1,22 +1,15 @@
-
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const outputPath = path.resolve(__dirname, "./dist");
+const outputPath = path.resolve(__dirname, "build");
 const autoprefixer = require("autoprefixer");
-
+console.log(__dirname)
 module.exports = {
-  entry: {
-    app: [
-      
-      
-      path.resolve(__dirname, "./src/index.js")
-    ]
-  },
+  entry: path.resolve(__dirname, "./src/index.js"),
   output: {
     path: outputPath,
-    filename: "[name].js"
+    filename: "app.js"
   },
 
   module: {
@@ -26,13 +19,13 @@ module.exports = {
         exclude: /node_modules/,
         use: "babel-loader"
       },
-     
-     
+
       {
         test: /\.s?(a|c)ss$/,
-        include: [path.resolve(__dirname, "./src/assets/"),
-      path.resolve(__dirname, './node_modules/semantic-ui-css')
-      ],
+        include: [
+          path.resolve(__dirname, "./src/assets/"),
+          path.resolve(__dirname, "./node_modules/semantic-ui-css")
+        ],
         use: [
           "style-loader",
           "css-loader",
@@ -53,29 +46,30 @@ module.exports = {
 
       {
         test: /\.(gif|woff(2)?|eot|ttf|png|jpg|jpeg|svg)$/,
-        
-        include: [path.resolve(__dirname, "./src/assets/"),
-      path.resolve(__dirname, './node_modules/semantic-ui-css')
-      ],
+
+        include: [
+          path.resolve(__dirname, "./src/assets/"),
+          path.resolve(__dirname, "./node_modules/semantic-ui-css")
+        ],
         use: "url-loader?limit=10000"
       }
     ]
   },
-  
+
   plugins: [
-    new HtmlWebpackPlugin({
+     new HtmlWebpackPlugin({
       template: path.join(__dirname, "./src/assets/index.html"),
       filename: "index.html",
       path: outputPath
-    }),
-    new webpack.NamedModulesPlugin(),
+    }), 
+   // new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, "./dist"),
+    contentBase: __dirname,
     port: 8000,
     historyApiFallback: true,
-    inline: true,
+    
     hot: true,
     host: "127.0.0.1"
   },

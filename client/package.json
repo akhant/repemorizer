@@ -1,10 +1,14 @@
 {
   "name": "repemorizer_client",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "https://github.com/akhant/repemorizer.git",
   "author": "akhant <a.khantelev@mail.ru>",
   "license": "MIT",
+  "scripts": {
+    "start": "set SKIP_PREFLIGHT_CHECK=true&&set PORT=8000&& react-scripts start",
+    "dev": "webpack-dev-server"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "history": "^4.7.2",
@@ -13,8 +17,15 @@
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1",
     "redux": "^4.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.83.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

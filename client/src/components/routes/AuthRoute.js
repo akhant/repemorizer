@@ -17,7 +17,7 @@ AuthRoute.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-//change to state.user.confirmed
+
 function mapStateToProps(state) {
   return {
     isAuthenticated: !!state.user.token

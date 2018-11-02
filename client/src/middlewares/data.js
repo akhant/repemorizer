@@ -10,7 +10,9 @@ import {
   FETCH_CURRENT_USER,
   USER_LOGGED_IN,
   LOGIN,
-  LOGOUT
+  LOGOUT,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD
 } from "../constants";
 import axios from "axios";
 import setAuthHeader from "../utils/setAuthHeader";
@@ -114,50 +116,58 @@ const Data = store => next => action => {
       return axios
         .post(`${serverUrl}/signup`, { ...payload })
         .then(res => {
-          
           localStorage.JWT = res.data.token;
           next({
             type: USER_LOGGED_IN,
             data: {
               user: res.data
             }
-          })
+          });
           window.location = "/login";
-        })          
+        })
         .catch(err => console.log("Error post SIGNUP", err));
 
-case FETCH_CURRENT_USER:
+    case FETCH_CURRENT_USER:
       return axios
-        .get(`${serverUrl}/fetch_current_user`,)
+        .get(`${serverUrl}/fetch_current_user`)
         .then(res => {
-          
           next({
             type: USER_LOGGED_IN,
             data: {
               user: res.data
             }
-          })
-          
-        })          
+          });
+        })
         .catch(err => console.log("Error get FETCH_CURRENT_USER", err));
 
-        case LOGIN:
+    case LOGIN:
       return axios
         .post(`${serverUrl}/login`, { ...payload })
         .then(res => {
-          const {token} = res.data
-          localStorage.JWT = token
+          const { token } = res.data;
+          localStorage.JWT = token;
           setAuthHeader(token);
-          window.location = "/"
+          window.location = "/";
           next({
             type: USER_LOGGED_IN,
             data: {
               user: res.data
             }
-          })
-          
-        })          
+          });
+        })
         .catch(err => console.log("Error post LOGIN", err));
+   
+        case FORGOT_PASSWORD:
+      return axios
+        .post(`${serverUrl}/forgot_password`, { ...payload })
+
+        .catch(err => console.log("Error post FORGOT_PASSWORD", err));
+      
+        case RESET_PASSWORD:
+      return axios
+        .post(`${serverUrl}/reset_password`, { ...payload })
+
+        .catch(err => console.log("Error post RESET_PASSWORD", err));
 
     default:
       return next(action);

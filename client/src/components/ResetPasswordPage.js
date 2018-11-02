@@ -1,53 +1,38 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { login } from "../actions";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
-class LoginPage extends Component {
+import { connect } from "react-redux";
+import { resetPassword } from "../actions";
+
+class ResetPasswordPage extends Component {
   state = {
     data: {
-      email: "",
-      password: ""
-      
+      password1: "",
+      password2: ""
     }
-  };
-
-
-
-  emailHandler = e => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        email: e.target.value
-      }
-    });
   };
 
   passwordHandler = e => {
     this.setState({
       data: {
         ...this.state.data,
-        password: e.target.value
+        [e.target.name]: e.target.value
       }
     });
   };
 
   onSubmit = e => {
     //TODO: verify data
-    this.props.login(this.state.data);
-    
+    //if pass1 === pass2
+    console.log(this.props.match.params);
+    this.props.resetPassword({
+      token: this.props.match.params.token,
+      password: this.state.data.password1
+    });
   };
 
   render() {
-    
+    console.log(this.props);
     return (
       <div className="login-form">
         <Grid
@@ -57,23 +42,25 @@ class LoginPage extends Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              Log in
+              Reset password
             </Header>
             <Form onSubmit={this.onSubmit} size="large">
               <Segment stacked>
-                
                 <Form.Input
-                  onChange={this.emailHandler}
-                  value={this.state.data.email}
+                  onChange={this.passwordHandler}
+                  value={this.state.data.password}
                   fluid
-                  icon="mail"
+                  name="password1"
+                  icon="lock"
                   iconPosition="left"
-                  placeholder="E-mail address"
+                  placeholder="Password"
+                  type="password"
                 />
                 <Form.Input
                   onChange={this.passwordHandler}
                   value={this.state.data.password}
                   fluid
+                  name="password2"
                   icon="lock"
                   iconPosition="left"
                   placeholder="Password"
@@ -81,13 +68,10 @@ class LoginPage extends Component {
                 />
 
                 <Button type="submit" color="teal" fluid size="large">
-                  LOGIN!
+                  Reset password!
                 </Button>
               </Segment>
             </Form>
-            <Message>
-              <Link to="/forgot_password">forgot password?</Link>
-            </Message>
           </Grid.Column>
         </Grid>
       </div>
@@ -96,6 +80,6 @@ class LoginPage extends Component {
 }
 
 export default connect(
-  ({user}) => ({user}),
-  { login }
-)(LoginPage);
+  ({ user }) => ({ user }),
+  { resetPassword }
+)(ResetPasswordPage);

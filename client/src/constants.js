@@ -11,7 +11,9 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER'
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
-export const CONFIRMATION = 'CONFIRMATION'
+export const RESET_PASSWORD = 'RESET_PASSWORD'
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'
+
 
 
 export const STAGE = [

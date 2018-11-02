@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../actions";
 
-export class SignupPage extends Component {
+class SignupPage extends Component {
   state = {
     data: {
       email: "",

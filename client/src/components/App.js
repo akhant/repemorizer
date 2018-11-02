@@ -13,21 +13,26 @@ import HomePage from "./HomePage";
 import setAuthHeader from "../utils/setAuthHeader";
 import { fetchCurrentUser, logout } from "../actions";
 import NotFoundPage from "./NotFoundPage";
-import AuthRoute from './routes/AuthRoute'
-import ConfirmationPage from './ConfirmationPage'
+import AuthRoute from "./routes/AuthRoute";
+import ConfirmationPage from "./ConfirmationPage";
+import ConfirmedRoute from "./routes/ConfirmedRoute";
 
 import "../assets/js";
 //import "../assets/styles/bootstrap.css";
 import "semantic-ui-css/semantic.min.css";
 import "../assets/styles/styles.sass";
+import ForgotPasswordPage from "./ForgotPasswordPage";
+import ResetPasswordPage from "./ResetPasswordPage";
 
 const history = createBrowserHistory();
 
 const store = configureStore();
 
 if (localStorage.JWT) {
-  setAuthHeader(localStorage.JWT);
-  store.dispatch(fetchCurrentUser());
+  if (history.path !== "/login") {
+    setAuthHeader(localStorage.JWT);
+    store.dispatch(fetchCurrentUser());
+  }
 } else {
   store.dispatch(logout());
 }
@@ -43,8 +48,13 @@ const App = () => (
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SignupPage} />
           <Route path="/confirmation" exact component={ConfirmationPage} />
-          <AuthRoute path="/dictionary" exact component={Dictionary} />
-          <AuthRoute path="/repeat" exact component={RepeatPage} />
+          <ConfirmedRoute path="/dictionary" exact component={Dictionary} />
+          <ConfirmedRoute path="/repeat" exact component={RepeatPage} />
+          <Route path="/forgot_password" exact component={ForgotPasswordPage} />
+          <Route path="/reset_password/:token" component={ResetPasswordPage} />
+            
+          
+
           <Route component={NotFoundPage} />
         </Switch>
       </div>

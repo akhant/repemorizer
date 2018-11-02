@@ -3,23 +3,21 @@ import { connect } from "react-redux";
 import { Grid, Table, Button } from "semantic-ui-react";
 import * as actions from "../actions";
 import { STAGE } from "../constants";
-import PropTypes from 'prop-types'
-
-
+import PropTypes from "prop-types";
 
 export class Dictionary extends Component {
   componentDidMount = () => {
     this.props.getDictionary();
-    this.props.getWordsToRepeat()
+    this.props.getWordsToRepeat();
   };
 
   componentWillUnmount = () => {
     this.props.checkWordsToRepeat();
-  }
+  };
 
   updateNextRepeatIn = () => {
     this.props.checkWordsToRepeat();
-  }
+  };
 
   onRemoveClick = e => {
     this.props.removeText(e.target.id);
@@ -35,11 +33,11 @@ export class Dictionary extends Component {
       (Date.parse(lastRepeat) + STAGE[stage] - Date.now()) / 1000
     );
     //return s > 0 ? this.renderTime(s) : "Ready to repeat";
-    if (s>0) {
-      return this.renderTime(s)
+    if (s > 0) {
+      return this.renderTime(s);
     } else {
       this.props.checkWordsToRepeat();
-      return "Ready to repeat"
+      return "Ready to repeat";
     }
   };
 
@@ -64,14 +62,25 @@ export class Dictionary extends Component {
             <Table.HeaderCell>Translation</Table.HeaderCell>
             <Table.HeaderCell>Time added</Table.HeaderCell>
             <Table.HeaderCell>Stage</Table.HeaderCell>
-            <Table.HeaderCell>Next repeat in <Button onClick={this.updateNextRepeatIn}>Update</Button></Table.HeaderCell>
+            <Table.HeaderCell>
+              Next repeat in{" "}
+              <Button onClick={this.updateNextRepeatIn}>Update</Button>
+            </Table.HeaderCell>
             <Table.HeaderCell>Remove</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {this.props.dictionary.map(
-            ({ text, translation, _id, addTime, stage, lastRepeat, isRepeatTime }) => (
+            ({
+              text,
+              translation,
+              _id,
+              addTime,
+              stage,
+              lastRepeat,
+              isRepeatTime
+            }) => (
               <Table.Row key={_id}>
                 <Table.Cell>{text}</Table.Cell>
                 <Table.Cell>{translation}</Table.Cell>
@@ -94,27 +103,25 @@ export class Dictionary extends Component {
   };
 
   render() {
+    if (!this.props.dictionary.length)
+      return <div>There is no words in your dictionary yet</div>;
     return (
       <div>
         <Grid>
-        <Grid.Row>
+          <Grid.Row>
             <Grid.Column>
-            <h1>Dictionary</h1>
-              
+              <h1>Dictionary</h1>
             </Grid.Column>
           </Grid.Row>
-        
-        <Grid.Row>
+
+          <Grid.Row>
             <Grid.Column>
-              <div>Words in dictionary:  {this.props.dictionary.length}</div>
+              <div>Words in dictionary: {this.props.dictionary.length}</div>
               <div>Ready to repeat: {this.props.words.length}</div>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Column>
-              
-              {this.renderTable()}
-            </Grid.Column>
+            <Grid.Column>{this.renderTable()}</Grid.Column>
           </Grid.Row>
         </Grid>
       </div>
@@ -123,13 +130,13 @@ export class Dictionary extends Component {
 }
 
 Dictionary.propTypes = {
-  dictionary: PropTypes.array,
-}
-
+  dictionary: PropTypes.array
+};
 
 export default connect(
   ({ dictionary, words }) => ({
-    dictionary, words
+    dictionary,
+    words
   }),
   { ...actions }
 )(Dictionary);

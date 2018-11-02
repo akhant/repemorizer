@@ -5,10 +5,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import * as route from "./controllers";
 import authenticate from "./utils/authenticate";
-
+import path from 'path'
 dotenv.config();
 const app = express();
-
+app.use(express.static(path.resolve(__dirname +'/assets')))
 mongoose.connect(
   process.env.MONGODB_URI,
   {
@@ -22,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-app.post("/api/translate",authenticate,  authenticate, route.translate);
+
+app.post("/api/translate",authenticate, route.translate);
 app.get("/api/get_fifty", authenticate, route.getFifty);
 app.get("/api/get_dictionary",authenticate,  route.getDictionary);
 app.post("/api/remove_text",authenticate,  route.removeText);
@@ -32,12 +33,16 @@ app.patch("/api/next_stage",authenticate,  route.nextStage);
 app.post("/api/signup", route.signup);
 app.get("/api/fetch_current_user", authenticate, route.fetchCurrentUser);
 app.post("/api/login", route.login);
-app.get('/api/confirmation', route.confirmation)
+app.get('/api/confirmation/:token', route.confirmation)
+app.post('/api/forgot_password', route.forgotPassword)
+app.post('/api/reset_password', route.resetPassword)
 
 
-
-app.get("/", (req, res) => {
-  res.send("This is API for repemorizer app. ");
+app.get("/*", (req, res) => {
+  
+  res.sendFile(path.join(__dirname, '/assets/index.html'))
 });
-
-app.listen(process.env.PORT, () => console.log("server running"));
+ 
+  
+ app.listen(process.env.PORT, () => console.log("server running"));
+ module.exports = app;

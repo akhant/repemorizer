@@ -1,53 +1,31 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { login } from "../actions";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
-class LoginPage extends Component {
+import { connect } from "react-redux";
+import { forgotPassword } from "../actions";
+
+class ForgotPasswordPage extends Component {
   state = {
     data: {
-      email: "",
-      password: ""
-      
+      email: ""
     }
   };
-
-
 
   emailHandler = e => {
     this.setState({
       data: {
-        ...this.state.data,
         email: e.target.value
-      }
-    });
-  };
-
-  passwordHandler = e => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        password: e.target.value
       }
     });
   };
 
   onSubmit = e => {
     //TODO: verify data
-    this.props.login(this.state.data);
     
+    this.props.forgotPassword(this.state.data);
   };
 
   render() {
-    
     return (
       <div className="login-form">
         <Grid
@@ -57,11 +35,10 @@ class LoginPage extends Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              Log in
+              Forgot password
             </Header>
             <Form onSubmit={this.onSubmit} size="large">
               <Segment stacked>
-                
                 <Form.Input
                   onChange={this.emailHandler}
                   value={this.state.data.email}
@@ -70,24 +47,12 @@ class LoginPage extends Component {
                   iconPosition="left"
                   placeholder="E-mail address"
                 />
-                <Form.Input
-                  onChange={this.passwordHandler}
-                  value={this.state.data.password}
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
-                />
 
                 <Button type="submit" color="teal" fluid size="large">
-                  LOGIN!
+                  Send confirmation email!
                 </Button>
               </Segment>
             </Form>
-            <Message>
-              <Link to="/forgot_password">forgot password?</Link>
-            </Message>
           </Grid.Column>
         </Grid>
       </div>
@@ -96,6 +61,6 @@ class LoginPage extends Component {
 }
 
 export default connect(
-  ({user}) => ({user}),
-  { login }
-)(LoginPage);
+  ({ user }) => ({ user }),
+  { forgotPassword }
+)(ForgotPasswordPage);
