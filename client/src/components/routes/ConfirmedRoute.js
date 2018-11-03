@@ -7,16 +7,14 @@ const ConfirmedRoute = ({ isConfirmed, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-        isConfirmed ? <Component {...props} /> : <Redirect to="/confirmation" />
+      isConfirmed ? <Component {...props} /> : <Redirect to="/confirmation" />
     }
   />
 );
 
 ConfirmedRoute.propTypes = {
   component: PropTypes.func.isRequired
-  
 };
-
 
 function mapStateToProps(state) {
   return {

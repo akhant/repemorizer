@@ -79,16 +79,12 @@ export function removeText(req, res) {
 }
 
 export function getWordsToRepeat(req, res) {
-  // .then(() => {
   Dictionary.find({ userId: req.body.user._id, isRepeatTime: true })
     .then(repeatWords => {
-      //console.log(repeatWords)
       if (repeatWords.length) return res.send(repeatWords);
       return res.send([]);
     })
     .catch(err => console.log("error DB getwordsToRepeat", err));
-  //})
-  // .catch(err => console.log("error DB wordsToRepeat", err));
 }
 
 export function checkWordsToRepeat(req, res) {
@@ -102,13 +98,10 @@ export function checkWordsToRepeat(req, res) {
     .catch(err => console.log("error DB checkWordsToRepeat", err));
 }
 
-//after repeat we find word by id, set lastRepeat = new Date(),
-// stage += 1, isRepeatTime = false
 export function nextStage(req, res) {
-  
   Dictionary.findOne({ userId: req.body.user._id, _id: req.body._id })
     .then(word => {
-      console.log(word)
+      console.log(word);
       if (req.body.success) word.stage += 1;
 
       word.lastRepeat = new Date();
@@ -124,19 +117,26 @@ export function signup(req, res) {
   const { email, password, username } = req.body;
 
   const user = new User({ email, username });
+
   user.setPassword(password);
   user.setConfirmationToken();
   user.setResetPasswordToken();
-  sendConfirmationEmail(user);
   
-  user
-    .save()
-    .then(u => {
+
+     user.save((err, u) => {
+    if (err) {
+      if (err.name === "MongoError" && err.code === 11000) {      
+        let errType = err.errmsg.match(/email|username/)
+        const mess = `${errType[0].charAt(0).toUpperCase() + errType[0].slice(1)} isn't unique. Try another one.`
+         
+        res.status(203).send({ message: mess});
+      }
+    } else {
+      sendConfirmationEmail(user);
       const userWithToken = u.withToken();
-      console.log(userWithToken)
-      res.send({...userWithToken});
-    })
-    .catch(err => console.log("error DB signup", err));
+      res.send({ ...userWithToken });
+    }
+  });
 }
 
 export function fetchCurrentUser(req, res) {
@@ -159,7 +159,7 @@ export function login(req, res) {
       const userWithToken = user.withToken();
       res.send({ ...userWithToken });
     } else {
-      res.status(401).send({ error: "Invalid credentials" });
+      res.status(203).send({ message: "Invalid login or password" });
     }
   });
 }
@@ -173,7 +173,7 @@ export function confirmation(req, res) {
     if (user) {
       res.redirect(`${process.env.HOST}/`);
     } else {
-      res.send({ error: "Invalid confirmation" });
+      res.status(203).send({ message: "Invalid confirmation" });
     }
   });
 }
@@ -184,7 +184,7 @@ export function forgotPassword(req, res) {
       sendResetPasswordEmail(user);
       res.send({});
     } else {
-      res.send({ error: "There is no user with such email" });
+      res.status(203).send({ message: "There is no user with such email" });
     }
   });
 }
@@ -197,10 +197,11 @@ export function resetPassword(req, res) {
       user.setPassword(password);
       user.setResetPasswordToken();
       user.save().then(u => {
-        const userWithToken = u.withToken()
-        res.send({...userWithToken})});
+        const userWithToken = u.withToken();
+        res.send({ ...userWithToken });
+      });
     } else {
-      res.send({ error: "Invalid data" });
+      res.status(203).send({ message: "Invalid confirmation token" });
     }
   });
 }

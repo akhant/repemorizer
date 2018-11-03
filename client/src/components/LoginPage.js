@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "../actions";
+import { login, clearMessage } from "../actions";
 
 class LoginPage extends Component {
   state = {
@@ -18,6 +18,15 @@ class LoginPage extends Component {
       password: ""
     }
   };
+
+  componentWillUnmount = () => {
+    this.props.clearMessage()
+  }
+
+  /* componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.user !== this.props.user)
+      this.props.history.push("/dashboard");
+  }; */
 
   emailHandler = e => {
     this.setState({
@@ -43,6 +52,7 @@ class LoginPage extends Component {
   };
 
   render() {
+    const { messages } = this.props;
     return (
       <div className="login-form">
         <Grid
@@ -51,8 +61,10 @@ class LoginPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
+            {messages.message && <Message negative>{messages.message}</Message>}
+
             <Header as="h2" color="teal" textAlign="center">
-            Log in
+              Log in
             </Header>
             <Form onSubmit={this.onSubmit} size="large">
               <Segment stacked>
@@ -90,6 +102,6 @@ class LoginPage extends Component {
 }
 
 export default connect(
-  ({ user }) => ({ user }),
-  { login }
+  ({ user, messages }) => ({ user, messages }),
+  { login, clearMessage }
 )(LoginPage);

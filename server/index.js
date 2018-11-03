@@ -12,6 +12,7 @@ app.use(express.static(path.resolve(__dirname +'/assets')))
 mongoose.connect(
   process.env.MONGODB_URI,
   {
+    useCreateIndex: true,
     useNewUrlParser: true
   }
 ); 

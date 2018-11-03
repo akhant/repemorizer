@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, LOGOUT, FORGOT_PASSWORD } from "../constants";
+import { USER_LOGGED_IN, LOGOUT } from "../constants";
 
 export default (state = {}, action) => {
   const { type, data } = action;
@@ -7,10 +7,9 @@ export default (state = {}, action) => {
     case USER_LOGGED_IN:
       return { ...state, ...data.user };
     case LOGOUT:
-      localStorage.removeItem("JWT")
-      return {}
+      localStorage.removeItem("JWT");
+      return {};
     
-
     default:
       return state;
   }

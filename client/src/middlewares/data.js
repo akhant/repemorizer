@@ -1,3 +1,5 @@
+import axios from "axios";
+import setAuthHeader from "../utils/setAuthHeader";
 import {
   TRANSLATE,
   GET_DICTIONARY,
@@ -10,12 +12,10 @@ import {
   FETCH_CURRENT_USER,
   USER_LOGGED_IN,
   LOGIN,
-  LOGOUT,
   FORGOT_PASSWORD,
-  RESET_PASSWORD
+  RESET_PASSWORD,
+  SHOW_MESSAGE
 } from "../constants";
-import axios from "axios";
-import setAuthHeader from "../utils/setAuthHeader";
 
 const serverUrl = "http://localhost:3000/api";
 
@@ -116,17 +116,24 @@ const Data = store => next => action => {
       return axios
         .post(`${serverUrl}/signup`, { ...payload })
         .then(res => {
-          if (res.data.token) {
-            localStorage.JWT = res.data.token;
+          const { token, message } = res.data;
+          if (message) {
+            return next({
+              type: SHOW_MESSAGE,
+              data: {
+                message
+              }
+            });
           }
-
-          next({
-            type: USER_LOGGED_IN,
-            data: {
-              user: res.data
-            }
-          });
-          //window.location = "/login";
+          if (token) {
+            localStorage.JWT = token;
+            next({
+              type: USER_LOGGED_IN,
+              data: {
+                user: res.data
+              }
+            });
+          }
         })
         .catch(err => console.log("Error post SIGNUP", err));
 
@@ -147,10 +154,20 @@ const Data = store => next => action => {
       return axios
         .post(`${serverUrl}/login`, { ...payload })
         .then(res => {
-          const { token } = res.data;
-          localStorage.JWT = token;
-          setAuthHeader(token);
-          window.location = "/";
+          const { token, message } = res.data;
+          if (message) {
+            return next({
+              type: SHOW_MESSAGE,
+              data: {
+                message
+              }
+            });
+          }
+          if (token) {
+            localStorage.JWT = token;
+            setAuthHeader(token);
+          }
+          console.log(res);
           next({
             type: USER_LOGGED_IN,
             data: {
@@ -163,12 +180,34 @@ const Data = store => next => action => {
     case FORGOT_PASSWORD:
       return axios
         .post(`${serverUrl}/forgot_password`, { ...payload })
+        .then(res => {
+          const { message } = res.data;
+          if (message) {
+            return next({
+              type: SHOW_MESSAGE,
+              data: {
+                message
+              }
+            });
+          }
+        })
 
         .catch(err => console.log("Error post FORGOT_PASSWORD", err));
 
     case RESET_PASSWORD:
       return axios
         .post(`${serverUrl}/reset_password`, { ...payload })
+        .then(res => {
+          const { message } = res.data;
+          if (message) {
+            return next({
+              type: SHOW_MESSAGE,
+              data: {
+                message
+              }
+            });
+          }
+        })
 
         .catch(err => console.log("Error post RESET_PASSWORD", err));
 

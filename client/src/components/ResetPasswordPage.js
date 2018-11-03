@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
+import { Button, Form, Grid, Header, Segment, Message } from "semantic-ui-react";
 
 import { connect } from "react-redux";
-import { resetPassword } from "../actions";
+import { resetPassword, clearMessage } from "../actions";
 
 class ResetPasswordPage extends Component {
   state = {
@@ -11,6 +11,9 @@ class ResetPasswordPage extends Component {
       password2: ""
     }
   };
+componentWillUnmount = () => {
+  this.props.clearMessage()
+}
 
   passwordHandler = e => {
     this.setState({
@@ -24,7 +27,7 @@ class ResetPasswordPage extends Component {
   onSubmit = e => {
     //TODO: verify data
     //if pass1 === pass2
-    console.log(this.props.match.params);
+
     this.props.resetPassword({
       token: this.props.match.params.token,
       password: this.state.data.password1
@@ -32,7 +35,8 @@ class ResetPasswordPage extends Component {
   };
 
   render() {
-    console.log(this.props);
+    const { messages } = this.props;
+
     return (
       <div className="login-form">
         <Grid
@@ -41,6 +45,8 @@ class ResetPasswordPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
+            {messages.message && <Message negative>{messages.message}</Message>}
+
             <Header as="h2" color="teal" textAlign="center">
               Reset password
             </Header>
@@ -80,6 +86,6 @@ class ResetPasswordPage extends Component {
 }
 
 export default connect(
-  ({ user }) => ({ user }),
-  { resetPassword }
+  ({ user, messages }) => ({ user, messages }),
+  { resetPassword, clearMessage }
 )(ResetPasswordPage);

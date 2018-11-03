@@ -1,5 +1,5 @@
-(function(){
-/* function sendNotification(title, options) {
+/* (function() {
+  function sendNotification(title, options) {
 // Проверим, поддерживает ли браузер HTML5 Notifications
 if (!("Notification" in window)) {
 alert('Ваш браузер не поддерживает HTML Notifications, его необходимо обновить.');
@@ -38,6 +38,5 @@ body: 'Тестирование HTML5 Notifications',
 icon: 'icon.jpg',
 dir: 'auto'
 });
-*/
-    
-})()
+
+})(); */

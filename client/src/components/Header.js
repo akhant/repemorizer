@@ -29,8 +29,6 @@ class Header extends Component {
               <Link to="/repeat">Repeat</Link> |
               <Link to="/dashboard">Dashboard</Link> |
               <Link to="/forgot_password">Forgot</Link> |
-              <Link to="/reset_password">Reset </Link> |
-              <Link to="/">Home</Link>
             </Grid.Column>
           </Grid.Row>
         </Grid>

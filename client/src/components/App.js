@@ -16,7 +16,7 @@ import NotFoundPage from "./NotFoundPage";
 import AuthRoute from "./routes/AuthRoute";
 import ConfirmationPage from "./ConfirmationPage";
 import ConfirmedRoute from "./routes/ConfirmedRoute";
-
+import OnlyNotAuthRoute from './routes/OnlyNotAuthRoute'
 import "../assets/js";
 //import "../assets/styles/bootstrap.css";
 import "semantic-ui-css/semantic.min.css";
@@ -29,8 +29,7 @@ const history = createBrowserHistory();
 const store = configureStore();
 
 if (localStorage.JWT) {
-  console.log(localStorage.JWT);
-  console.log(history);
+  
   const { pathname } = history.location;
   if (pathname !== "/signup" && pathname !== "/login") {
     setAuthHeader(localStorage.JWT);
@@ -48,13 +47,13 @@ const App = () => (
         <Switch>
           <Route path="/" exact component={HomePage} />
           <AuthRoute path="/dashboard" exact component={Main} />
-          <Route path="/login" exact component={LoginPage} />
-          <Route path="/signup" exact component={SignupPage} />
+          <OnlyNotAuthRoute path="/login" exact component={LoginPage} />
+          <OnlyNotAuthRoute path="/signup" exact component={SignupPage} />
           <Route path="/confirmation" exact component={ConfirmationPage} />
           <ConfirmedRoute path="/dictionary" exact component={Dictionary} />
           <ConfirmedRoute path="/repeat" exact component={RepeatPage} />
-          <Route path="/forgot_password" exact component={ForgotPasswordPage} />
-          <Route path="/reset_password/:token" component={ResetPasswordPage} />
+          <OnlyNotAuthRoute path="/forgot_password" exact component={ForgotPasswordPage} />
+          <OnlyNotAuthRoute path="/reset_password/:token" component={ResetPasswordPage} />
 
           <Route component={NotFoundPage} />
         </Switch>

@@ -8,18 +8,22 @@ const User = new Schema({
   email: {
     type: String,
     required: true,
-    lowercase: true
+    lowercase: true,
+    index: true,
+    unique: true 
   },
   username: {
     type: String,
-    required: true
+    required: true,
+    index: true,
+    unique: true
   },
   passwordHash: { type: String, required: true },
   confirmed: { type: Boolean, default: false },
   confirmationToken: { type: String, default: "", expires: "1d" },
   resetPasswordToken: { type: String, default: "", expires: "1d" },
   
-});
+}, {timestamps: true});
 
 User.methods.setPassword = function(password) {
   this.passwordHash = bcrypt.hashSync(password, 10);

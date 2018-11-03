@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Segment,
+  Message
+} from "semantic-ui-react";
 
 import { connect } from "react-redux";
-import { forgotPassword } from "../actions";
+import { forgotPassword, clearMessage } from "../actions";
 
 class ForgotPasswordPage extends Component {
   state = {
@@ -10,7 +17,9 @@ class ForgotPasswordPage extends Component {
       email: ""
     }
   };
-
+  componentWillUnmount = () => {
+    this.props.clearMessage();
+  };
   emailHandler = e => {
     this.setState({
       data: {
@@ -21,11 +30,13 @@ class ForgotPasswordPage extends Component {
 
   onSubmit = e => {
     //TODO: verify data
-    
+
     this.props.forgotPassword(this.state.data);
   };
 
   render() {
+    const { user, history, messages } = this.props;
+
     return (
       <div className="login-form">
         <Grid
@@ -34,6 +45,8 @@ class ForgotPasswordPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
+            {messages.message && <Message negative>{messages.message}</Message>}
+
             <Header as="h2" color="teal" textAlign="center">
               Forgot password
             </Header>
@@ -61,6 +74,6 @@ class ForgotPasswordPage extends Component {
 }
 
 export default connect(
-  ({ user }) => ({ user }),
-  { forgotPassword }
+  ({ user, messages }) => ({ user, messages }),
+  { forgotPassword, clearMessage }
 )(ForgotPasswordPage);

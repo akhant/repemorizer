@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signup } from "../actions";
+import { signup, clearMessage } from "../actions";
 
 class SignupPage extends Component {
   state = {
@@ -20,6 +20,9 @@ class SignupPage extends Component {
     }
   };
 
+  componentWillUnmount = () => {
+    this.props.clearMessage()
+  }
   usernameHandler = e => {
     this.setState({
       data: {
@@ -53,6 +56,7 @@ class SignupPage extends Component {
   };
 
   render() {
+    const {messages} = this.props
     return (
       <div className="signup-form">
         <Grid
@@ -61,6 +65,8 @@ class SignupPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
+          {messages.message && <Message negative>{messages.message}</Message>}
+
             <Header as="h2" color="teal" textAlign="center">
               Sign up
             </Header>
@@ -108,6 +114,6 @@ class SignupPage extends Component {
 }
 
 export default connect(
-  null,
-  { signup }
+  ({messages}) => ({ messages}),
+  { signup, clearMessage }
 )(SignupPage);

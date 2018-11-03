@@ -11,7 +11,8 @@ import {
   NEXT_STAGE,
   FETCH_CURRENT_USER,
   RESET_PASSWORD,
-  FORGOT_PASSWORD
+  FORGOT_PASSWORD,
+  CLEAR_MESSAGE
 } from "../constants";
 
 export const translateRequest = text => ({
@@ -71,3 +72,7 @@ export const resetPassword = data => ({
   type: RESET_PASSWORD,
   payload: data
 });
+
+export const clearMessage = () => ({
+  type: CLEAR_MESSAGE
+})
