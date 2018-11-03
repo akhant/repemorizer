@@ -36,7 +36,7 @@ export function translate(req, res) {
               translation: response.data.text[0],
               addTime: new Date(),
               lastRepeat: new Date(),
-              repeatStage: 0,
+              stage: 0,
               isRepeatTime: false,
               userId: req.body.user._id
             });
@@ -105,8 +105,10 @@ export function checkWordsToRepeat(req, res) {
 //after repeat we find word by id, set lastRepeat = new Date(),
 // stage += 1, isRepeatTime = false
 export function nextStage(req, res) {
-  Dictionary.findOne({ userId: req.body.user.userId, _id: req.body._id })
+  
+  Dictionary.findOne({ userId: req.body.user._id, _id: req.body._id })
     .then(word => {
+      console.log(word)
       if (req.body.success) word.stage += 1;
 
       word.lastRepeat = new Date();
@@ -126,11 +128,13 @@ export function signup(req, res) {
   user.setConfirmationToken();
   user.setResetPasswordToken();
   sendConfirmationEmail(user);
+  
   user
     .save()
     .then(u => {
       const userWithToken = u.withToken();
-      res.send(...userWithToken);
+      console.log(userWithToken)
+      res.send({...userWithToken});
     })
     .catch(err => console.log("error DB signup", err));
 }
@@ -193,8 +197,8 @@ export function resetPassword(req, res) {
       user.setPassword(password);
       user.setResetPasswordToken();
       user.save().then(u => {
-        const userWithToken= u.withToken()
-        res.send(...userWithToken)});
+        const userWithToken = u.withToken()
+        res.send({...userWithToken})});
     } else {
       res.send({ error: "Invalid data" });
     }

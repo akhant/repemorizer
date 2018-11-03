@@ -16,11 +16,8 @@ class LoginPage extends Component {
     data: {
       email: "",
       password: ""
-      
     }
   };
-
-
 
   emailHandler = e => {
     this.setState({
@@ -43,11 +40,9 @@ class LoginPage extends Component {
   onSubmit = e => {
     //TODO: verify data
     this.props.login(this.state.data);
-    
   };
 
   render() {
-    
     return (
       <div className="login-form">
         <Grid
@@ -57,11 +52,10 @@ class LoginPage extends Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" color="teal" textAlign="center">
-              Log in
+            Log in
             </Header>
             <Form onSubmit={this.onSubmit} size="large">
               <Segment stacked>
-                
                 <Form.Input
                   onChange={this.emailHandler}
                   value={this.state.data.email}
@@ -81,7 +75,7 @@ class LoginPage extends Component {
                 />
 
                 <Button type="submit" color="teal" fluid size="large">
-                  LOGIN!
+                  LOG IN!
                 </Button>
               </Segment>
             </Form>
@@ -96,6 +90,6 @@ class LoginPage extends Component {
 }
 
 export default connect(
-  ({user}) => ({user}),
+  ({ user }) => ({ user }),
   { login }
 )(LoginPage);

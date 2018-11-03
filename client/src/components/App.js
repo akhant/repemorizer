@@ -29,7 +29,10 @@ const history = createBrowserHistory();
 const store = configureStore();
 
 if (localStorage.JWT) {
-  if (history.path !== "/login") {
+  console.log(localStorage.JWT);
+  console.log(history);
+  const { pathname } = history.location;
+  if (pathname !== "/signup" && pathname !== "/login") {
     setAuthHeader(localStorage.JWT);
     store.dispatch(fetchCurrentUser());
   }
@@ -52,8 +55,6 @@ const App = () => (
           <ConfirmedRoute path="/repeat" exact component={RepeatPage} />
           <Route path="/forgot_password" exact component={ForgotPasswordPage} />
           <Route path="/reset_password/:token" component={ResetPasswordPage} />
-            
-          
 
           <Route component={NotFoundPage} />
         </Switch>

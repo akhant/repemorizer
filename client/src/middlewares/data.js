@@ -116,14 +116,17 @@ const Data = store => next => action => {
       return axios
         .post(`${serverUrl}/signup`, { ...payload })
         .then(res => {
-          localStorage.JWT = res.data.token;
+          if (res.data.token) {
+            localStorage.JWT = res.data.token;
+          }
+
           next({
             type: USER_LOGGED_IN,
             data: {
               user: res.data
             }
           });
-          window.location = "/login";
+          //window.location = "/login";
         })
         .catch(err => console.log("Error post SIGNUP", err));
 
@@ -156,14 +159,14 @@ const Data = store => next => action => {
           });
         })
         .catch(err => console.log("Error post LOGIN", err));
-   
-        case FORGOT_PASSWORD:
+
+    case FORGOT_PASSWORD:
       return axios
         .post(`${serverUrl}/forgot_password`, { ...payload })
 
         .catch(err => console.log("Error post FORGOT_PASSWORD", err));
-      
-        case RESET_PASSWORD:
+
+    case RESET_PASSWORD:
       return axios
         .post(`${serverUrl}/reset_password`, { ...payload })
 
