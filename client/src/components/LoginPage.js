@@ -17,9 +17,9 @@ class LoginPage extends Component {
       email: "",
       password: ""
     }
-  };
+  };  
 
-  componentWillUnmount = () => {
+    componentWillUnmount = () => {
     this.props.clearMessage()
   }
 
@@ -61,7 +61,7 @@ class LoginPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            {messages.message && <Message negative>{messages.message}</Message>}
+            {messages.message && <Message color={this.props.messages.success ? "green" : "red"}>{messages.message}</Message>}
 
             <Header as="h2" color="teal" textAlign="center">
               Log in

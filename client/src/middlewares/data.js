@@ -118,15 +118,16 @@ const Data = store => next => action => {
         .then(res => {
           const { token, message } = res.data;
           if (message) {
-            return next({
+             next({
               type: SHOW_MESSAGE,
               data: {
-                message
+                ...res.data
               }
             });
           }
           if (token) {
             localStorage.JWT = token;
+            setAuthHeader(token);
             next({
               type: USER_LOGGED_IN,
               data: {
@@ -156,10 +157,10 @@ const Data = store => next => action => {
         .then(res => {
           const { token, message } = res.data;
           if (message) {
-            return next({
+             next({
               type: SHOW_MESSAGE,
               data: {
-                message
+                ...res.data
               }
             });
           }
@@ -186,7 +187,7 @@ const Data = store => next => action => {
             return next({
               type: SHOW_MESSAGE,
               data: {
-                message
+                ...res.data
               }
             });
           }
@@ -203,7 +204,7 @@ const Data = store => next => action => {
             return next({
               type: SHOW_MESSAGE,
               data: {
-                message
+                ...res.data
               }
             });
           }

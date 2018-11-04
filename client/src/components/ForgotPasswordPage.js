@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   Button,
   Form,
@@ -7,14 +7,22 @@ import {
   Segment,
   Message
 } from "semantic-ui-react";
-
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { forgotPassword, clearMessage } from "../actions";
 
-class ForgotPasswordPage extends Component {
+class ForgotPasswordPage extends PureComponent {
   state = {
     data: {
       email: ""
+    }
+  };
+  componentDidUpdate = () => {
+    if (this.props.messages.success) {
+      
+      setTimeout(() => {
+        this.props.history.push("/");
+      }, 3000);
     }
   };
   componentWillUnmount = () => {
@@ -35,7 +43,7 @@ class ForgotPasswordPage extends Component {
   };
 
   render() {
-    const { user, history, messages } = this.props;
+    const { messages } = this.props;
 
     return (
       <div className="login-form">
@@ -45,7 +53,11 @@ class ForgotPasswordPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            {messages.message && <Message negative>{messages.message}</Message>}
+            {messages.message && (
+              <Message color={this.props.messages.success ? "green" : "red"}>
+                {messages.message}
+              </Message>
+            )}
 
             <Header as="h2" color="teal" textAlign="center">
               Forgot password
@@ -73,7 +85,11 @@ class ForgotPasswordPage extends Component {
   }
 }
 
+ForgotPasswordPage.propTypes = {
+  messages: PropTypes.object
+};
+
 export default connect(
-  ({ user, messages }) => ({ user, messages }),
+  ({ messages }) => ({ messages }),
   { forgotPassword, clearMessage }
 )(ForgotPasswordPage);

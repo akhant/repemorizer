@@ -20,6 +20,16 @@ class SignupPage extends Component {
     }
   };
 
+  //TODO: fix signup, show success message before redirect
+/*   componentDidUpdate = () => {
+    if (this.props.messages.success) {
+      
+      setTimeout(() => {
+        this.props.history.push("/dashboard");
+      }, 3000);
+    }
+  }; */
+
   componentWillUnmount = () => {
     this.props.clearMessage()
   }
@@ -65,7 +75,7 @@ class SignupPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-          {messages.message && <Message negative>{messages.message}</Message>}
+          {messages.message && <Message color={this.props.messages.success ? "green" : "red"}>{messages.message}</Message>}
 
             <Header as="h2" color="teal" textAlign="center">
               Sign up

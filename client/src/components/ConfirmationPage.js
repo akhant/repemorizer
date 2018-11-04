@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class ConfirmationPage extends Component {
-  componentDidMount() {}
+  
   render() {
     if (this.props.confirmed) {
       return <div>You've already confirmed your email. Enjoy the app.</div>;
@@ -10,6 +11,7 @@ class ConfirmationPage extends Component {
       return (
         <div>
           Please confirm your email to get access to dictionary and repetition.
+          <Link to="/dashboard"> Go to dashboard </Link>
         </div>
       );
     } else {

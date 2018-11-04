@@ -134,7 +134,7 @@ export function signup(req, res) {
     } else {
       sendConfirmationEmail(user);
       const userWithToken = u.withToken();
-      res.send({ ...userWithToken });
+      res.send({ ...userWithToken, message: "Confirmation email has been send. Check your mailbox.", success: true });
     }
   });
 }
@@ -157,9 +157,9 @@ export function login(req, res) {
   User.findOne({ email: email }).then(user => {
     if (user && user.isValidPassword(password)) {
       const userWithToken = user.withToken();
-      res.send({ ...userWithToken });
+      res.send({ ...userWithToken, message: "Successful!", success: true });
     } else {
-      res.status(203).send({ message: "Invalid login or password" });
+      res.status(203).send({ message: "Invalid login or password", success: false });
     }
   });
 }
@@ -173,7 +173,7 @@ export function confirmation(req, res) {
     if (user) {
       res.redirect(`${process.env.HOST}/`);
     } else {
-      res.status(203).send({ message: "Invalid confirmation" });
+      res.status(203).send({ message: "Invalid confirmation", success: false });
     }
   });
 }
@@ -182,9 +182,9 @@ export function forgotPassword(req, res) {
   User.findOne({ email: email }).then(user => {
     if (user) {
       sendResetPasswordEmail(user);
-      res.send({});
+      res.send({message: "Confirmation email has been send. Check your mailbox.", success: true});
     } else {
-      res.status(203).send({ message: "There is no user with such email" });
+      res.status(203).send({ message: "There is no user with such email", success: false });
     }
   });
 }
@@ -198,10 +198,10 @@ export function resetPassword(req, res) {
       user.setResetPasswordToken();
       user.save().then(u => {
         const userWithToken = u.withToken();
-        res.send({ ...userWithToken });
+        res.send({ ...userWithToken, message: "Password has cheanged", success: true });
       });
     } else {
-      res.status(203).send({ message: "Invalid confirmation token" });
+      res.status(203).send({ message: "Invalid confirmation token", success: false });
     }
   });
 }

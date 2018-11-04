@@ -11,6 +11,15 @@ class ResetPasswordPage extends Component {
       password2: ""
     }
   };
+
+  componentDidUpdate = () => {
+    if (this.props.messages.success) {
+      
+      setTimeout(() => {
+        this.props.history.push("/login");
+      }, 3000);
+    }
+  };
 componentWillUnmount = () => {
   this.props.clearMessage()
 }
@@ -45,7 +54,7 @@ componentWillUnmount = () => {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            {messages.message && <Message negative>{messages.message}</Message>}
+            {messages.message && <Message color={this.props.messages.success ? "green" : "red"}>{messages.message}</Message>}
 
             <Header as="h2" color="teal" textAlign="center">
               Reset password
