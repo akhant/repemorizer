@@ -118,7 +118,7 @@ const Data = store => next => action => {
         .then(res => {
           const { token, message } = res.data;
           if (message) {
-             next({
+            next({
               type: SHOW_MESSAGE,
               data: {
                 ...res.data
@@ -157,7 +157,7 @@ const Data = store => next => action => {
         .then(res => {
           const { token, message } = res.data;
           if (message) {
-             next({
+            next({
               type: SHOW_MESSAGE,
               data: {
                 ...res.data
@@ -167,14 +167,13 @@ const Data = store => next => action => {
           if (token) {
             localStorage.JWT = token;
             setAuthHeader(token);
+            next({
+              type: USER_LOGGED_IN,
+              data: {
+                user: res.data
+              }
+            });
           }
-          console.log(res);
-          next({
-            type: USER_LOGGED_IN,
-            data: {
-              user: res.data
-            }
-          });
         })
         .catch(err => console.log("Error post LOGIN", err));
 

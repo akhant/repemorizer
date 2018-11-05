@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   Button,
   Form,
@@ -9,24 +9,35 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { login, clearMessage } from "../actions";
+import { login, clearMessage, logout } from "../actions";
 
-class LoginPage extends Component {
+class LoginPage extends PureComponent {
   state = {
     data: {
       email: "",
       password: ""
     }
   };  
+  componentDidMount = () => {
+    this.props.logout()
+  }
+  
 
     componentWillUnmount = () => {
     this.props.clearMessage()
+    
   }
 
-  /* componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.user !== this.props.user)
-      this.props.history.push("/dashboard");
-  }; */
+  componentDidUpdate = () => {
+    
+    if (this.props.messages.success) {
+     // if (this.timer) clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+
+        this.props.history.push("/dashboard");
+      }, 2000);
+    }
+  };
 
   emailHandler = e => {
     this.setState({
@@ -53,6 +64,7 @@ class LoginPage extends Component {
 
   render() {
     const { messages } = this.props;
+
     return (
       <div className="login-form">
         <Grid
@@ -103,5 +115,5 @@ class LoginPage extends Component {
 
 export default connect(
   ({ user, messages }) => ({ user, messages }),
-  { login, clearMessage }
+  { login, clearMessage, logout }
 )(LoginPage);

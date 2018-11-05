@@ -47,8 +47,8 @@ const App = () => (
         <Switch>
           <Route path="/" exact component={HomePage} />
           <AuthRoute path="/dashboard" exact component={Main} />
-          <OnlyNotAuthRoute path="/login" exact component={LoginPage} />
-          <OnlyNotAuthRoute path="/signup" exact component={SignupPage} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/signup" exact component={SignupPage} />
           <Route path="/confirmation" exact component={ConfirmationPage} />
           <ConfirmedRoute path="/dictionary" exact component={Dictionary} />
           <ConfirmedRoute path="/repeat" exact component={RepeatPage} />

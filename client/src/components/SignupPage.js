@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signup, clearMessage } from "../actions";
+import { signup, clearMessage, logout } from "../actions";
 
 class SignupPage extends Component {
   state = {
@@ -19,16 +19,20 @@ class SignupPage extends Component {
       username: ""
     }
   };
+  componentDidMount = () => {
+    this.props.logout()
+  }
+  
 
-  //TODO: fix signup, show success message before redirect
-/*   componentDidUpdate = () => {
+ 
+  componentDidUpdate = () => {
     if (this.props.messages.success) {
       
       setTimeout(() => {
         this.props.history.push("/dashboard");
       }, 3000);
     }
-  }; */
+  };
 
   componentWillUnmount = () => {
     this.props.clearMessage()
@@ -125,5 +129,5 @@ class SignupPage extends Component {
 
 export default connect(
   ({messages}) => ({ messages}),
-  { signup, clearMessage }
+  { signup, clearMessage, logout }
 )(SignupPage);

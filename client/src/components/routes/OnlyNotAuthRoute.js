@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const AuthRoute = ({ isAuthenticated, component: Component, ...rest }) => (
+const OnlyNotAuthRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -12,15 +12,16 @@ const AuthRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   />
 );
 
-AuthRoute.propTypes = {
+OnlyNotAuthRoute.propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.user.token
+    isAuthenticated: !!state.user.token,
+    messages: state.messages
   };
 }
 
-export default connect(mapStateToProps)(AuthRoute);
+export default connect(mapStateToProps)(OnlyNotAuthRoute);
