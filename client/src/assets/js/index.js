@@ -1,3 +1,6 @@
+
+
+
 /* (function() {
   function sendNotification(title, options) {
 // Проверим, поддерживает ли браузер HTML5 Notifications

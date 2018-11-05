@@ -9,68 +9,86 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { isEmail, isAlphanumeric } from "validator";
 import { signup, clearMessage, logout } from "../actions";
-
+import { isError } from "../utils";
 class SignupPage extends Component {
   state = {
     data: {
       email: "",
       password: "",
+      password2: "",
       username: ""
     }
   };
   componentDidMount = () => {
-    this.props.logout()
-  }
-  
+    this.props.logout();
+  };
 
- 
   componentDidUpdate = () => {
-    if (this.props.messages.success) {
-      
+    const { history, messages } = this.props;
+    if (messages.success) {
       setTimeout(() => {
-        this.props.history.push("/dashboard");
+        history.push("/dashboard");
       }, 3000);
     }
   };
 
   componentWillUnmount = () => {
-    this.props.clearMessage()
-  }
-  usernameHandler = e => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        username: e.target.value
-      }
-    });
+    this.props.clearMessage();
   };
 
-  emailHandler = e => {
+  inputHandler = e => {
     this.setState({
       data: {
         ...this.state.data,
-        email: e.target.value
-      }
-    });
-  };
-
-  passwordHandler = e => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        password: e.target.value
+        [e.target.name]: e.target.value
       }
     });
   };
 
   onSubmit = e => {
-    //TODO: verify data
-    this.props.signup(this.state.data);
+    const { data } = this.state;
+    this.setState(
+      {
+        errors: {}
+      },
+      () => {
+        if (this.validate(data)) this.props.signup(data);
+      }
+    );
+  };
+
+  validate = data => {
+    const errors = {};
+    if (!data.username || !isAlphanumeric(data.username)) {
+      errors.username = "Not valid username";
+    }
+    if (!isEmail(data.email) || !data.email) {
+      errors.email = "Not valid email";
+    }
+    if (data.password !== data.password2) {
+      errors.password = "Not equal passwords";
+    }
+    if (
+      !isAlphanumeric(data.password) ||
+      data.password.length < 4 ||
+      data.password.length > 16
+    ) {
+      errors.password = "Not valid password";
+    }
+
+    this.setState({
+      errors: { ...errors }
+    });
+
+    return JSON.stringify(errors) === "{}";
   };
 
   render() {
-    const {messages} = this.props
+    const { messages } = this.props;
+    const { errors, data } = this.state;
+    const err = Object.values(errors);
     return (
       <div className="signup-form">
         <Grid
@@ -79,33 +97,55 @@ class SignupPage extends Component {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-          {messages.message && <Message color={this.props.messages.success ? "green" : "red"}>{messages.message}</Message>}
-
+            {messages.message && (
+              <Message color={messages.success ? "green" : "red"}>
+                {messages.message}
+              </Message>
+            )}
+            {isError(errors) &&
+              err.map((val, i) => (
+                <Message key={i} negative>
+                  {val}
+                </Message>
+              ))}
             <Header as="h2" color="teal" textAlign="center">
               Sign up
             </Header>
             <Form onSubmit={this.onSubmit} size="large">
               <Segment stacked>
                 <Form.Input
-                  onChange={this.usernameHandler}
-                  value={this.state.data.username}
+                  onChange={this.inputHandler}
+                  value={data.username}
                   fluid
+                  name="username"
                   icon="user"
                   iconPosition="left"
                   placeholder="Your name"
                 />
                 <Form.Input
-                  onChange={this.emailHandler}
-                  value={this.state.data.email}
+                  onChange={this.inputHandler}
+                  value={data.email}
                   fluid
+                  name="email"
                   icon="mail"
                   iconPosition="left"
                   placeholder="E-mail address"
                 />
                 <Form.Input
-                  onChange={this.passwordHandler}
-                  value={this.state.data.password}
+                  onChange={this.inputHandler}
+                  value={data.password}
                   fluid
+                  name="password"
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+                <Form.Input
+                  onChange={this.inputHandler}
+                  value={data.password2}
+                  fluid
+                  name="password2"
                   icon="lock"
                   iconPosition="left"
                   placeholder="Password"
@@ -128,6 +168,6 @@ class SignupPage extends Component {
 }
 
 export default connect(
-  ({messages}) => ({ messages}),
+  ({ messages }) => ({ messages }),
   { signup, clearMessage, logout }
 )(SignupPage);

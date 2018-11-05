@@ -9,25 +9,32 @@ import {
 } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { isEmail } from "validator";
 import { forgotPassword, clearMessage } from "../actions";
 
 class ForgotPasswordPage extends PureComponent {
   state = {
     data: {
       email: ""
+    },
+    error: {
+      email: ""
     }
   };
+
   componentDidUpdate = () => {
-    if (this.props.messages.success) {
-      
+    const { history, messages } = this.props;
+    if (messages.success) {
       setTimeout(() => {
-        this.props.history.push("/");
+        history.push("/");
       }, 3000);
     }
   };
+
   componentWillUnmount = () => {
     this.props.clearMessage();
   };
+
   emailHandler = e => {
     this.setState({
       data: {
@@ -37,14 +44,36 @@ class ForgotPasswordPage extends PureComponent {
   };
 
   onSubmit = e => {
-    //TODO: verify data
+    const { data } = this.state;
+    this.setState(
+      {
+        error: {}
+      },
+      () => {
+        if (this.validate(data)) {
+          this.props.forgotPassword(data);
+        }
+      }
+    );
+  };
 
-    this.props.forgotPassword(this.state.data);
+  validate = data => {
+    const error = {};
+
+    if (!isEmail(data.email)) {
+      error.email = "Not valid email";
+    }
+
+    this.setState({
+      error: { ...error }
+    });
+
+    return !error.email;
   };
 
   render() {
     const { messages } = this.props;
-
+    const { error, data } = this.state;
     return (
       <div className="login-form">
         <Grid
@@ -54,10 +83,11 @@ class ForgotPasswordPage extends PureComponent {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             {messages.message && (
-              <Message color={this.props.messages.success ? "green" : "red"}>
+              <Message color={messages.success ? "green" : "red"}>
                 {messages.message}
               </Message>
             )}
+            {error.email && <Message negative>{error.email}</Message>}
 
             <Header as="h2" color="teal" textAlign="center">
               Forgot password
@@ -66,7 +96,7 @@ class ForgotPasswordPage extends PureComponent {
               <Segment stacked>
                 <Form.Input
                   onChange={this.emailHandler}
-                  value={this.state.data.email}
+                  value={data.email}
                   fluid
                   icon="mail"
                   iconPosition="left"
@@ -84,10 +114,6 @@ class ForgotPasswordPage extends PureComponent {
     );
   }
 }
-
-ForgotPasswordPage.propTypes = {
-  messages: PropTypes.object
-};
 
 export default connect(
   ({ messages }) => ({ messages }),

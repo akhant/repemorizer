@@ -8,62 +8,87 @@ import {
   Segment
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { isEmail, isAlphanumeric } from "validator";
 import { connect } from "react-redux";
 import { login, clearMessage, logout } from "../actions";
+import { isError } from "../utils";
 
 class LoginPage extends PureComponent {
   state = {
     data: {
       email: "",
       password: ""
+    },
+    errors: {
+      email: "",
+      password: ""
     }
-  };  
-  componentDidMount = () => {
-    this.props.logout()
-  }
-  
+  };
 
-    componentWillUnmount = () => {
-    this.props.clearMessage()
-    
-  }
+  componentDidMount = () => {
+    this.props.logout();
+  };
+
+  componentWillUnmount = () => {
+    this.props.clearMessage();
+  };
 
   componentDidUpdate = () => {
-    
-    if (this.props.messages.success) {
-     // if (this.timer) clearTimeout(this.timer);
+    const { history, messages } = this.props;
+    if (messages.success) {
       this.timer = setTimeout(() => {
-
-        this.props.history.push("/dashboard");
+        history.push("/dashboard");
       }, 2000);
     }
   };
 
-  emailHandler = e => {
+  inputHandler = e => {
     this.setState({
       data: {
         ...this.state.data,
-        email: e.target.value
-      }
-    });
-  };
-
-  passwordHandler = e => {
-    this.setState({
-      data: {
-        ...this.state.data,
-        password: e.target.value
+        [e.target.name]: e.target.value
       }
     });
   };
 
   onSubmit = e => {
-    //TODO: verify data
-    this.props.login(this.state.data);
+    const { data } = this.state;
+    this.setState(
+      {
+        errors: {}
+      },
+      () => {
+        if (this.validate(data)) this.props.login(data);
+      }
+    );
+  };
+
+  validate = data => {
+    const errors = {};
+
+    if (!isEmail(data.email) || !data.email) {
+      errors.email = "Not valid email";
+    }
+
+    if (
+      !isAlphanumeric(data.password) ||
+      data.password.length < 4 ||
+      data.password.length > 16
+    ) {
+      errors.password = "Not valid password";
+    }
+
+    this.setState({
+      errors: { ...errors }
+    });
+
+    return JSON.stringify(errors) === "{}";
   };
 
   render() {
     const { messages } = this.props;
+    const { errors, data } = this.state;
+    const err = Object.values(errors);
 
     return (
       <div className="login-form">
@@ -73,7 +98,17 @@ class LoginPage extends PureComponent {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            {messages.message && <Message color={this.props.messages.success ? "green" : "red"}>{messages.message}</Message>}
+            {messages.message && (
+              <Message color={messages.success ? "green" : "red"}>
+                {messages.message}
+              </Message>
+            )}
+            {isError(errors) &&
+              err.map((val, i) => (
+                <Message key={i} negative>
+                  {val}
+                </Message>
+              ))}
 
             <Header as="h2" color="teal" textAlign="center">
               Log in
@@ -81,17 +116,19 @@ class LoginPage extends PureComponent {
             <Form onSubmit={this.onSubmit} size="large">
               <Segment stacked>
                 <Form.Input
-                  onChange={this.emailHandler}
-                  value={this.state.data.email}
+                  onChange={this.inputHandler}
+                  value={data.email}
                   fluid
+                  name="email"
                   icon="mail"
                   iconPosition="left"
                   placeholder="E-mail address"
                 />
                 <Form.Input
-                  onChange={this.passwordHandler}
-                  value={this.state.data.password}
+                  onChange={this.inputHandler}
+                  value={data.password}
                   fluid
+                  name="password"
                   icon="lock"
                   iconPosition="left"
                   placeholder="Password"

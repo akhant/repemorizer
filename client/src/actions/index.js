@@ -75,4 +75,4 @@ export const resetPassword = data => ({
 
 export const clearMessage = () => ({
   type: CLEAR_MESSAGE
-})
+});
