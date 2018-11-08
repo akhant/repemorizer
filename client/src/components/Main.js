@@ -4,6 +4,7 @@ import { Grid, Form, Button } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
+import LastWords from "./LastWords";
 
 //TODO: protect form
 //TODO: separate the component
@@ -17,7 +18,8 @@ class Main extends Component {
     const { dictionary } = this.props;
     if (dictionary) {
       if (
-        this.state.formValue && dictionary.length &&
+        this.state.formValue &&
+        dictionary.length &&
         dictionary.length !== prevProps.dictionary.length
       ) {
         this.setState({
@@ -26,12 +28,12 @@ class Main extends Component {
       }
     }
   }
+
   componentDidMount = () => {
-    
-      this.props.checkWordsToRepeat();
-      this.props.getFifty();
-      this.props.getWordsToRepeat();
-    
+    const { checkWordsToRepeat, getFifty, getWordsToRepeat } = this.props;
+    checkWordsToRepeat();
+    getFifty();
+    getWordsToRepeat();
   };
 
   onChangeInput = e => {
@@ -39,14 +41,28 @@ class Main extends Component {
       formValue: e.target.value
     });
   };
-  onSubmit = () => {
-    this.props.translateRequest(this.state.formValue);
-  };
-  addToRepetition = () => {
-    this.props.addToRepetition(this.state.formValue);
+
+  onSubmit = e => {
+    e.preventDefault();
+    const { translateRequest } = this.props;
+    const { formValue } = this.state;
+    if (!formValue) return;
+    if (formValue.length > 10000) {
+      return this.setState(
+        prevState => ({
+          formValue: prevState.formValue.slice(0, 9999)
+        }),
+        () => {
+          translateRequest(formValue);
+        }
+      );
+    }
+    translateRequest(formValue);
   };
 
   render() {
+    const { formValue, translation } = this.state;
+    const { dictionary, words } = this.props;
     return (
       <Grid className="main-page">
         <Grid.Row>
@@ -54,7 +70,7 @@ class Main extends Component {
             <Form onSubmit={this.onSubmit} method="POST">
               <Form.Group widths="equal" inline>
                 <Form.Field
-                  value={this.state.formValue}
+                  value={formValue}
                   onChange={this.onChangeInput}
                   control="textarea"
                   label="Text"
@@ -69,7 +85,7 @@ class Main extends Component {
 
               <Form.Field
                 width={14}
-                value={this.state.translation}
+                value={translation}
                 control="textarea"
                 label="Translation"
                 disabled={true}
@@ -77,21 +93,13 @@ class Main extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column width={4}>
-            <div className="dictionary">
-              <h2>Last added words</h2>
-              <div>
-                {this.props.dictionary.map(({ text, translation, _id }) => (
-                  <p key={_id}>{`${text} - ${translation}`}</p>
-                ))}
-              </div>
-            </div>
-            <Link to="/dictionary">Show all</Link>
+            <LastWords dictionary={dictionary} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
             <div>
-              {this.props.words.length ? (
+              {words.length ? (
                 <div>
                   <span>
                     You have {this.props.words.length} words to repeat ->
@@ -117,10 +125,9 @@ Main.propTypes = {
 };
 
 export default connect(
-  ({ dictionary, words, user }) => ({
+  ({ dictionary, words }) => ({
     dictionary,
-    words,
-    user
+    words
   }),
   { ...actions }
 )(Main);

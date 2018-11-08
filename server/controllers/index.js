@@ -25,12 +25,14 @@ export function translate(req, res) {
 
   Dictionary.findOne({ userId: req.body.user._id, text: reqText })
     .then(found => {
-      if (found) {
+      
+       if (found) {
         res.send(found);
       } else {
         axios
           .post(`${url}&lang=en-ru&text=${req.body.text}`)
           .then(response => {
+            
             const word = new Dictionary({
               text: reqText,
               translation: response.data.text[0],
@@ -43,7 +45,7 @@ export function translate(req, res) {
             word.save().then(w => res.send(w));
           })
           .catch(err => console.log("error post yandex/api", err));
-      }
+      } 
     })
     .catch(err => console.log("Error DB translate", err));
 }
@@ -171,9 +173,9 @@ export function confirmation(req, res) {
     { confirmationToken: "", confirmed: true }
   ).then(user => {
     if (user) {
-      res.redirect(`${process.env.HOST}/`);
+      res.redirect(`${process.env.HOST}/confirmation`);
     } else {
-      res.status(203).send({ message: "Invalid confirmation", success: false });
+      res.status(401).send({ message: "Invalid confirmation", success: false });
     }
   });
 }

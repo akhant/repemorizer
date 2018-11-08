@@ -19,8 +19,14 @@ class SignupPage extends Component {
       password: "",
       password2: "",
       username: ""
+    },
+    errors: {
+      email: "",
+      password: "",
+      username: ""
     }
   };
+
   componentDidMount = () => {
     this.props.logout();
   };
@@ -28,13 +34,14 @@ class SignupPage extends Component {
   componentDidUpdate = () => {
     const { history, messages } = this.props;
     if (messages.success) {
-      setTimeout(() => {
+    this.timer = setTimeout(() => {
         history.push("/dashboard");
       }, 3000);
     }
   };
 
   componentWillUnmount = () => {
+    clearTimeout(this.timer)
     this.props.clearMessage();
   };
 
@@ -103,8 +110,8 @@ class SignupPage extends Component {
               </Message>
             )}
             {isError(errors) &&
-              err.map((val, i) => (
-                <Message key={i} negative>
+              err.map(val => (
+                <Message key={val} negative>
                   {val}
                 </Message>
               ))}

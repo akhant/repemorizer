@@ -7,7 +7,6 @@ import {
   Segment,
   Message
 } from "semantic-ui-react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { isEmail } from "validator";
 import { forgotPassword, clearMessage } from "../actions";

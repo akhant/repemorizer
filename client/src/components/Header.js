@@ -8,6 +8,7 @@ class Header extends Component {
   onLogout = () => {
     this.props.logout();
   };
+
   render() {
     const { token } = this.props.user;
     return (
@@ -17,18 +18,19 @@ class Header extends Component {
             <Grid.Column width={4} floated="right">
               {token ? (
                 <span className="logout-link" onClick={this.onLogout}>
-                  Logout
+                  Logout  
                 </span>
               ) : (
                 <span>
-                  <Link to="/login">Login</Link> |
-                  <Link to="/signup">Signup</Link>
+                  <Link to="/login">Login</Link> |  
+                  <Link to="/signup"> Signup</Link> 
                 </span>
               )}
-              |<Link to="/dictionary">Dictionary</Link> |
-              <Link to="/repeat">Repeat</Link> |
-              <Link to="/dashboard">Dashboard</Link> |
-              <Link to="/forgot_password">Forgot</Link> |
+             | <Link to="/dashboard">Dashboard</Link> | 
+              <Link to="/dictionary">Dictionary</Link> | 
+              <Link to="/repeat">Repeat</Link> 
+              
+              
             </Grid.Column>
           </Grid.Row>
         </Grid>

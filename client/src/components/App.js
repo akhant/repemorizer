@@ -17,8 +17,6 @@ import AuthRoute from "./routes/AuthRoute";
 import ConfirmationPage from "./ConfirmationPage";
 import ConfirmedRoute from "./routes/ConfirmedRoute";
 import OnlyNotAuthRoute from './routes/OnlyNotAuthRoute'
-import "../assets/js";
-//import "../assets/styles/bootstrap.css";
 import "semantic-ui-css/semantic.min.css";
 import "../assets/styles/styles.sass";
 import ForgotPasswordPage from "./ForgotPasswordPage";

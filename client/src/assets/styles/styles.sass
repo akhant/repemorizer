@@ -1,10 +1,22 @@
+$link-color: #0074E8
+$main-grey: #474749
+$lagoon: #88D1F1
+    
 body
     margin: 0
     padding: 0
     box-sizing: border-box
-
-h1
-    text-align: center
+    background-color: #fff !important
+    h1
+        text-align: center
+    a   
+        color: $link-color
+        outline: none
+    
+.header a, .header span
+    color: $link-color
+    padding: 5px
+    //background-color: $main-grey
             
 .main-page
     width: 80%
@@ -25,5 +37,28 @@ body > div > div > div.signup-form , body> div > div > div.login-form
 
 .logout-link
     cursor: pointer
-    color: blue
+    color: $link-color
     
+.home-page
+    h3 
+        text-align: center
+
+.card
+    height: 100%
+    color: #FDFDFD
+    background: $main-grey
+    clip-path: polygon(0% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%)
+    h2 
+        text-align: center
+        padding-top: 20px
+    &__body
+        background-color: lighten($main-grey, 50%)
+        color: #FDFDFD
+        font-weight: bold
+        margin: 39px 10px 10px 10px
+        padding: 20px
+        height: 75%
+        border-radius: 10px
+        
+  
+        
