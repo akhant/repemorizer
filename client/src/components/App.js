@@ -16,18 +16,19 @@ import NotFoundPage from "./NotFoundPage";
 import AuthRoute from "./routes/AuthRoute";
 import ConfirmationPage from "./ConfirmationPage";
 import ConfirmedRoute from "./routes/ConfirmedRoute";
-import OnlyNotAuthRoute from './routes/OnlyNotAuthRoute'
+import OnlyNotAuthRoute from "./routes/OnlyNotAuthRoute";
 import "semantic-ui-css/semantic.min.css";
 import "../assets/styles/styles.sass";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 
+//const Dictionary = React.lazy(() => import("./Dictionary"));
+//const RepeatPage = React.lazy(() => import("./RepeatPage"));
 const history = createBrowserHistory();
 
 const store = configureStore();
 
 if (localStorage.JWT) {
-  
   const { pathname } = history.location;
   if (pathname !== "/signup" && pathname !== "/login") {
     setAuthHeader(localStorage.JWT);
@@ -50,8 +51,15 @@ const App = () => (
           <Route path="/confirmation" exact component={ConfirmationPage} />
           <ConfirmedRoute path="/dictionary" exact component={Dictionary} />
           <ConfirmedRoute path="/repeat" exact component={RepeatPage} />
-          <OnlyNotAuthRoute path="/forgot_password" exact component={ForgotPasswordPage} />
-          <OnlyNotAuthRoute path="/reset_password/:token" component={ResetPasswordPage} />
+          <OnlyNotAuthRoute
+            path="/forgot_password"
+            exact
+            component={ForgotPasswordPage}
+          />
+          <OnlyNotAuthRoute
+            path="/reset_password/:token"
+            component={ResetPasswordPage}
+          />
 
           <Route component={NotFoundPage} />
         </Switch>

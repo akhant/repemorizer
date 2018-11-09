@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+
 
 export class LastWords extends Component {
   render() {
@@ -20,7 +20,7 @@ export class LastWords extends Component {
 
           <div />
         </div>
-        <Link to="/dictionary">Show all</Link>
+        
       </Fragment>
     );
   }

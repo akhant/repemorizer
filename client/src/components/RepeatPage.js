@@ -6,7 +6,12 @@ import * as actions from "../actions";
 import Word from "./Word";
 
 class RepeatPage extends Component {
+  
   componentDidMount = () => {
+    this.props.getWordsToRepeat();
+  };
+
+  nextWord = () => {
     this.props.getWordsToRepeat();
   };
 
@@ -15,27 +20,42 @@ class RepeatPage extends Component {
   };
 
   render() {
+    const { words } = this.props;
+    
+    
     return (
       <div>
         <Grid>
-          <Grid.Row>
+          <Grid.Row centered>
             <Grid.Column>
               <h1>Memory check!</h1>
-              {this.props.words.length ? (
-                this.props.words.map(({ text, translation, _id }) => {
-                  return (
-                    <Word
-                      text={text}
-                      translation={translation}
-                      _id={_id}
-                      key={_id}
-                      showResult={this.showResult}
-                    />
-                  );
-                })
-              ) : (
-                <div>There is no words to repeat</div>
-              )}
+              <div className="repeat__list">
+                {/*  <Carousel showThumbs={false}> */}
+                {words.length ? (
+                  <Word
+                    text={words[0].text}
+                    translation={words[0].translation}
+                    _id={words[0]._id}
+                    key={words[0]._id}
+                    showResult={this.showResult}
+                    nextWord={this.nextWord}
+                  />
+                ) : (
+                  /* this.props.words.map(({ text, translation, _id }) => {
+                      return (
+                        <Word
+                          text={text}
+                          translation={translation}
+                          _id={_id}
+                          key={_id}
+                          showResult={this.showResult}
+                        />
+                      );
+                    }) */
+                  <div className="empty-message">There is no words to repeat</div>
+                )}
+                {/* </Carousel> */}
+              </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>

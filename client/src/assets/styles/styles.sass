@@ -1,3 +1,28 @@
+@font-face
+    font-family: "Purpose"
+    src: url('../fonts/Purpose-normal.ttf')
+ 
+@font-face
+    font-family: "Athiti"
+    src: url('../fonts/Athiti/Athiti-Medium.ttf')
+
+
+@font-face
+    font-family: "Raleway"
+    src: url('../fonts/Raleway/Raleway-Regular.ttf')
+
+@font-face
+    font-family: "Florentia"
+    src: url('../fonts/florentia/Florentia-Regular-trial.ttf')
+
+@font-face
+    font-family: "KolnMesseDeutz"
+    src: url('../fonts/KolnMesseDeutz.otf')
+
+@font-face
+    font-family: "NeogreyRegular"
+    src: url('../fonts/NeogreyRegular.otf')
+
 $link-color: #0074E8
 $main-grey: #474749
 $lagoon: #88D1F1
@@ -7,11 +32,17 @@ body
     padding: 0
     box-sizing: border-box
     background-color: #fff !important
+    font-family: Florentia, sans-serif
     h1
         text-align: center
+        font-family: NeogreyRegular, sans-serif
+    button
+        font-family: Florentia, sans-serif !important
     a   
         color: $link-color
         outline: none
+        font-family: KolnMesseDeutz, sans-serif
+        font-weight: 500
     
 .header a, .header span
     color: $link-color
@@ -38,6 +69,8 @@ body > div > div > div.signup-form , body> div > div > div.login-form
 .logout-link
     cursor: pointer
     color: $link-color
+    display: inline-block
+    margin-right: 5px
     
 .home-page
     h3 
@@ -47,6 +80,7 @@ body > div > div > div.signup-form , body> div > div > div.login-form
     height: 100%
     color: #FDFDFD
     background: $main-grey
+    overflow: hidden
     clip-path: polygon(0% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%)
     h2 
         text-align: center
@@ -59,6 +93,34 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         padding: 20px
         height: 75%
         border-radius: 10px
-        
+        overflow-y: auto
   
+.repeat__list
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 400px
+    .word
+        text-align: center
+        &__text
+            font-size: 20px
+            font-weight: bold
+            text-transform: uppercase
+        &__buttons
+            margin-top: 50px
+        &__button_next
+            margin-top: 50px
+            text-align: center
+    /* >div 
+        width: 50%
+        .carousel, .slider-wrapper, .slider 
+            height: 100%
+        .carousel .slide
+            background: #fff
+        .word
+            margin-top: 200px */
         
+.empty-message
+    text-align: center
+    font-size: 30px
+    margin-top: 100px

@@ -25,17 +25,24 @@ export class Word extends Component {
     const { flag, hidden } = this.state;
     const { text, translation } = this.props;
     return (
-      <div>
-        <span> {flag ? text : translation}</span>
-        <span hidden={hidden}> - {flag ? translation : text}</span>
+      <div className="word">
+        <div className="word__text">
+          <span className="word__text_one"> {flag ? text : translation}</span>
+          <span className="word__text_translate" hidden={hidden}>
+            {" "}
+            - {flag ? translation : text}
+          </span>
+        </div>
 
         {hidden && (
-          <div>
+          <div className="word__buttons">
             <Button onClick={this.handleClick(true)}>I know</Button>
             <Button onClick={this.handleClick(false)}>Remind</Button>
           </div>
         )}
-        <hr />
+        <Button onClick={this.props.nextWord} className="word__button_next">
+          Next word
+        </Button>
       </div>
     );
   }

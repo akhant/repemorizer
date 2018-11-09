@@ -70,6 +70,7 @@ class Main extends Component {
             <Form onSubmit={this.onSubmit} method="POST">
               <Form.Group widths="equal" inline>
                 <Form.Field
+                  
                   value={formValue}
                   onChange={this.onChangeInput}
                   control="textarea"
@@ -84,11 +85,14 @@ class Main extends Component {
               </Form.Group>
 
               <Form.Field
-                width={14}
+                width={16}
                 value={translation}
                 control="textarea"
                 label="Translation"
-                disabled={true}
+                onChange={e => {
+                  e.preventDefault();
+                  return;
+                }}
               />
             </Form>
           </Grid.Column>
@@ -104,10 +108,10 @@ class Main extends Component {
                   <span>
                     You have {this.props.words.length} words to repeat ->
                   </span>
-                  <Link to="/repeat">Repeat words</Link>
+                  <Link to="/repeat"> Repeat words</Link>
                 </div>
               ) : (
-                <div>You don't have words to repeat</div>
+                <div />
               )}
             </div>
           </Grid.Column>

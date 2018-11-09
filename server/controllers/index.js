@@ -103,7 +103,7 @@ export function checkWordsToRepeat(req, res) {
 export function nextStage(req, res) {
   Dictionary.findOne({ userId: req.body.user._id, _id: req.body._id })
     .then(word => {
-      console.log(word);
+      
       if (req.body.success) word.stage += 1;
 
       word.lastRepeat = new Date();

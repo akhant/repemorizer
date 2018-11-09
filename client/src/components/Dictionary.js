@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Table, Button } from "semantic-ui-react";
 import * as actions from "../actions";
 import { STAGE } from "../constants";
-import PropTypes from "prop-types";
 
 export class Dictionary extends Component {
   componentDidMount = () => {
@@ -104,7 +104,11 @@ export class Dictionary extends Component {
 
   render() {
     if (!this.props.dictionary.length)
-      return <div>There is no words in your dictionary yet</div>;
+      return (
+        <div className="empty-message">
+          There is no words in your dictionary yet
+        </div>
+      );
     return (
       <div>
         <Grid>

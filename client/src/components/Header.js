@@ -15,18 +15,18 @@ class Header extends Component {
       <div>
         <Grid>
           <Grid.Row className="header">
-            <Grid.Column width={4} floated="right">
+            <Grid.Column largeScreen={5} tablet={7} mobile={16} width={5} floated="right">
               {token ? (
-                <span className="logout-link" onClick={this.onLogout}>
-                  Logout  
-                </span>
+                <div className="logout-link" onClick={this.onLogout}>
+                  Logout 
+                </div>
               ) : (
                 <span>
                   <Link to="/login">Login</Link> |  
                   <Link to="/signup"> Signup</Link> 
                 </span>
               )}
-             | <Link to="/dashboard">Dashboard</Link> | 
+              | <Link to="/dashboard">Dashboard</Link> | 
               <Link to="/dictionary">Dictionary</Link> | 
               <Link to="/repeat">Repeat</Link> 
               

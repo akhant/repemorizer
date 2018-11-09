@@ -4,17 +4,21 @@ import { Link } from "react-router-dom";
 
 const renderPage = (isConfirmed, isAuthenticated) => {
   if (isConfirmed) {
-    return <div>You've already confirmed your email. Enjoy the app.</div>;
+    return (
+      <div className="empty-message">
+        You've already confirmed your email. Enjoy the app.
+      </div>
+    );
   }
   if (isAuthenticated) {
     return (
-      <div>
+      <div className="empty-message">
         Please confirm your email to get access to dictionary and repetition.
         <Link to="/dashboard"> Go to dashboard </Link>
       </div>
     );
   }
-  return <div>Please sign up or log in</div>;
+  return <div className="empty-message">Please sign up or log in</div>;
 };
 const ConfirmationPage = ({ isConfirmed, isAuthenticated }) => {
   return <Fragment>{renderPage(isConfirmed, isAuthenticated)}</Fragment>;
