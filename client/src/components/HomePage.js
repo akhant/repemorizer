@@ -6,7 +6,7 @@ export class HomePage extends Component {
     return (
       <div className="home-page">
         <Grid>
-          <Grid.Row>
+          <Grid.Row className="home-page__header">
             <Grid.Column>
               <h1>Repemorizer</h1>
 

@@ -2,20 +2,26 @@ import React, { Component } from "react";
 import Canvas from "./Canvas";
 
 class ReactCanvas extends Component {
-  state = { rotation: 0 };
+  state = { time: 0 };
 
-  componentDidMount = () => {
+  /*  componentDidMount = () => {
     requestAnimationFrame(this.tick);
   };
 
   tick = () => {
-    const rotation = this.state.rotation + 0.01;
-    this.setState({ rotation });
+    const time = this.state.time + 0.1;
+    this.setState({ time });
     requestAnimationFrame(this.tick);
-  };
+  }; */
 
   render() {
-    return <Canvas rotation={this.state.rotation} width={window.innerWidth} height={window.innerHeight} />;
+    return (
+      <Canvas
+        time={this.state.time}
+        width={window.innerWidth}
+        height={window.innerHeight - 6 }
+      />
+    );
   }
 }
 

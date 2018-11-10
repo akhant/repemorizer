@@ -28,7 +28,7 @@ $main-grey: #474749
 $lagoon: #88D1F1
     
 body
-    margin: 0
+    margin: 0 
     padding: 0
     box-sizing: border-box
     background-color: #fff !important
@@ -43,15 +43,27 @@ body
         outline: none
         font-family: KolnMesseDeutz, sans-serif
         font-weight: 500
+
+.row
+    padding: 0 !important
     
-.header a, .header span
-    color: $link-color
-    padding: 5px
-    //background-color: $main-grey
+.grid
+    width: 100% !important
+    margin: 0 !important
+    
+.header
+    padding: 10px 0 !important
+    a, span 
+        color: $link-color
+        padding: 5px
+        font-size: 18px
+ 
             
 .main-page
-    width: 80%
+    width: 100%
+    height: 100%
     margin: auto !important
+    
     
 .btn
     margin-top: 10px !important
@@ -61,10 +73,11 @@ body
     overflow: auto
 
 
-body > div,
-body > div > div,
+
+
 body > div > div > div.signup-form , body> div > div > div.login-form
     height: 100%
+    margin-top: 7%
 
 .logout-link
     cursor: pointer
@@ -73,8 +86,16 @@ body > div > div > div.signup-form , body> div > div > div.login-form
     margin-right: 5px
     
 .home-page
+    position: relative
+    &__header
+        position: absolute !important
+        z-index: 1
+        top: 40%
+    h1 
+        font-size: 40px
     h3 
         text-align: center
+        font-size: 30px
 
 .card
     height: 100%

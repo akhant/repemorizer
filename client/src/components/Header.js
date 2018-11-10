@@ -9,28 +9,64 @@ class Header extends Component {
     this.props.logout();
   };
 
+  renderColorStyle = () => {
+    return window.location.pathname === "/"
+      ? { color: "#fff " }
+      : { color: "#0074E8" };
+  };
+
   render() {
     const { token } = this.props.user;
+    //console.log(window.location);
+
     return (
       <div>
         <Grid>
-          <Grid.Row className="header">
-            <Grid.Column largeScreen={5} tablet={7} mobile={16} width={5} floated="right">
+          <Grid.Row
+            style={
+              window.location.pathname === "/"
+                ? { backgroundColor: "#0074E8", position: "absolute", zIndex: 2 }
+                : { backgroundColor: "#fff" }
+            }
+            className="header"
+          >
+            <Grid.Column
+              widescreen={5}
+              mobile={16}
+              /* tablet={7}  width={5} */ floated="right"
+            >
               {token ? (
-                <div className="logout-link" onClick={this.onLogout}>
-                  Logout 
+                <div
+                  style={this.renderColorStyle()}
+                  className="logout-link"
+                  onClick={this.onLogout}
+                >
+                  Logout
                 </div>
               ) : (
-                <span>
-                  <Link to="/login">Login</Link> |  
-                  <Link to="/signup"> Signup</Link> 
+                <span style={{ color: "#474749" }}>
+                  <Link style={this.renderColorStyle()} to="/login">
+                    Login
+                  </Link>{" "}
+                  |
+                  <Link style={this.renderColorStyle()} to="/signup">
+                    {" "}
+                    Signup
+                  </Link>
                 </span>
               )}
-              | <Link to="/dashboard">Dashboard</Link> | 
-              <Link to="/dictionary">Dictionary</Link> | 
-              <Link to="/repeat">Repeat</Link> 
-              
-              
+              |{" "}
+              <Link style={this.renderColorStyle()} to="/dashboard">
+                Dashboard
+              </Link>{" "}
+              |
+              <Link style={this.renderColorStyle()} to="/dictionary">
+                Dictionary
+              </Link>{" "}
+              |
+              <Link style={this.renderColorStyle()} to="/repeat">
+                Repeat
+              </Link>
             </Grid.Column>
           </Grid.Row>
         </Grid>
