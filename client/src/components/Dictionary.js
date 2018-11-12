@@ -60,8 +60,8 @@ export class Dictionary extends Component {
           <Table.Row>
             <Table.HeaderCell>Text</Table.HeaderCell>
             <Table.HeaderCell>Translation</Table.HeaderCell>
-            <Table.HeaderCell>Time added</Table.HeaderCell>
             <Table.HeaderCell>Stage</Table.HeaderCell>
+            <Table.HeaderCell>Time added</Table.HeaderCell>
             <Table.HeaderCell>
               Next repeat in{" "}
               <Button onClick={this.updateNextRepeatIn}>Update</Button>
@@ -84,14 +84,14 @@ export class Dictionary extends Component {
               <Table.Row key={_id}>
                 <Table.Cell>{text}</Table.Cell>
                 <Table.Cell>{translation}</Table.Cell>
-                <Table.Cell width={2}>{this.renderAddTime(addTime)}</Table.Cell>
                 <Table.Cell width={1}>{stage}</Table.Cell>
+                <Table.Cell width={2}>{this.renderAddTime(addTime)}</Table.Cell>
                 <Table.Cell width={2}>
                   {this.renderNextRepeatIn(lastRepeat, stage, isRepeatTime)}
                 </Table.Cell>
                 <Table.Cell width={1}>
                   <Button onClick={this.onRemoveClick} color="red" id={_id}>
-                    [X]
+                    X
                   </Button>
                 </Table.Cell>
               </Table.Row>
@@ -110,7 +110,7 @@ export class Dictionary extends Component {
         </div>
       );
     return (
-      <div>
+      <div className="dictionary">
         <Grid>
           <Grid.Row>
             <Grid.Column>

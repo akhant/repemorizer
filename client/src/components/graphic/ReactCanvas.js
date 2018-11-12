@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Canvas from "./Canvas";
 
 class ReactCanvas extends Component {
-  state = { time: 0 };
+  /* state = { time: 0 }; */
 
   /*  componentDidMount = () => {
     requestAnimationFrame(this.tick);
@@ -17,7 +17,7 @@ class ReactCanvas extends Component {
   render() {
     return (
       <Canvas
-        time={this.state.time}
+        /* time={this.state.time} */
         width={window.innerWidth}
         height={window.innerHeight - 6 }
       />

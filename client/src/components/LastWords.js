@@ -6,14 +6,14 @@ export class LastWords extends Component {
     const { dictionary } = this.props;
     return (
       <Fragment>
-        <div className="dictionary">
+        <div className="last-words">
           <div className="card">
             <div className="card__header">
               <h2>Last words</h2>
             </div>
             <div className="card__body">
               {dictionary.map(({ text, translation, _id }) => (
-                <p key={_id}>{`${text} - ${translation}`}</p>
+                <p key={_id}>{`${text} => ${translation}`}</p>
               ))}
             </div>
           </div>

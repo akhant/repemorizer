@@ -40,9 +40,11 @@ export class Word extends Component {
             <Button onClick={this.handleClick(false)}>Remind</Button>
           </div>
         )}
-        <Button onClick={this.props.nextWord} className="word__button_next">
-          Next word
-        </Button>
+        {!hidden && (
+          <Button onClick={this.props.nextWord} className="word__button_next">
+            Next word
+          </Button>
+        )}
       </div>
     );
   }

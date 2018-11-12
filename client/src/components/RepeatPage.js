@@ -30,7 +30,7 @@ class RepeatPage extends Component {
             <Grid.Column>
               <h1>Memory check!</h1>
               <div className="repeat__list">
-                {/*  <Carousel showThumbs={false}> */}
+               
                 {words.length ? (
                   <Word
                     text={words[0].text}
@@ -41,20 +41,10 @@ class RepeatPage extends Component {
                     nextWord={this.nextWord}
                   />
                 ) : (
-                  /* this.props.words.map(({ text, translation, _id }) => {
-                      return (
-                        <Word
-                          text={text}
-                          translation={translation}
-                          _id={_id}
-                          key={_id}
-                          showResult={this.showResult}
-                        />
-                      );
-                    }) */
+                 
                   <div className="empty-message">There is no words to repeat</div>
                 )}
-                {/* </Carousel> */}
+                
               </div>
             </Grid.Column>
           </Grid.Row>

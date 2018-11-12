@@ -26,13 +26,16 @@
 $link-color: #0074E8
 $main-grey: #474749
 $lagoon: #88D1F1
-    
+
+  
 body
     margin: 0 
     padding: 0
     box-sizing: border-box
+    font-size: 16px
     background-color: #fff !important
     font-family: Florentia, sans-serif
+    position: relative
     h1
         text-align: center
         font-family: NeogreyRegular, sans-serif
@@ -44,47 +47,46 @@ body
         font-family: KolnMesseDeutz, sans-serif
         font-weight: 500
 
+.btn
+    margin-top: 10px !important
+
 .row
     padding: 0 !important
     
 .grid
     width: 100% !important
     margin: 0 !important
-    
+
+//TODO: menu - one button, less 320px  
 .header
     padding: 10px 0 !important
+    text-align: center
     a, span 
         color: $link-color
         padding: 5px
         font-size: 18px
- 
+        @media(max-width: 420px)
+            font-size: 12px
+    .logout-link
+        cursor: pointer
+        color: $link-color
+        display: inline-block
+        margin-right: 5px
+        @media(max-width: 420px)
+            font-size: 12px
+    
             
-.main-page
-    width: 100%
-    height: 100%
-    margin: auto !important
-    
-    
-.btn
-    margin-top: 10px !important
-
-.dictionary
-    height: 400px
-    overflow: auto
-
-
-
-
 body > div > div > div.signup-form , body> div > div > div.login-form
     height: 100%
     margin-top: 7%
-
-.logout-link
-    cursor: pointer
-    color: $link-color
-    display: inline-block
-    margin-right: 5px
     
+.dictionary
+    padding-top: 80px !important
+    td 
+        word-break: break-all
+    h1 
+        margin-bottom: 20px
+
 .home-page
     position: relative
     &__header
@@ -97,25 +99,101 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         text-align: center
         font-size: 30px
 
-.card
+
+.main-page
+    width: 80% !important
     height: 100%
-    color: #FDFDFD
-    background: $main-grey
-    overflow: hidden
-    clip-path: polygon(0% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%)
-    h2 
+    margin: auto !important
+    padding-top: 80px !important
+    @media (max-width: 1366px)
+        width: 100% !important
+    .main__input_text
+        text-align: left
+        @media (max-width: 1200px)
+            text-align: left
+        & input
+            padding: 30px !important
+            font-size: 2rem !important
+            width: 73% !important
+            text-align: center
+            @media (max-width: 998px)
+                font-size: 1.3rem !important
+                padding: 15px !important
+            @media (max-width: 580px)
+                font-size: 1.3rem !important
+                padding: 15px !important
+                width: 65%
+            @media (max-width: 400px)
+                width: 60% !important
+                font-size: 1rem !important
+                padding: 10px !important
+    .main__output_translation 
+        padding: 30px !important
+        font-size: 2rem !important
+        width: 80% !important
+        max-height: 330px
+        position: absolute
+        top: 50px
+        left: 11%
         text-align: center
-        padding-top: 20px
-    &__body
-        background-color: lighten($main-grey, 50%)
-        color: #FDFDFD
-        font-weight: bold
-        margin: 39px 10px 10px 10px
-        padding: 20px
-        height: 75%
-        border-radius: 10px
-        overflow-y: auto
-  
+        margin: auto
+        overflow: auto
+        word-wrap: break-word
+    .main__btn_translate
+        position: absolute
+        left: 75%
+        font-size: 1.3rem
+        padding: 20px 40px
+        @media (max-width: 998px)
+            padding: 17px 26px
+            top: 0px
+            left: 73%
+        @media (max-width: 580px)
+            padding: 17px 22px
+            left: 70%
+        @media (max-width: 400px)
+            left: 60%
+            padding: 10px 20px
+            top: 0px
+            font-size: 1rem
+            padding: 12px 20px
+    .last-words
+        height: 400px
+        @media (max-width: 767px)
+            margin-top: 325px
+        .card
+            height: 100%
+            color: #FDFDFD
+            background: $main-grey
+            overflow: hidden
+            clip-path: polygon(0% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%)
+            h2 
+                text-align: center
+                padding-top: 20px
+            &__body
+                background-color: lighten($main-grey, 50%)
+                color: #FDFDFD
+                font-weight: bold
+                margin: 39px 10px 10px 10px
+                padding: 20px
+                height: 75%
+                border-radius: 10px
+                overflow-y: auto
+                text-align: center
+                word-wrap: break-word
+    .main__link_repeat
+        text-align: center
+        margin-top: 30px
+        margin-bottom: 30px
+        word-break: break-all
+        @media (max-width: 767px)
+            position: absolute
+            top: -900px
+            left: 25%
+        @media (max-width: 540px)
+            top: -900px
+            left: 6%
+    
 .repeat__list
     display: flex
     justify-content: center
@@ -132,16 +210,14 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         &__button_next
             margin-top: 50px
             text-align: center
-    /* >div 
-        width: 50%
-        .carousel, .slider-wrapper, .slider 
-            height: 100%
-        .carousel .slide
-            background: #fff
-        .word
-            margin-top: 200px */
+
         
 .empty-message
     text-align: center
     font-size: 30px
     margin-top: 100px
+
+//canvas
+#c  
+    width: 100% !important
+    height: 100% !important

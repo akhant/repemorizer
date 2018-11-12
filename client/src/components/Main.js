@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, Form, Button } from "semantic-ui-react";
+import { Grid, Form, Button, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
@@ -47,10 +47,10 @@ class Main extends Component {
     const { translateRequest } = this.props;
     const { formValue } = this.state;
     if (!formValue) return;
-    if (formValue.length > 10000) {
+    if (formValue.length > 300) {
       return this.setState(
         prevState => ({
-          formValue: prevState.formValue.slice(0, 9999)
+          formValue: prevState.formValue.slice(0, 300)
         }),
         () => {
           translateRequest(formValue);
@@ -66,54 +66,42 @@ class Main extends Component {
     return (
       <Grid className="main-page">
         <Grid.Row>
-          <Grid.Column width={12}>
+          <Grid.Column mobile={16} tablet={9}  computer={11} largeScreen={12} widescreen={12}  style={{ paddingTop: "70px" }}/*  width={12} */>
             <Form onSubmit={this.onSubmit} method="POST">
               <Form.Group widths="equal" inline>
                 <Form.Field
-                  
+                  className="main__input_text"
                   value={formValue}
                   onChange={this.onChangeInput}
-                  control="textarea"
-                  label="Text"
+                  control="input"
+                  placeholder="Enter word to translate"
                 />
 
-                <Form.Group width={2} style={{ flexDirection: "column" }}>
-                  <Button type="sumbit" className="btn" primary>
-                    Translate
-                  </Button>
-                </Form.Group>
+                <Button type="sumbit" className="main__btn_translate" primary>
+                  Translate
+                </Button>
               </Form.Group>
 
-              <Form.Field
-                width={16}
-                value={translation}
-                control="textarea"
-                label="Translation"
-                onChange={e => {
-                  e.preventDefault();
-                  return;
-                }}
-              />
+              <div className="main__output_translation">{translation}</div>
             </Form>
           </Grid.Column>
-          <Grid.Column width={4}>
+          <Grid.Column mobile={16} tablet={7}  computer={5} largeScreen={4} widescreen={4}   >
             <LastWords dictionary={dictionary} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column>
-            <div>
-              {words.length ? (
-                <div>
-                  <span>
-                    You have {this.props.words.length} words to repeat ->
-                  </span>
-                  <Link to="/repeat"> Repeat words</Link>
-                </div>
-              ) : (
-                <div />
-              )}
-            </div>
+            {words.length ? (
+              <div className="main__link_repeat">
+                <span>
+                  You have {this.props.words.length} words to repeat
+                </span>
+                <Icon name="long arrow alternate right" />
+                <Link to="/repeat"> Repeat words</Link>
+              </div>
+            ) : (
+              <div />
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>
