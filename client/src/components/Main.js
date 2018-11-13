@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, Form, Button, Icon } from "semantic-ui-react";
+import { Grid, Form, Button, Icon, Select, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as actions from "../actions";
 import LastWords from "./LastWords";
+import { languages } from "../constants";
 
 //TODO: protect form
 //TODO: separate the component
 class Main extends Component {
   state = {
     formValue: "",
-    translation: ""
+    translation: "",
+    lang: {
+      from: "en",
+      to: "ru"
+    }
   };
 
   componentDidUpdate(prevProps) {
@@ -45,7 +50,7 @@ class Main extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { translateRequest } = this.props;
-    const { formValue } = this.state;
+    const { formValue, lang } = this.state;
     if (!formValue) return;
     if (formValue.length > 300) {
       return this.setState(
@@ -57,7 +62,16 @@ class Main extends Component {
         }
       );
     }
-    translateRequest(formValue);
+    translateRequest(formValue, lang);
+  };
+
+  onSelectLanguage = (e, { value, name }) => {
+    this.setState({
+      lang: {
+        ...this.state.lang,
+        [name]: value
+      }
+    });
   };
 
   render() {
@@ -66,8 +80,35 @@ class Main extends Component {
     return (
       <Grid className="main-page">
         <Grid.Row>
-          <Grid.Column mobile={16} tablet={9}  computer={11} largeScreen={12} widescreen={12}  style={{ paddingTop: "70px" }}/*  width={12} */>
+          <Grid.Column
+            mobile={16}
+            tablet={9}
+            computer={11}
+            largeScreen={12}
+            widescreen={12}
+            style={{ paddingTop: "70px" }} /*  width={12} */
+          >
             <Form onSubmit={this.onSubmit} method="POST">
+              <Form.Group>
+                <Dropdown
+                  search
+                  selection
+                  onChange={this.onSelectLanguage}
+                  placeholder="From"
+                  value={this.state.lang.from}
+                  name="from"
+                  options={languages}
+                />{" "}
+                <Dropdown
+                  search
+                  selection
+                  onChange={this.onSelectLanguage}
+                  placeholder="To"
+                  name="to"
+                  value={this.state.lang.to}
+                  options={languages}
+                />
+              </Form.Group>
               <Form.Group widths="equal" inline>
                 <Form.Field
                   className="main__input_text"
@@ -85,7 +126,13 @@ class Main extends Component {
               <div className="main__output_translation">{translation}</div>
             </Form>
           </Grid.Column>
-          <Grid.Column mobile={16} tablet={7}  computer={5} largeScreen={4} widescreen={4}   >
+          <Grid.Column
+            mobile={16}
+            tablet={7}
+            computer={5}
+            largeScreen={4}
+            widescreen={4}
+          >
             <LastWords dictionary={dictionary} />
           </Grid.Column>
         </Grid.Row>
@@ -93,9 +140,7 @@ class Main extends Component {
           <Grid.Column>
             {words.length ? (
               <div className="main__link_repeat">
-                <span>
-                  You have {this.props.words.length} words to repeat
-                </span>
+                <span>You have {this.props.words.length} words to repeat</span>
                 <Icon name="long arrow alternate right" />
                 <Link to="/repeat"> Repeat words</Link>
               </div>

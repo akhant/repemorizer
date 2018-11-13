@@ -8,7 +8,6 @@
   "devDependencies": {
     "dotenv": "^6.1.0"
   },
-  
   "dependencies": {
     "axios": "^0.18.0",
     "bcrypt": "^3.0.2",

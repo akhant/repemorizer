@@ -23,8 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-
-app.post("/api/translate",authenticate, route.translate);
+//app.use(bodyParser.text({ type: 'text/html' }))
+app.post("/api/translate",authenticate, route.translateText);
 app.get("/api/get_fifty", authenticate, route.getFifty);
 app.get("/api/get_dictionary",authenticate,  route.getDictionary);
 app.post("/api/remove_text",authenticate,  route.removeText);

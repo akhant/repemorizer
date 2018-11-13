@@ -15,9 +15,9 @@ import {
   CLEAR_MESSAGE
 } from "../constants";
 
-export const translateRequest = text => ({
+export const translateRequest = (text, lang) => ({
   type: TRANSLATE,
-  payload: text
+  payload: { text, lang }
 });
 
 export const getFifty = () => ({

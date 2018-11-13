@@ -27,7 +27,7 @@ const Data = store => next => action => {
   switch (type) {
     case TRANSLATE:
       return axios
-        .post(`${serverUrl}/translate`, { text: payload })
+        .post(`${serverUrl}/translate`, { ...payload })
         .then(res =>
           next({
             type: TRANSLATE,

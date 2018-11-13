@@ -1,6 +1,5 @@
 import axios from "axios";
 require("dotenv").config();
-import jwt from "jsonwebtoken";
 import Dictionary from "../models/dictionary";
 import User from "../models/user";
 import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
@@ -14,25 +13,26 @@ import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
 & [callback=<имя callback-функции>] */
 
 //const stageMedium = [25, 1200, 28800, 86400, 1209600, 4838400, 31536000];
-//TODO: check exist of userId
+
 const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
   process.env.YANDEX_API_KEY
 }`;
 
 //TODO: set right time, because of defference between client and server
-export function translate(req, res) {
+export function translateText(req, res) {
   const reqText = req.body.text.toLowerCase();
+  const from = req.body.lang.from;
+  const to = req.body.lang.to 
+  
 
   Dictionary.findOne({ userId: req.body.user._id, text: reqText })
     .then(found => {
-      
-       if (found) {
+      if (found) {
         res.send(found);
       } else {
         axios
-          .post(`${url}&lang=en-ru&text=${req.body.text}`)
+          .post(`${url}&lang=${from}-${to}&text=${req.body.text}`)
           .then(response => {
-            
             const word = new Dictionary({
               text: reqText,
               translation: response.data.text[0],
@@ -45,7 +45,7 @@ export function translate(req, res) {
             word.save().then(w => res.send(w));
           })
           .catch(err => console.log("error post yandex/api", err));
-      } 
+      }
     })
     .catch(err => console.log("Error DB translate", err));
 }
@@ -103,7 +103,6 @@ export function checkWordsToRepeat(req, res) {
 export function nextStage(req, res) {
   Dictionary.findOne({ userId: req.body.user._id, _id: req.body._id })
     .then(word => {
-      
       if (req.body.success) word.stage += 1;
 
       word.lastRepeat = new Date();
@@ -123,20 +122,24 @@ export function signup(req, res) {
   user.setPassword(password);
   user.setConfirmationToken();
   user.setResetPasswordToken();
-  
 
-     user.save((err, u) => {
+  user.save((err, u) => {
     if (err) {
-      if (err.name === "MongoError" && err.code === 11000) {      
-        let errType = err.errmsg.match(/email|username/)
-        const mess = `${errType[0].charAt(0).toUpperCase() + errType[0].slice(1)} isn't unique. Try another one.`
-         
-        res.status(203).send({ message: mess});
+      if (err.name === "MongoError" && err.code === 11000) {
+        let errType = err.errmsg.match(/email|username/);
+        const mess = `${errType[0].charAt(0).toUpperCase() +
+          errType[0].slice(1)} isn't unique. Try another one.`;
+
+        res.status(203).send({ message: mess });
       }
     } else {
       sendConfirmationEmail(user);
       const userWithToken = u.withToken();
-      res.send({ ...userWithToken, message: "Confirmation email has been send. Check your mailbox.", success: true });
+      res.send({
+        ...userWithToken,
+        message: "Confirmation email has been send. Check your mailbox.",
+        success: true
+      });
     }
   });
 }
@@ -161,7 +164,9 @@ export function login(req, res) {
       const userWithToken = user.withToken();
       res.send({ ...userWithToken, message: "Successful!", success: true });
     } else {
-      res.status(203).send({ message: "Invalid login or password", success: false });
+      res
+        .status(203)
+        .send({ message: "Invalid login or password", success: false });
     }
   });
 }
@@ -184,9 +189,14 @@ export function forgotPassword(req, res) {
   User.findOne({ email: email }).then(user => {
     if (user) {
       sendResetPasswordEmail(user);
-      res.send({message: "Confirmation email has been send. Check your mailbox.", success: true});
+      res.send({
+        message: "Confirmation email has been send. Check your mailbox.",
+        success: true
+      });
     } else {
-      res.status(203).send({ message: "There is no user with such email", success: false });
+      res
+        .status(203)
+        .send({ message: "There is no user with such email", success: false });
     }
   });
 }
@@ -200,10 +210,16 @@ export function resetPassword(req, res) {
       user.setResetPasswordToken();
       user.save().then(u => {
         const userWithToken = u.withToken();
-        res.send({ ...userWithToken, message: "Password has cheanged", success: true });
+        res.send({
+          ...userWithToken,
+          message: "Password has cheanged",
+          success: true
+        });
       });
     } else {
-      res.status(203).send({ message: "Invalid confirmation token", success: false });
+      res
+        .status(203)
+        .send({ message: "Invalid confirmation token", success: false });
     }
   });
 }
