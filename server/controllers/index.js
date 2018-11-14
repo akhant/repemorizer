@@ -14,27 +14,45 @@ import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
 
 //const stageMedium = [25, 1200, 28800, 86400, 1209600, 4838400, 31536000];
 
-const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
+const urlTranslate = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
+  process.env.YANDEX_API_KEY
+}`;
+const urlDetect = `https://translate.yandex.net/api/v1.5/tr.json/detect?key=${
   process.env.YANDEX_API_KEY
 }`;
 
 //TODO: set right time, because of defference between client and server
-export function translateText(req, res) {
+export async function translateText(req, res) {
   const reqText = req.body.text.toLowerCase();
-  const from = req.body.lang.from;
-  const to = req.body.lang.to 
-  
+  let from = req.body.lang.from;
+  const to = req.body.lang.to;
 
-  Dictionary.findOne({ userId: req.body.user._id, text: reqText })
+  const resDetectLang = await axios.get(
+    `${urlDetect}&text=${encodeURI(reqText)}$hint=${from}`
+  );
+  const { code, lang } = resDetectLang.data;
+
+  if (code === 200) {
+    from = lang;
+  }
+
+  Dictionary.findOne({
+    userId: req.body.user._id,
+    text: reqText,
+    langFrom: from,
+    langTo: to
+  })
     .then(found => {
       if (found) {
         res.send(found);
       } else {
         axios
-          .post(`${url}&lang=${from}-${to}&text=${req.body.text}`)
+          .post(`${urlTranslate}&lang=${from}-${to}&text=${encodeURI(reqText)}`)
           .then(response => {
             const word = new Dictionary({
               text: reqText,
+              langFrom: from,
+              langTo: to,
               translation: response.data.text[0],
               addTime: new Date(),
               lastRepeat: new Date(),

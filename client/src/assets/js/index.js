@@ -7,7 +7,7 @@ class CanvasAnimation {
 
   go() {
     this.c.width = window.innerWidth;
-    this.c.height = window.innerHeight - 14;
+    this.c.height = window.innerHeight;
 
     const matrixWords = [
       "do",

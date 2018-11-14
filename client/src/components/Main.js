@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, Form, Button, Icon, Select, Dropdown } from "semantic-ui-react";
+import { Grid, Form, Button, Icon, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import _ from "lodash";
 import * as actions from "../actions";
 import LastWords from "./LastWords";
 import { languages } from "../constants";
@@ -16,7 +17,8 @@ class Main extends Component {
     lang: {
       from: "en",
       to: "ru"
-    }
+    },
+    word: ""
   };
 
   componentDidUpdate(prevProps) {
@@ -28,7 +30,8 @@ class Main extends Component {
         dictionary.length !== prevProps.dictionary.length
       ) {
         this.setState({
-          translation: dictionary[dictionary.length - 1].translation
+          translation: dictionary[dictionary.length - 1].translation,
+          word: dictionary[dictionary.length - 1]
         });
       }
     }
@@ -74,9 +77,32 @@ class Main extends Component {
     });
   };
 
+  turnLang = () => {
+    this.setState(prevState => ({
+      lang: {
+        from: prevState.lang.to,
+        to: prevState.lang.from
+      }
+    }));
+  };
+
+  renderTranslatedFromAnotherLanguage = () => {
+    const { word, lang } = this.state;
+    if (word && word.langFrom !== lang.from) {
+      return (
+        //render a name of Language by using a language code
+        <div className="message_translated-from">
+          Translated from{" "}
+          {_.find(languages, o => o.value === word.langFrom).text}
+        </div>
+      );
+    }
+  };
+
   render() {
-    const { formValue, translation } = this.state;
+    const { formValue, translation, lang } = this.state;
     const { dictionary, words } = this.props;
+
     return (
       <Grid className="main-page">
         <Grid.Row>
@@ -86,7 +112,7 @@ class Main extends Component {
             computer={11}
             largeScreen={12}
             widescreen={12}
-            style={{ paddingTop: "70px" }} /*  width={12} */
+            style={{ paddingTop: "70px" }}
           >
             <Form onSubmit={this.onSubmit} method="POST">
               <Form.Group>
@@ -95,17 +121,23 @@ class Main extends Component {
                   selection
                   onChange={this.onSelectLanguage}
                   placeholder="From"
-                  value={this.state.lang.from}
+                  value={lang.from}
                   name="from"
                   options={languages}
-                />{" "}
+                />
+                <Icon
+                  onClick={this.turnLang}
+                  name="arrows alternate horizontal"
+                  size="large"
+                  className="turn-lang-icon"
+                />
                 <Dropdown
                   search
                   selection
                   onChange={this.onSelectLanguage}
                   placeholder="To"
                   name="to"
-                  value={this.state.lang.to}
+                  value={lang.to}
                   options={languages}
                 />
               </Form.Group>
@@ -121,9 +153,12 @@ class Main extends Component {
                 <Button type="sumbit" className="main__btn_translate" primary>
                   Translate
                 </Button>
+                
               </Form.Group>
-
-              <div className="main__output_translation">{translation}</div>
+              <div className="main__output">
+                  <div className="main__output_translation">{translation}</div>
+                  {this.renderTranslatedFromAnotherLanguage()}
+                </div>
             </Form>
           </Grid.Column>
           <Grid.Column
@@ -140,7 +175,7 @@ class Main extends Component {
           <Grid.Column>
             {words.length ? (
               <div className="main__link_repeat">
-                <span>You have {this.props.words.length} words to repeat</span>
+                <span>You have {words.length} words to repeat</span>
                 <Icon name="long arrow alternate right" />
                 <Link to="/repeat"> Repeat words</Link>
               </div>
@@ -158,7 +193,8 @@ Main.propTypes = {
   dictionary: PropTypes.array,
   getWordsToRepeat: PropTypes.func,
   getFifty: PropTypes.func,
-  checkWordsToRepeat: PropTypes.func
+  checkWordsToRepeat: PropTypes.func,
+  words: PropTypes.array
 };
 
 export default connect(
