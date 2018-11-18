@@ -26,16 +26,19 @@
 $link-color: #0074E8
 $main-grey: #474749
 $lagoon: #88D1F1
+$blue-p: #CCE2FF
 
   
 body
     margin: 0 
     padding: 0
+    height: 100vh
     box-sizing: border-box
     font-size: 16px
-    background-color: #fff !important
     font-family: Florentia, sans-serif
     position: relative
+    background: linear-gradient(#fff 8%, $blue-p, #fff) !important
+    background-repeat: no-repeat
     h1
         text-align: center
         font-family: NeogreyRegular, sans-serif
@@ -86,6 +89,10 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         word-break: break-all
     h1 
         margin-bottom: 20px
+    &__button_remove
+        cursor: pointer
+        font-size: 2em !important
+        line-height: 1.2
 
 .home-page
     position: relative
@@ -107,6 +114,14 @@ body > div > div > div.signup-form , body> div > div > div.login-form
     padding-top: 80px !important
     @media (max-width: 1366px)
         width: 100% !important
+    .lang
+        @media (max-width: 767px)
+            margin-bottom: 20px !important
+        .dropdown
+            @media (max-width: 450px)
+                min-width: 1em !important
+    .main__input
+        position: relative
     .main__input_text
         text-align: left
         @media (max-width: 1200px)
@@ -173,39 +188,63 @@ body > div > div > div.signup-form , body> div > div > div.login-form
     .last-words
         height: 400px
         @media (max-width: 767px)
-            margin-top: 325px
+            margin-top: 200px 
         .card
             height: 100%
             color: #FDFDFD
             background: $main-grey
-            overflow: hidden
             clip-path: polygon(0% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%)
             h2 
                 text-align: center
-                padding-top: 20px
+                padding-top: 29px
             &__body
                 background-color: lighten($main-grey, 50%)
                 color: #FDFDFD
-                font-weight: bold
-                margin: 39px 10px 10px 10px
+                font-weight: normal
+                margin: 31px 10px 10px 10px
                 padding: 20px
                 height: 75%
                 border-radius: 10px
                 overflow-y: auto
                 text-align: center
                 word-wrap: break-word
+            .card__word
+                position: relative
+                border-radius: 5px
+                color: $main-grey
+                cursor: default
+                border-bottom: 1px dotted rgba(0,0,0,0.3)
+                &:hover
+                    background-color: lighten($main-grey, 40%)
+                &_button
+                    position: absolute
+                    top: calc(100%/2 - 12px)
+                    right: -20px
+                    padding: 0px
+                    cursor: pointer
+
+                
     .main__link_repeat
         text-align: center
         margin-top: 30px
         margin-bottom: 30px
-        word-break: break-all
+        word-wrap: break-word
         @media (max-width: 767px)
             position: absolute
-            top: -950px
+            top: -920px
             left: 25%
         @media (max-width: 540px)
-            top: -950px
+            top: -920px
             left: 6%
+            font-size: 1rem
+    .main__button-turn
+        position: absolute
+        top: 7%
+        left: calc(100%/2 - 60px)
+        z-index: 2
+        @media (max-width: 767px)
+            top: 220px
+
     
 .repeat__list
     display: flex
@@ -223,7 +262,6 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         &__button_next
             margin-top: 50px
             text-align: center
-
         
 .empty-message
     text-align: center

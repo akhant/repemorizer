@@ -7,10 +7,11 @@ const AuthRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isAuthenticated ? <Component {...props} /> : <Redirect to="/confirmation" />
+      isAuthenticated ? <Component {...props} /> : <Redirect to="/dashboard" />
     }
   />
 );
+//  TODO: change path to /confirmation
 
 AuthRoute.propTypes = {
   component: PropTypes.func.isRequired,

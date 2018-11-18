@@ -27,6 +27,7 @@ export async function translateText(req, res) {
   let from = req.body.lang.from;
   const to = req.body.lang.to;
 
+  //detect language
   const resDetectLang = await axios.get(
     `${urlDetect}&text=${encodeURI(reqText)}$hint=${from}`
   );
@@ -43,9 +44,11 @@ export async function translateText(req, res) {
     langTo: to
   })
     .then(found => {
+      //check if the word is already in dictionary
       if (found) {
         res.send(found);
       } else {
+        //if not, create new word
         axios
           .post(`${urlTranslate}&lang=${from}-${to}&text=${encodeURI(reqText)}`)
           .then(response => {

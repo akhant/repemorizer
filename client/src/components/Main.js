@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import * as actions from "../actions";
-import LastWords from "./LastWords";
+import Card from "./Card";
 import { languages } from "../constants";
 
 //TODO: protect form
@@ -18,7 +18,8 @@ class Main extends Component {
       from: "en",
       to: "ru"
     },
-    word: ""
+    word: "",
+    hidden: false
   };
 
   componentDidUpdate(prevProps) {
@@ -100,7 +101,7 @@ class Main extends Component {
   };
 
   render() {
-    const { formValue, translation, lang } = this.state;
+    const { formValue, translation, lang, hidden } = this.state;
     const { dictionary, words } = this.props;
 
     return (
@@ -115,7 +116,7 @@ class Main extends Component {
             style={{ paddingTop: "70px" }}
           >
             <Form onSubmit={this.onSubmit} method="POST">
-              <Form.Group>
+              <Form.Group className="lang">
                 <Dropdown
                   search
                   selection
@@ -141,7 +142,7 @@ class Main extends Component {
                   options={languages}
                 />
               </Form.Group>
-              <Form.Group widths="equal" inline>
+              <Form.Group widths="equal" inline className="main__input">
                 <Form.Field
                   className="main__input_text"
                   value={formValue}
@@ -153,12 +154,11 @@ class Main extends Component {
                 <Button type="sumbit" className="main__btn_translate" primary>
                   Translate
                 </Button>
-                
               </Form.Group>
               <div className="main__output">
-                  <div className="main__output_translation">{translation}</div>
-                  {this.renderTranslatedFromAnotherLanguage()}
-                </div>
+                <div className="main__output_translation">{translation}</div>
+                {this.renderTranslatedFromAnotherLanguage()}
+              </div>
             </Form>
           </Grid.Column>
           <Grid.Column
@@ -168,7 +168,17 @@ class Main extends Component {
             largeScreen={4}
             widescreen={4}
           >
-            <LastWords dictionary={dictionary} />
+            <Button
+            className="main__button-turn"
+              onClick={() => {
+                this.setState(prevState => ({
+                  hidden: !prevState.hidden
+                }));
+              }}
+            >
+              Last words
+            </Button>
+            {!hidden && <Card dictionary={dictionary} />}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>

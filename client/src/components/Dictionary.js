@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Grid, Table, Button } from "semantic-ui-react";
+import { Grid, Table, Button, Icon } from "semantic-ui-react";
 import * as actions from "../actions";
 import { STAGE } from "../constants";
 
@@ -19,20 +19,22 @@ export class Dictionary extends Component {
     this.props.checkWordsToRepeat();
   };
 
-  onRemoveClick = e => {
-    this.props.removeText(e.target.id);
-  };
+  onRemoveClick = _id => () => this.props.removeText(_id);
+
   renderAddTime = time => {
     if (!time) return "";
     const t = new Date(time);
     return `${t.toLocaleDateString()} at ${t.toLocaleTimeString()}`;
   };
+
   renderNextRepeatIn = (lastRepeat, stage, isRepeatTime) => {
     if (isRepeatTime) return "Ready to repeat";
     const s = Math.floor(
       (Date.parse(lastRepeat) + STAGE[stage] - Date.now()) / 1000
     );
-    //return s > 0 ? this.renderTime(s) : "Ready to repeat";
+
+    // return s > 0 ? this.renderTime(s) : "Ready to repeat";
+
     if (s > 0) {
       return this.renderTime(s);
     } else {
@@ -53,6 +55,7 @@ export class Dictionary extends Component {
       </div>
     );
   };
+
   renderTable = () => {
     return (
       <Table textAlign="center" celled selectable>
@@ -90,9 +93,12 @@ export class Dictionary extends Component {
                   {this.renderNextRepeatIn(lastRepeat, stage, isRepeatTime)}
                 </Table.Cell>
                 <Table.Cell width={1}>
-                  <Button onClick={this.onRemoveClick} color="red" id={_id}>
-                    X
-                  </Button>
+                  <Icon
+                    name="x"
+                    className="dictionary__button_remove"
+                    onClick={this.onRemoveClick(_id)}
+                    color="red"
+                  />
                 </Table.Cell>
               </Table.Row>
             )
@@ -103,7 +109,8 @@ export class Dictionary extends Component {
   };
 
   render() {
-    if (!this.props.dictionary.length)
+    const { dictionary, words } = this.props;
+    if (!dictionary.length)
       return (
         <div className="empty-message">
           There is no words in your dictionary yet
@@ -120,8 +127,8 @@ export class Dictionary extends Component {
 
           <Grid.Row>
             <Grid.Column>
-              <div>Words in dictionary: {this.props.dictionary.length}</div>
-              <div>Ready to repeat: {this.props.words.length}</div>
+              <div>Words in dictionary: {dictionary.length}</div>
+              <div>Ready to repeat: {words.length}</div>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -134,7 +141,8 @@ export class Dictionary extends Component {
 }
 
 Dictionary.propTypes = {
-  dictionary: PropTypes.array
+  dictionary: PropTypes.array,
+  words: PropTypes.array
 };
 
 export default connect(
