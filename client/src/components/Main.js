@@ -23,6 +23,7 @@ class Main extends Component {
   };
 
   componentDidUpdate(prevProps) {
+    
     const { dictionary } = this.props;
     if (dictionary) {
       if (
@@ -39,10 +40,15 @@ class Main extends Component {
   }
 
   componentDidMount = () => {
-    const { checkWordsToRepeat, getFifty, getWordsToRepeat } = this.props;
+    const { checkWordsToRepeat, getWordsToRepeat } = this.props;
     checkWordsToRepeat();
-    getFifty();
+
     getWordsToRepeat();
+    if (window.innerWidth < 768) {
+      this.setState({
+        hidden: true
+      })
+    }
   };
 
   onChangeInput = e => {
@@ -154,6 +160,7 @@ class Main extends Component {
                 <Button type="sumbit" className="main__btn_translate" primary>
                   Translate
                 </Button>
+                
               </Form.Group>
               <div className="main__output">
                 <div className="main__output_translation">{translation}</div>
@@ -169,7 +176,7 @@ class Main extends Component {
             widescreen={4}
           >
             <Button
-            className="main__button-turn"
+              className="main__button-turn"
               onClick={() => {
                 this.setState(prevState => ({
                   hidden: !prevState.hidden
@@ -181,16 +188,16 @@ class Main extends Component {
             {!hidden && <Card dictionary={dictionary} />}
           </Grid.Column>
         </Grid.Row>
-        
+
         {words.length ? (
-              <div className="main__link_repeat">
-                <span>You have {words.length} words to repeat</span>
-                <Icon name="long arrow alternate right" />
-                <Link to="/repeat"> Repeat words</Link>
-              </div>
-            ) : (
-              <div />
-            )}
+          <div className="main__link_repeat">
+            <span>You have {words.length} words to repeat</span>
+            <Icon name="long arrow alternate right" />
+            <Link to="/repeat"> Repeat words</Link>
+          </div>
+        ) : (
+          <div />
+        )}
       </Grid>
     );
   }
