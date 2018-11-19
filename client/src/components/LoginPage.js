@@ -38,7 +38,7 @@ class LoginPage extends PureComponent {
     if (messages.success) {
       this.timer = setTimeout(() => {
         history.push("/dashboard");
-      }, 2000);
+      }, 1000);
     }
   };
 

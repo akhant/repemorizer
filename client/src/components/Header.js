@@ -5,35 +5,34 @@ import { connect } from "react-redux";
 import { logout } from "../actions";
 
 class Header extends Component {
+  state = {
+    path: ""
+  };
   onLogout = () => {
     this.props.logout();
   };
 
   renderColorStyle = () => {
-    return window.location.pathname === "/"
-      ? { color: "#fff " }
-      : { color: "#0074E8" };
+    return { color: "#fff " };
   };
 
   render() {
     const { token } = this.props.user;
-    //console.log(window.location);
 
     return (
       <Grid>
-        <Grid.Row
-          style={
-            window.location.pathname === "/"
-              ? { backgroundColor: "#0074E8", position: "absolute", zIndex: 2 }
-              : { backgroundColor: "#fff", position: "static" }
-          }
-          className="header"
-        >
+        <Grid.Row className="header">
           <Grid.Column
-            mobile={16} tablet={9}  computer={7} largeScreen={6} widescreen={4}   floated="right"
+            mobile={16}
+            tablet={9}
+            computer={7}
+            largeScreen={6}
+            widescreen={4}
+            floated="right"
           >
             {token ? (
               <div
+                role="button"
                 style={this.renderColorStyle()}
                 className="logout-link"
                 onClick={this.onLogout}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import createBrowserHistory from "history/createBrowserHistory";
@@ -22,8 +22,8 @@ import "../assets/styles/styles.sass";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 
-//const Dictionary = React.lazy(() => import("./Dictionary"));
-//const RepeatPage = React.lazy(() => import("./RepeatPage"));
+// const Dictionary = React.lazy(() => import("./Dictionary"));
+// const RepeatPage = React.lazy(() => import("./RepeatPage"));
 const history = createBrowserHistory();
 
 const store = configureStore();
@@ -41,8 +41,8 @@ if (localStorage.JWT) {
 const App = () => (
   <Provider store={store}>
     <Router history={history}>
-      <div>
-        <Header />
+      <Fragment>
+        <Header history={history} />
         <Switch>
           <Route path="/" exact component={HomePage} />
           <AuthRoute path="/dashboard" exact component={Main} />
@@ -63,7 +63,7 @@ const App = () => (
 
           <Route component={NotFoundPage} />
         </Switch>
-      </div>
+      </Fragment>
     </Router>
   </Provider>
 );

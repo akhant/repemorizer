@@ -181,9 +181,8 @@ class Main extends Component {
             {!hidden && <Card dictionary={dictionary} />}
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row>
-          <Grid.Column>
-            {words.length ? (
+        
+        {words.length ? (
               <div className="main__link_repeat">
                 <span>You have {words.length} words to repeat</span>
                 <Icon name="long arrow alternate right" />
@@ -192,8 +191,6 @@ class Main extends Component {
             ) : (
               <div />
             )}
-          </Grid.Column>
-        </Grid.Row>
       </Grid>
     );
   }

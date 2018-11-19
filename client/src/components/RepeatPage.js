@@ -25,7 +25,7 @@ class RepeatPage extends Component {
     
     return (
       <div>
-        <Grid>
+        <Grid className="repeat-page">
           <Grid.Row centered>
             <Grid.Column>
               <h1>Memory check!</h1>

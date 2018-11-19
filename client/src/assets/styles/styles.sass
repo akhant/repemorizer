@@ -64,6 +64,9 @@ body
 .header
     padding: 10px 0 !important
     text-align: center
+    background: linear-gradient(lighten(#0074E8, 20%) 10%, #0074E8 50%, lighten(#0074E8, 20%) 80%)
+    position: "absolute"
+    z-index: 2
     a, span 
         color: $link-color
         padding: 5px
@@ -86,7 +89,7 @@ body > div > div > div.signup-form , body> div > div > div.login-form
 .dictionary
     padding-top: 80px !important
     td 
-        word-break: break-all
+        word-break: break-word
     h1 
         margin-bottom: 20px
     &__button_remove
@@ -229,14 +232,14 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         margin-top: 30px
         margin-bottom: 30px
         word-wrap: break-word
+        position: absolute
         @media (max-width: 767px)
-            position: absolute
-            top: -920px
             left: 25%
         @media (max-width: 540px)
-            top: -920px
             left: 6%
             font-size: 1rem
+        @media (max-width: 350px)
+            top: 110px
     .main__button-turn
         position: absolute
         top: 7%
@@ -245,24 +248,26 @@ body > div > div > div.signup-form , body> div > div > div.login-form
         @media (max-width: 767px)
             top: 220px
 
-    
-.repeat__list
-    display: flex
-    justify-content: center
-    align-items: center
-    height: 400px
-    .word
-        text-align: center
-        &__text
-            font-size: 20px
-            font-weight: bold
-            text-transform: uppercase
-        &__buttons
-            margin-top: 50px
-        &__button_next
-            margin-top: 50px
+.repeat-page
+    h1 
+        margin-top: 50px 
+    .repeat__list
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 400px
+        .word
             text-align: center
-        
+            &__text
+                font-size: 20px
+                font-weight: bold
+                text-transform: uppercase
+            &__buttons
+                margin-top: 50px
+            &__button_next
+                margin-top: 50px
+                text-align: center
+            
 .empty-message
     text-align: center
     font-size: 30px
