@@ -7,7 +7,11 @@
   "license": "MIT",
   "scripts": {
     "start": "set SKIP_PREFLIGHT_CHECK=true&&set PORT=8000&&set BROWSER=none&& react-scripts start",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "build": "set SKIP_PREFLIGHT_CHECK=true&& react-scripts build"
+  },
+  "devDependencies": {
+    "react-scripts": "^2.1.1"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -18,11 +22,10 @@
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.1",
     "redux": "^4.0.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.83.0",
-    "validator": "^10.8.0"
+    "validator": "^10.9.0"
   },
   "browserslist": [
     ">0.2%",

@@ -22,8 +22,6 @@ import "../assets/styles/styles.sass";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 
-// const Dictionary = React.lazy(() => import("./Dictionary"));
-// const RepeatPage = React.lazy(() => import("./RepeatPage"));
 const history = createBrowserHistory();
 
 const store = configureStore();

@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { isEmail, isAlphanumeric } from "validator";
 import { signup, clearMessage, logout } from "../actions";
 import { isError } from "../utils";
+
 class SignupPage extends Component {
   state = {
     data: {
@@ -34,14 +35,14 @@ class SignupPage extends Component {
   componentDidUpdate = () => {
     const { history, messages } = this.props;
     if (messages.success) {
-    this.timer = setTimeout(() => {
+      this.timer = setTimeout(() => {
         history.push("/dashboard");
       }, 3000);
     }
   };
 
   componentWillUnmount = () => {
-    clearTimeout(this.timer)
+    clearTimeout(this.timer);
     this.props.clearMessage();
   };
 

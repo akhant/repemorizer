@@ -37,11 +37,6 @@ export default (state = [], action) => {
 
     case LOGOUT:
       return [];
-    /*    case NEXT_STAGE:
-      return state.map(w => {
-        if (w._id === data.updatedWord._id) return data.updatedWord;
-        return w;
-      }); */
 
     default:
       return state;

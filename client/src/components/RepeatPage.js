@@ -6,7 +6,6 @@ import * as actions from "../actions";
 import Word from "./Word";
 
 class RepeatPage extends Component {
-  
   componentDidMount = () => {
     this.props.getWordsToRepeat();
   };
@@ -21,8 +20,7 @@ class RepeatPage extends Component {
 
   render() {
     const { words } = this.props;
-    
-    
+
     return (
       <div>
         <Grid className="repeat-page">
@@ -30,7 +28,6 @@ class RepeatPage extends Component {
             <Grid.Column>
               <h1>Memory check!</h1>
               <div className="repeat__list">
-               
                 {words.length ? (
                   <Word
                     text={words[0].text}
@@ -41,10 +38,10 @@ class RepeatPage extends Component {
                     nextWord={this.nextWord}
                   />
                 ) : (
-                 
-                  <div className="empty-message">There is no words to repeat</div>
+                  <div className="empty-message">
+                    There is no words to repeat
+                  </div>
                 )}
-                
               </div>
             </Grid.Column>
           </Grid.Row>

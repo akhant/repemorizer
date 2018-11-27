@@ -1,8 +1,4 @@
-import {
-  SHOW_MESSAGE,
-  
-  CLEAR_MESSAGE
-} from "../constants";
+import { SHOW_MESSAGE, CLEAR_MESSAGE } from "../constants";
 
 export default (state = {}, action) => {
   const { type, data } = action;

@@ -33,8 +33,6 @@ export class Dictionary extends Component {
       (Date.parse(lastRepeat) + STAGE[stage] - Date.now()) / 1000
     );
 
-    // return s > 0 ? this.renderTime(s) : "Ready to repeat";
-
     if (s > 0) {
       return this.renderTime(s);
     } else {

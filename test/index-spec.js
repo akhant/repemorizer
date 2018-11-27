@@ -26,7 +26,7 @@ describe("Server response", function() {
   });  */
 });
 
-//test pass in 3 seconds
+
 describe("google scrabing", () => {
   it("get translation of a word", done => {
     const nightmare = Nightmare();

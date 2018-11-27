@@ -4,3 +4,6 @@ yarn.lock
 yarn-error.log
 .env
 client/src/assets/fonts
+build/
+test/
+errorLog.txt

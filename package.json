@@ -31,6 +31,8 @@
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "nightmare": "^3.0.1",
     "node-sass": "^4.9.4",
     "nodemon": "^1.18.4",
     "postcss-loader": "^3.0.0",
@@ -44,9 +46,5 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
   },
-  "dependencies": {
-    "mocha": "^5.2.0",
-    "mongoose": "^5.3.4",
-    "nightmare": "^3.0.1"
-  }
+  "dependencies": {}
 }

@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
-const OnlyNotAuthRoute = ({ isAuthenticated, component: Component, ...rest }) => (
+const OnlyNotAuthRoute = ({
+  isAuthenticated,
+  component: Component,
+  ...rest
+}) => (
   <Route
     {...rest}
     render={props =>

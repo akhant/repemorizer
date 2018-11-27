@@ -71,18 +71,16 @@ class CanvasAnimation {
       "запоминать",
       "любовь"
     ];
-    //matrix = matrix.split("");
+
     const font_size = 16;
-    //const magic = 25
+   
     let columns = this.c.width / font_size;
     let drops = [];
 
     for (let x = 0; x < columns; x++)
       drops[x] = Math.floor(Math.random() * this.c.height);
-    //drops[x] = Math.floor(Math.random() * magic);
-
+  
     function draw() {
-      //let font_size = Math.floor(Math.random() * magic);
       this.ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
       this.ctx.fillRect(0, 0, this.c.width, this.c.height);
 
@@ -119,92 +117,7 @@ window.onresize = function () {
 };
 
 
-
-
-/* const fun = function() {
-
-  let c = document.getElementById("c");
- 
-  let ctx = c.getContext("2d");
-
-  
-
-  c.width = window.innerWidth;
-  c.height = window.innerHeight - 7;
-
-  // let matrix =
-  //  "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%æøåλςερτυθιοπαλδξφγηκζψχωβνμףשךגלכיגלחוראט-'ןםפץתצמנהבסかあさたらまらゆむるつふうくすしせきえねほもよめみちをわ";
-  
-
-  const matrixWords = [
-    "do",
-    "hi",
-    "have",
-    "go",
-    "be",
-    "can",
-    "hello",
-    "he",
-    "she",
-    "you",
-    "we",
-    "say",
-    "memory",
-    "repeat",
-    "who",
-    "power",
-    "will",
-    "yes",
-    "like",
-    "love",
-    "know",
-    "take",
-    "give",
-    "people",
-    "good",
-    "up",
-    "forward",
-    "well",
-    "way",
-    "want",
-    "first"
-  ];
-  //matrix = matrix.split("");
-  const font_size = 16;
-  //const magic = 25
-  let columns = c.width / font_size;
-  let drops = [];
-
-  for (let x = 0; x < columns; x++)
-    drops[x] = Math.floor(Math.random() * c.height);
-  //drops[x] = Math.floor(Math.random() * magic);
-
-  function draw() {
-    //let font_size = Math.floor(Math.random() * magic);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
-    ctx.fillRect(0, 0, c.width, c.height);
-
-    ctx.fillStyle = "#0074E8";
-    ctx.font = font_size + "px arial";
-
-    for (let i = 0; i < drops.length; i++) {
-      let text = matrixWords[Math.floor(Math.random() * matrixWords.length)];
-
-      ctx.fillText(text, i * font_size, drops[i] * font_size);
-
-      if (drops[i] * font_size > c.height && Math.random() > 0.995)
-        drops[i] = 0;
-
-      drops[i]++;
-    }
-  }
-
-
-  this.timer = setInterval(draw, 50);
- 
-} */
-
-
+//notification prototype
 /* (function() {
   function sendNotification(title, options) {
 // Проверим, поддерживает ли браузер HTML5 Notifications

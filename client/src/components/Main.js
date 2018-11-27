@@ -23,7 +23,6 @@ class Main extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    
     const { dictionary } = this.props;
     if (dictionary) {
       if (
@@ -47,7 +46,7 @@ class Main extends Component {
     if (window.innerWidth < 768) {
       this.setState({
         hidden: true
-      })
+      });
     }
   };
 
@@ -160,7 +159,6 @@ class Main extends Component {
                 <Button type="sumbit" className="main__btn_translate" primary>
                   Translate
                 </Button>
-                
               </Form.Group>
               <div className="main__output">
                 <div className="main__output_translation">{translation}</div>

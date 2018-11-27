@@ -21,7 +21,7 @@ class Header extends Component {
 
     return (
       <Grid>
-        <Grid.Row className="header">
+        <Grid.Row className="head">
           <Grid.Column
             mobile={16}
             tablet={9}

@@ -79,11 +79,11 @@ class ResetPasswordPage extends Component {
       error: { ...error }
     });
 
-     return !error.password; 
+    return !error.password;
   };
 
   render() {
-    const { messages  } = this.props;
+    const { messages } = this.props;
     const { error, data } = this.state;
     return (
       <div className="login-form">

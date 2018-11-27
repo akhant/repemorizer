@@ -19,8 +19,6 @@ import {
 
 const serverUrl = "http://localhost:3000/api";
 
-// TODO: change error handling to send error to server and
-// write to log, don't show to client
 const Data = store => next => action => {
   const { type, payload } = action;
 
@@ -36,7 +34,7 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => console.log("Error post TRANSLATE", err));
+        .catch(error => axios.post(`${serverUrl}/error`, error));
     case GET_FIFTY:
       return axios
         .get(`${serverUrl}/get_fifty`)

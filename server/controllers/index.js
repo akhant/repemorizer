@@ -4,16 +4,6 @@ import Dictionary from "../models/dictionary";
 import User from "../models/user";
 import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
 
-/* https://translate.yandex.net/api/v1.5/tr.json/translate
-? [key=<API-ключ>]
-& [text=<переводимый текст>]
-& [lang=<направление перевода>]
-& [format=<формат текста>]
-& [options=<опции перевода>]
-& [callback=<имя callback-функции>] */
-
-//const stageMedium = [25, 1200, 28800, 86400, 1209600, 4838400, 31536000];
-
 const urlTranslate = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
   process.env.YANDEX_API_KEY
 }`;
@@ -21,13 +11,11 @@ const urlDetect = `https://translate.yandex.net/api/v1.5/tr.json/detect?key=${
   process.env.YANDEX_API_KEY
 }`;
 
-//TODO: set right time, because of defference between client and server
 export async function translateText(req, res) {
   const reqText = req.body.text.toLowerCase();
   let from = req.body.lang.from;
   const to = req.body.lang.to;
 
-  //detect language
   const resDetectLang = await axios.get(
     `${urlDetect}&text=${encodeURI(reqText)}$hint=${from}`
   );
@@ -243,4 +231,13 @@ export function resetPassword(req, res) {
         .send({ message: "Invalid confirmation token", success: false });
     }
   });
+}
+
+export function errorHandler(req, res) {
+  const err = req.body.error;
+  fs.writeFile(
+    "errorLog.txt",
+    `Date: ${new Date().toLocaleString()}\n${err}\n\n`
+  );
+  res.redirect("/");
 }
