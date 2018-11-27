@@ -36,7 +36,7 @@ app.post("/api/login", route.login);
 app.get("/api/confirmation/:token", route.confirmation);
 app.post("/api/forgot_password", route.forgotPassword);
 app.post("/api/reset_password", route.resetPassword);
-app.post('api/error', route.errorHandler)
+app.post("/api/error", route.errorHandler);
 
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname + "/build/index.html"));

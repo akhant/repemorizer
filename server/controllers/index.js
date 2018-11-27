@@ -3,6 +3,7 @@ require("dotenv").config();
 import Dictionary from "../models/dictionary";
 import User from "../models/user";
 import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
+import fs from "fs";
 
 const urlTranslate = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
   process.env.YANDEX_API_KEY
@@ -234,10 +235,24 @@ export function resetPassword(req, res) {
 }
 
 export function errorHandler(req, res) {
-  const err = req.body.error;
-  fs.writeFile(
+  const { config, response } = req.body.error;
+  console.log(config.headers);
+  const url = config.url;
+  const headers = JSON.stringify(config.headers);
+  const data = config.data;
+  const status = `${response.status} - ${response.statusText}`;
+  fs.appendFile(
     "errorLog.txt",
-    `Date: ${new Date().toLocaleString()}\n${err}\n\n`
+    `Date: ${new Date().toLocaleString()}
+    ${url}
+    ${status}
+    ${data}
+    ${headers}
+    
+    `,
+    err => {
+      if (err) console.log(err);
+    }
   );
-  res.redirect("/");
+  res.send({ error: "wrote" });
 }

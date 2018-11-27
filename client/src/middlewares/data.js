@@ -34,7 +34,8 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(error => axios.post(`${serverUrl}/error`, error));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
+
     case GET_FIFTY:
       return axios
         .get(`${serverUrl}/get_fifty`)
@@ -46,7 +47,8 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => console.log("Error get GET_FIFTY", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
+
     case GET_DICTIONARY:
       return axios
         .get(`${serverUrl}/get_dictionary`)
@@ -58,7 +60,8 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => console.log("Error get GET_FIFTY", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
+
     case REMOVE_TEXT:
       return axios
         .post(`${serverUrl}/remove_text`, { id: payload })
@@ -70,7 +73,8 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => console.log("Error post REMOVE_TEXT", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
+
     case GET_WORDS_TO_REPEAT:
       return axios
         .get(`${serverUrl}/get_words_to_repeat`)
@@ -82,7 +86,7 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => console.log("Error post GET_WORDS_TO_REPEAT", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     case CHECK_WORDS_TO_REPEAT:
       return axios
@@ -96,7 +100,8 @@ const Data = store => next => action => {
           })
         )
 
-        .catch(err => console.log("Error patch CHECK_WORDS_TO_REPEAT", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
+
     case NEXT_STAGE:
       return axios
         .patch(`${serverUrl}/next_stage`, { ...payload })
@@ -108,7 +113,7 @@ const Data = store => next => action => {
             }
           })
         )
-        .catch(err => console.log("Error patch NEXT_STAGE", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     case SIGNUP:
       return axios
@@ -134,7 +139,7 @@ const Data = store => next => action => {
             });
           }
         })
-        .catch(err => console.log("Error post SIGNUP", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     case FETCH_CURRENT_USER:
       return axios
@@ -147,7 +152,7 @@ const Data = store => next => action => {
             }
           });
         })
-        .catch(err => console.log("Error get FETCH_CURRENT_USER", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     case LOGIN:
       return axios
@@ -173,7 +178,7 @@ const Data = store => next => action => {
             });
           }
         })
-        .catch(err => console.log("Error post LOGIN", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     case FORGOT_PASSWORD:
       return axios
@@ -189,8 +194,7 @@ const Data = store => next => action => {
             });
           }
         })
-
-        .catch(err => console.log("Error post FORGOT_PASSWORD", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     case RESET_PASSWORD:
       return axios
@@ -206,8 +210,7 @@ const Data = store => next => action => {
             });
           }
         })
-
-        .catch(err => console.log("Error post RESET_PASSWORD", err));
+        .catch(error => axios.post(`${serverUrl}/error`, { error }));
 
     default:
       return next(action);
