@@ -11,6 +11,8 @@ $link-color: #0074E8
 $main-grey: #474749
 $lagoon: #88D1F1
 $blue-p: #CCE2FF
+$green: #92C062
+$orange: #F6AC4B
 
   
 body
@@ -47,7 +49,7 @@ body
 .head
     padding: 10px 0 !important
     text-align: center
-    background: linear-gradient(lighten(#0074E8, 20%) 10%, #0074E8 50%, lighten(#0074E8, 20%) 80%)
+    background: $link-color
     position: "absolute"
     z-index: 2
     a, span 
@@ -173,23 +175,23 @@ body
         cursor: pointer
     .last-words
         height: 400px
+        filter: drop-shadow(10px 10px 15px #00000099)
         @media (max-width: 767px)
             margin-top: 200px 
         .card
             height: 100%
+            padding-top: 50px
+            border-radius: 5px
             color: #FDFDFD
-            background: $main-grey
-            clip-path: polygon(0% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%)
-            h2 
-                text-align: center
-                padding-top: 29px
+            background: linear-gradient(230deg,darken(#46525E, 5%) 5%, lighten(#46525E, 10%)  25%,darken(#46525E, 5%)  100%)
+            clip-path: polygon(0% 0%, 85% 0%, 100% 15%, 100% 100%, 0 100%)
             &__body
-                background-color: lighten($main-grey, 50%)
+                background: linear-gradient(230deg,lighten(#E2E2E2, 6%) 5%, #E2E2E2 25%,  lighten(#E2E2E2, 8%) 100%)
                 color: #FDFDFD
                 font-weight: normal
-                margin: 31px 10px 10px 10px
+                margin: 10px 10px 10px 10px
                 padding: 20px
-                height: 75%
+                height: 94%
                 border-radius: 10px
                 overflow-y: auto
                 text-align: center
@@ -221,13 +223,23 @@ body
             font-size: 1rem
         @media (max-width: 350px)
             top: 110px
-    .main__button-turn
+    .main__button-turn_wrapper
+        display: inline-block
+        height: 40px
         position: absolute
-        top: 7%
+        z-index: 2
+        width: 120px
+        top: 3%
         left: calc(100%/2 - 60px)
         z-index: 2
-        @media (max-width: 767px)
-            top: 220px
+        clip-path: polygon(10px 0%, 110px 0%, 100% 10px, 100% 30px, 110px 100%, 10px 100%, 0% 30px, 0% 10px)
+        @media (max-width: 767px) 
+            top: 210px
+            color: #fff
+        .main__button-turn
+            margin-right: 0
+            width: 100%
+            height: 100%
     .message_translated-from
         position: relative
         top: -10px
@@ -252,9 +264,14 @@ body
                 text-transform: uppercase
             &__buttons
                 margin-top: 50px
+                &_know
+                    background-color: $green
+                &_remind
+                    background-color: $orange
             &__button_next
                 margin-top: 50px
                 text-align: center
+                background-color: $green
             
 .empty-message
     text-align: center

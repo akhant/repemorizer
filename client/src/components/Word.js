@@ -36,8 +36,8 @@ export class Word extends Component {
 
         {hidden && (
           <div className="word__buttons">
-            <Button onClick={this.handleClick(true)}>I know</Button>
-            <Button onClick={this.handleClick(false)}>Remind</Button>
+            <Button className="word__buttons_know" onClick={this.handleClick(true)}>I know</Button>
+            <Button className="word__buttons_remind" onClick={this.handleClick(false)}>Remind</Button>
           </div>
         )}
         {!hidden && (

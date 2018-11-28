@@ -20,9 +20,7 @@ class Card extends Component {
     return (
       <div className="last-words">
         <div className="card">
-          <div className="card__header">
-            <h2>Last words</h2>
-          </div>
+          
           <div className="card__body">
             {dictionary.map(word => (
               <CardWord

@@ -173,7 +173,9 @@ class Main extends Component {
             largeScreen={4}
             widescreen={4}
           >
-            <Button
+          <div className="main__button-turn_wrapper">
+          
+          <Button
               className="main__button-turn"
               onClick={() => {
                 this.setState(prevState => ({
@@ -183,6 +185,8 @@ class Main extends Component {
             >
               Last words
             </Button>
+            </div>
+            
             {!hidden && <Card dictionary={dictionary} />}
           </Grid.Column>
         </Grid.Row>
