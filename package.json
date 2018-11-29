@@ -9,7 +9,7 @@
     "dev": "concurrently \"nodemon server/index.js --exec babel-node --presets env,react,stage-2 \" \"webpack-dev-server --config client/webpack.config.js\"  ",
     "d": "concurrently \"nodemon server/index.js --exec babel-node --presets env,react,stage-2 \" \"cd client && yarn  start \"  ",
     "client": "webpack-dev-server --config client/webpack.config.js",
-    "server": "nodemon server/index.js --exec babel-node",
+    "server": "nodemon server/src/index.js --exec babel-node",
     "test": "nodemon test/ --exec mocha --require babel-register test/index-spec.js --timeout 10000 "
   },
   "devDependencies": {
