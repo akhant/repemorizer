@@ -209,7 +209,7 @@ function confirmation(req, res) {
   const { token } = req.params;
   _user2.default.findOneAndUpdate({ confirmationToken: token }, { confirmationToken: "", confirmed: true }).then(user => {
     if (user) {
-      res.redirect(`${process.env.HOST}/confirmation`);
+      res.redirect(`https://repemorizer.herokuapp.com/confirmation`);
     } else {
       res.status(401).send({ message: "Invalid confirmation", success: false });
     }
