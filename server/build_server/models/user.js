@@ -18,10 +18,9 @@ var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Schema = _mongoose2.default.Schema;
+const { Schema } = _mongoose2.default;
 
-
-var User = new Schema({
+const User = new Schema({
   email: {
     type: String,
     required: true,
@@ -73,14 +72,14 @@ User.methods.generateJWT = function () {
 };
 
 User.methods.generateConfirmationUrl = function () {
-  return "https://repemorizer.herokuapp.com/api/confirmation/" + this.confirmationToken;
+  return `https://repemorizer.herokuapp.com/api/confirmation/${this.confirmationToken}`;
 };
 User.methods.setResetPasswordToken = function () {
   this.resetPasswordToken = this.generateJWT();
 };
 
 User.methods.generateResetPasswordUrl = function () {
-  return "https://repemorizer.herokuapp.com/reset_password/" + this.resetPasswordToken;
+  return `https://repemorizer.herokuapp.com/reset_password/${this.resetPasswordToken}`;
 };
 
 exports.default = _mongoose2.default.model("User", User);

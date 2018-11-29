@@ -6,15 +6,15 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (req, res, next) {
 
-  var header = req.headers.authorization;
-  var token = header.split(" ")[1];
+  const header = req.headers.authorization;
+  const token = header.split(" ")[1];
 
   if (token) {
-    _jsonwebtoken2.default.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+    _jsonwebtoken2.default.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         res.status(500).send({ message: "Invakid token", success: false });
       } else {
-        _user2.default.findOne({ email: decoded.email }).then(function (user) {
+        _user2.default.findOne({ email: decoded.email }).then(user => {
           req.body.user = user;
           next();
         });

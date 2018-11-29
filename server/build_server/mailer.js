@@ -12,7 +12,7 @@ var _nodemailer2 = _interopRequireDefault(_nodemailer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var from = '"Repemorizer" <repemorizer@gmail.com>';
+const from = '"Repemorizer" <repemorizer@gmail.com>';
 
 function setup() {
   return _nodemailer2.default.createTransport({
@@ -30,24 +30,32 @@ function setup() {
 }
 
 function sendConfirmationEmail(user) {
-  var transport = setup();
-  var email = {
-    from: from,
+  const transport = setup();
+  const email = {
+    from,
     to: user.email,
     subject: "Repemorizer confirmation",
-    html: "\n    <h1> Please, confirm your email. Click to \"Confirm\"</h1>\n\n    <a href=\"" + user.generateConfirmationUrl() + "\" >Confirm </a>\n    "
+    html: `
+    <h1> Please, confirm your email. Click to "Confirm"</h1>
+
+    <a href="${user.generateConfirmationUrl()}" >Confirm </a>
+    `
   };
 
   transport.sendMail(email);
 }
 
 function sendResetPasswordEmail(user) {
-  var transport = setup();
-  var email = {
-    from: from,
+  const transport = setup();
+  const email = {
+    from,
     to: user.email,
     subject: "Repemorizer reset password",
-    html: "\n    <h1>To reset password follow this link:</h1> \n\n    <a href=\"" + user.generateResetPasswordUrl() + "\">Reset<a>\n    "
+    html: `
+    <h1>To reset password follow this link:</h1> 
+
+    <a href="${user.generateResetPasswordUrl()}">Reset<a>
+    `
   };
 
   transport.sendMail(email);

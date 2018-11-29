@@ -32,7 +32,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express2.default)();
+const app = (0, _express2.default)();
 app.use(_express2.default.static(_path2.default.resolve(__dirname + "/build_client")));
 _mongoose2.default.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
@@ -60,11 +60,9 @@ app.post("/api/forgot_password", route.forgotPassword);
 app.post("/api/reset_password", route.resetPassword);
 app.post("/api/error", route.errorHandler);
 
-app.get("/*", function (req, res) {
+app.get("/*", (req, res) => {
   res.sendFile(_path2.default.resolve(__dirname + "/build_client/index.html"));
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  return console.log("server running");
-});
+app.listen(process.env.PORT || 3000, () => console.log("server running"));
 module.exports = app;

@@ -6,6 +6,7 @@ import * as route from "./controllers";
 import authenticate from "./utils/authenticate";
 import path from "path";
 
+
 const app = express();
 app.use(express.static(path.resolve(__dirname + "/build_client")));
 mongoose.connect(

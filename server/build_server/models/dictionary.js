@@ -12,10 +12,9 @@ var _constants = require("../constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Schema = _mongoose2.default.Schema;
+const { Schema } = _mongoose2.default;
 
-
-var Dictionary = new Schema({
+const Dictionary = new Schema({
   text: String,
   langFrom: String,
   langTo: String,

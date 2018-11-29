@@ -1,8 +1,8 @@
 "use strict";
 
-(window.webpackJsonp = window.webpackJsonp || []).push([[0], { 213: function _(e, t, a) {
+(window.webpackJsonp = window.webpackJsonp || []).push([[0], { 213: function (e, t, a) {
     e.exports = a(430);
-  }, 428: function _(e, t, a) {}, 430: function _(e, t, a) {
+  }, 428: function (e, t, a) {}, 430: function (e, t, a) {
     "use strict";
     a.r(t);var n = {};a.r(n), a.d(n, "translateRequest", function () {
       return L;
@@ -47,7 +47,7 @@
         v = [25e3, 12e4, 6e5, 36e5, 18e6, 864e5, 432e6, 216e7, 108e8, 648e8],
         g = [{ text: "Azerbaijan", value: "az" }, { text: "Albanian", value: "sq" }, { text: "Amharic", value: "am" }, { text: "English", value: "en" }, { text: "Arabic", value: "ar" }, { text: "Armenian", value: "hy" }, { text: "Afrikaans", value: "af" }, { text: "Basque", value: "eu" }, { text: "Bashkir", value: "ba" }, { text: "Belarusian", value: "be" }, { text: "Bengali", value: "bn" }, { text: "Burmese", value: "my" }, { text: "Bulgarian", value: "bg" }, { text: "Bosnian", value: "bs" }, { text: "Welsh", value: "cy" }, { text: "Hungarian", value: "hu" }, { text: "Vietnamese", value: "vi" }, { text: "Haitian (Creole)", value: "ht" }, { text: "Galician", value: "gl" }, { text: "Dutch", value: "nl" }, { text: "Hill Mari", value: "mrj" }, { text: "Greek", value: "el" }, { text: "Georgian", value: "ka" }, { text: "Gujarati", value: "gu" }, { text: "Danish", value: "da" }, { text: "Hebrew", value: "he" }, { text: "Yiddish", value: "yi" }, { text: "Indonesian", value: "id" }, { text: "Irish", value: "ga" }, { text: "Italian", value: "it" }, { text: "Icelandic", value: "is" }, { text: "Spanish", value: "es" }, { text: "Kazakh", value: "kk" }, { text: "Kannada", value: "kn" }, { text: "Catalan", value: "ca" }, { text: "Kyrgyz", value: "ky" }, { text: "Chinese", value: "zh" }, { text: "Korean", value: "ko" }, { text: "Xhosa", value: "xh" }, { text: "Khmer", value: "km" }, { text: "Laotian", value: "lo" }, { text: "Latin", value: "la" }, { text: "Latvian", value: "lv" }, { text: "Lithuanian", value: "lt" }, { text: "Luxembourgish", value: "lb" }, { text: "Malagasy", value: "mg" }, { text: "Malay", value: "ms" }, { text: "Malayalam", value: "ml" }, { text: "Maltese", value: "mt" }, { text: "Macedonian", value: "mk" }, { text: "Maori", value: "mi" }, { text: "Marathi", value: "mr" }, { text: "Mari", value: "mhr" }, { text: "Mongolian", value: "mn" }, { text: "German", value: "de" }, { text: "Nepali", value: "ne" }, { text: "Norwegian", value: "no" }, { text: "Punjabi", value: "pa" }, { text: "Papiamento", value: "pap" }, { text: "Persian", value: "fa" }, { text: "Polish", value: "pl" }, { text: "Portuguese", value: "pt" }, { text: "Romanian", value: "ro" }, { text: "Russian", value: "ru" }, { text: "Cebuano", value: "ceb" }, { text: "Serbian", value: "sr" }, { text: "Sinhala", value: "si" }, { text: "Slovakian", value: "sk" }, { text: "Slovenian", value: "sl" }, { text: "Swahili", value: "sw" }, { text: "Sundanese", value: "su" }, { text: "Tajik", value: "tg" }, { text: "Thai", value: "th" }, { text: "Tagalog", value: "tl" }, { text: "Tamil", value: "ta" }, { text: "Tatar", value: "tt" }, { text: "Telugu", value: "te" }, { text: "Turkish", value: "tr" }, { text: "Udmurt", value: "udm" }, { text: "Uzbek", value: "uz" }, { text: "Ukrainian", value: "uk" }, { text: "Urdu", value: "ur" }, { text: "Finnish", value: "fi" }, { text: "French", value: "fr" }, { text: "Hindi", value: "hi" }, { text: "Croatian", value: "hr" }, { text: "Czech", value: "cs" }, { text: "Swedish", value: "sv" }, { text: "Scottish", value: "gd" }, { text: "Estonian", value: "et" }, { text: "Esperanto", value: "eo" }, { text: "Javanese", value: "jv" }, { text: "Japanese", value: "ja" }],
         E = a(16),
-        b = Object(h.c)({ dictionary: function dictionary() {
+        b = Object(h.c)({ dictionary: function () {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
             t = arguments.length > 1 ? arguments[1] : void 0,
             a = t.type,
@@ -62,7 +62,7 @@
             return n.updatedDictionary;case "LOGOUT":
             return [];default:
             return e;}
-      }, words: function words() {
+      }, words: function () {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
             t = arguments.length > 1 ? arguments[1] : void 0,
             a = t.type,
@@ -76,7 +76,7 @@
             });case "LOGOUT":
             return [];default:
             return e;}
-      }, user: function user() {
+      }, user: function () {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
             t = arguments.length > 1 ? arguments[1] : void 0,
             a = t.type,
@@ -84,7 +84,7 @@
             return Object(E.a)({}, e, n.user);case "LOGOUT":
             return localStorage.removeItem("JWT"), {};default:
             return e;}
-      }, messages: function messages() {
+      }, messages: function () {
         var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {},
             t = arguments.length > 1 ? arguments[1] : void 0,
             a = t.type,
@@ -97,7 +97,7 @@
         O = a.n(y);function w(e) {
       e ? O.a.defaults.headers.common.authorization = "Bearer ".concat(e) : delete O.a.defaults.headers.common.authorization;
     }var x = "http://localhost:3000/api",
-        _ = function _(e) {
+        _ = function (e) {
       return function (e) {
         return function (t) {
           var a = t.type,
@@ -181,65 +181,63 @@
         P = a(438),
         I = a(184),
         M = a.n(I),
-        L = function L(e, t) {
+        L = function (e, t) {
       return { type: "TRANSLATE", payload: { text: e, lang: t } };
     },
-        H = function H() {
+        H = function () {
       return { type: "GET_FIFTY" };
     },
-        U = function U() {
+        U = function () {
       return { type: "GET_DICTIONARY" };
     },
-        F = function F(e) {
+        F = function (e) {
       return { type: "REMOVE_TEXT", payload: e };
     },
-        z = function z() {
+        z = function () {
       return { type: "GET_WORDS_TO_REPEAT" };
     },
-        V = function V() {
+        V = function () {
       return { type: "CHECK_WORDS_TO_REPEAT" };
     },
-        Y = function Y(e, t) {
+        Y = function (e, t) {
       return { type: "NEXT_STAGE", payload: { _id: e, success: t } };
     },
-        J = function J(e) {
+        J = function (e) {
       return { type: "SIGNUP", payload: e };
     },
-        B = function B() {
+        B = function () {
       return { type: "FETCH_CURRENT_USER" };
     },
-        K = function K() {
+        K = function () {
       return { type: "LOGOUT" };
     },
-        X = function X(e) {
+        X = function (e) {
       return { type: "LOGIN", payload: e };
     },
-        q = function q(e) {
+        q = function (e) {
       return { type: "FORGOT_PASSWORD", payload: e };
     },
-        Q = function Q(e) {
+        Q = function (e) {
       return { type: "RESET_PASSWORD", payload: e };
     },
-        Z = function Z() {
+        Z = function () {
       return { type: "CLEAR_MESSAGE" };
     },
-        $ = function $(e) {
+        $ = function (e) {
       var t = e.text,
           a = e.translation,
           n = e._id;return o.a.createElement("div", { className: "card__word" }, o.a.createElement("div", { className: "card__word_text" }, o.a.createElement("span", { className: "lang1" }, t), " ", o.a.createElement(W.a, { color: "black", name: "caret right" }), " ", o.a.createElement("span", { className: "lang2" }, a)), o.a.createElement(W.a, { name: "x", className: "card__word_button", onClick: e.onRemoveText(n), color: "red" }));
     },
         ee = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).componentDidMount = function () {
           a.props.getFifty();
         }, a.onRemoveText = function (e) {
           return function () {
             a.props.removeText(e);
           };
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this,
               t = this.props.dictionary;return o.a.createElement("div", { className: "last-words" }, o.a.createElement("div", { className: "card" }, o.a.createElement("div", { className: "card__body" }, t.map(function (t) {
             return o.a.createElement($, Object.assign({ onRemoveText: e.onRemoveText, key: t._id }, t));
@@ -249,9 +247,7 @@
         te = Object(d.b)(null, { removeText: F, getFifty: H })(ee),
         ae = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), l = 0; l < n; l++) {
-          r[l] = arguments[l];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { formValue: "", translation: "", lang: { from: "en", to: "ru" }, word: "", hidden: !1 }, a.componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), l = 0; l < n; l++) r[l] = arguments[l];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { formValue: "", translation: "", lang: { from: "en", to: "ru" }, word: "", hidden: !1 }, a.componentDidMount = function () {
           var e = a.props,
               t = e.checkWordsToRepeat,
               n = e.getWordsToRepeat;t(), n(), window.innerWidth < 768 && a.setState({ hidden: !0 });
@@ -280,9 +276,9 @@
             return e.value === t.langFrom;
           }).text);
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "componentDidUpdate", value: function value(e) {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "componentDidUpdate", value: function (e) {
           var t = this.props.dictionary;t && this.state.formValue && t.length && t.length !== e.dictionary.length && this.setState({ translation: t[t.length - 1].translation, word: t[t.length - 1] });
-        } }, { key: "render", value: function value() {
+        } }, { key: "render", value: function () {
           var e = this,
               t = this.state,
               a = t.formValue,
@@ -291,7 +287,7 @@
               l = t.hidden,
               c = this.props,
               s = c.dictionary,
-              i = c.words;return o.a.createElement(A.a, { className: "main-page" }, o.a.createElement(A.a.Row, null, o.a.createElement(A.a.Column, { mobile: 16, tablet: 9, computer: 11, largeScreen: 12, widescreen: 12, style: { paddingTop: "70px" } }, o.a.createElement(k.a, { onSubmit: this.onSubmit, method: "POST" }, o.a.createElement(k.a.Group, { className: "lang" }, o.a.createElement(G.a, { search: !0, selection: !0, onChange: this.onSelectLanguage, placeholder: "From", value: r.from, name: "from", options: g }), o.a.createElement(W.a, { onClick: this.turnLang, name: "arrows alternate horizontal", size: "large", className: "turn-lang-icon" }), o.a.createElement(G.a, { search: !0, selection: !0, onChange: this.onSelectLanguage, placeholder: "To", name: "to", value: r.to, options: g })), o.a.createElement(k.a.Group, { widths: "equal", inline: !0, className: "main__input" }, o.a.createElement(k.a.Field, { className: "main__input_text", value: a, onChange: this.onChangeInput, control: "input", placeholder: "Enter word to translate" }), o.a.createElement(D.a, { type: "sumbit", className: "main__btn_translate", primary: !0 }, "Translate")), o.a.createElement("div", { className: "main__output" }, o.a.createElement("div", { className: "main__output_translation" }, n), this.renderTranslatedFromAnotherLanguage()))), o.a.createElement(A.a.Column, { mobile: 16, tablet: 7, computer: 5, largeScreen: 4, widescreen: 4 }, o.a.createElement("div", { className: "main__button-turn_wrapper" }, o.a.createElement(D.a, { className: "main__button-turn", onClick: function onClick() {
+              i = c.words;return o.a.createElement(A.a, { className: "main-page" }, o.a.createElement(A.a.Row, null, o.a.createElement(A.a.Column, { mobile: 16, tablet: 9, computer: 11, largeScreen: 12, widescreen: 12, style: { paddingTop: "70px" } }, o.a.createElement(k.a, { onSubmit: this.onSubmit, method: "POST" }, o.a.createElement(k.a.Group, { className: "lang" }, o.a.createElement(G.a, { search: !0, selection: !0, onChange: this.onSelectLanguage, placeholder: "From", value: r.from, name: "from", options: g }), o.a.createElement(W.a, { onClick: this.turnLang, name: "arrows alternate horizontal", size: "large", className: "turn-lang-icon" }), o.a.createElement(G.a, { search: !0, selection: !0, onChange: this.onSelectLanguage, placeholder: "To", name: "to", value: r.to, options: g })), o.a.createElement(k.a.Group, { widths: "equal", inline: !0, className: "main__input" }, o.a.createElement(k.a.Field, { className: "main__input_text", value: a, onChange: this.onChangeInput, control: "input", placeholder: "Enter word to translate" }), o.a.createElement(D.a, { type: "sumbit", className: "main__btn_translate", primary: !0 }, "Translate")), o.a.createElement("div", { className: "main__output" }, o.a.createElement("div", { className: "main__output_translation" }, n), this.renderTranslatedFromAnotherLanguage()))), o.a.createElement(A.a.Column, { mobile: 16, tablet: 7, computer: 5, largeScreen: 4, widescreen: 4 }, o.a.createElement("div", { className: "main__button-turn_wrapper" }, o.a.createElement(D.a, { className: "main__button-turn", onClick: function () {
               e.setState(function (e) {
                 return { hidden: !e.hidden };
               });
@@ -303,14 +299,12 @@
     }, Object(E.a)({}, n))(ae),
         re = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { path: "" }, a.onLogout = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { path: "" }, a.onLogout = function () {
           a.props.logout();
         }, a.renderColorStyle = function () {
           return { color: "#fff " };
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props.user.token;return o.a.createElement(A.a, null, o.a.createElement(A.a.Row, { className: "head" }, o.a.createElement(A.a.Column, { mobile: 16, tablet: 9, computer: 7, largeScreen: 6, widescreen: 4, floated: "right" }, e ? o.a.createElement("div", { role: "button", style: this.renderColorStyle(), className: "logout-link", onClick: this.onLogout }, "Logout") : o.a.createElement("span", { style: { color: "#474749" } }, o.a.createElement(P.a, { style: this.renderColorStyle(), to: "/login" }, "Login"), " ", "|", o.a.createElement(P.a, { style: this.renderColorStyle(), to: "/signup" }, " ", "Signup")), "|", " ", o.a.createElement(P.a, { style: this.renderColorStyle(), to: "/dashboard" }, "Dashboard"), " ", "|", o.a.createElement(P.a, { style: this.renderColorStyle(), to: "/dictionary" }, "Dictionary"), " ", "|", o.a.createElement(P.a, { style: this.renderColorStyle(), to: "/repeat" }, "Repeat"))));
         } }]), t;
     }(r.Component),
@@ -321,16 +315,14 @@
         ce = a(448),
         se = a(447),
         ie = a(34),
-        ue = function ue(e) {
+        ue = function (e) {
       return Object.values(e).some(function (e) {
         return "" !== e;
       });
     },
         de = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { email: "", password: "" }, errors: { email: "", password: "" } }, a.componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { email: "", password: "" }, errors: { email: "", password: "" } }, a.componentDidMount = function () {
           a.props.logout();
         }, a.componentWillUnmount = function () {
           a.props.clearMessage();
@@ -348,7 +340,7 @@
         }, a.validate = function (e) {
           var t = {};return Object(ie.isEmail)(e.email) && e.email || (t.email = "Not valid email"), (!Object(ie.isAlphanumeric)(e.password) || e.password.length < 4 || e.password.length > 16) && (t.password = "Not valid password"), a.setState({ errors: Object(E.a)({}, t) }), "{}" === JSON.stringify(t);
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props.messages,
               t = this.state,
               a = t.errors,
@@ -363,9 +355,7 @@
     }, { login: X, clearMessage: Z, logout: K })(de),
         pe = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { email: "", password: "", password2: "", username: "" }, errors: { email: "", password: "", username: "" } }, a.componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { email: "", password: "", password2: "", username: "" }, errors: { email: "", password: "", username: "" } }, a.componentDidMount = function () {
           a.props.logout();
         }, a.componentDidUpdate = function () {
           var e = a.props,
@@ -383,7 +373,7 @@
         }, a.validate = function (e) {
           var t = {};return e.username && Object(ie.isAlphanumeric)(e.username) || (t.username = "Not valid username"), Object(ie.isEmail)(e.email) && e.email || (t.email = "Not valid email"), e.password !== e.password2 && (t.password = "Not equal passwords"), (!Object(ie.isAlphanumeric)(e.password) || e.password.length < 4 || e.password.length > 16) && (t.password = "Not valid password"), a.setState({ errors: Object(E.a)({}, t) }), "{}" === JSON.stringify(t);
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props.messages,
               t = this.state,
               a = t.errors,
@@ -399,9 +389,7 @@
         fe = a(442),
         ve = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), l = 0; l < n; l++) {
-          r[l] = arguments[l];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), l = 0; l < n; l++) r[l] = arguments[l];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).componentDidMount = function () {
           a.props.getDictionary(), a.props.getWordsToRepeat();
         }, a.componentWillUnmount = function () {
           a.props.checkWordsToRepeat();
@@ -431,7 +419,7 @@
                 i = e.isRepeatTime;return o.a.createElement(fe.a.Row, { key: r }, o.a.createElement(fe.a.Cell, null, t), o.a.createElement(fe.a.Cell, null, n), o.a.createElement(fe.a.Cell, { width: 1 }, c), o.a.createElement(fe.a.Cell, { width: 2 }, a.renderAddTime(l)), o.a.createElement(fe.a.Cell, { width: 2 }, a.renderNextRepeatIn(s, c, i)), o.a.createElement(fe.a.Cell, { width: 1 }, o.a.createElement(W.a, { name: "x", className: "dictionary__button_remove", onClick: a.onRemoveClick(r), color: "red" })));
           })));
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props,
               t = e.dictionary,
               a = e.words;return t.length ? o.a.createElement("div", { className: "dictionary" }, o.a.createElement(A.a, null, o.a.createElement(A.a.Row, null, o.a.createElement(A.a.Column, null, o.a.createElement("h1", null, "Dictionary"))), o.a.createElement(A.a.Row, null, o.a.createElement(A.a.Column, null, o.a.createElement("div", null, "Words in dictionary: ", t.length), o.a.createElement("div", null, "Ready to repeat: ", a.length))), o.a.createElement(A.a.Row, null, o.a.createElement(A.a.Column, null, this.renderTable())))) : o.a.createElement("div", { className: "empty-message" }, "There is no words in your dictionary yet");
@@ -442,16 +430,14 @@
     }, Object(E.a)({}, n))(ve),
         Ee = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { flag: "", hidden: !0 }, a.componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { flag: "", hidden: !0 }, a.componentDidMount = function () {
           a.setState({ flag: Math.random() > .5 });
         }, a.handleClick = function (e) {
           return function () {
             a.setState({ hidden: !1 }), a.props.showResult(a.props._id, e);
           };
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.state,
               t = e.flag,
               a = e.hidden,
@@ -462,31 +448,29 @@
     }(r.Component),
         be = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).componentDidMount = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).componentDidMount = function () {
           a.props.getWordsToRepeat();
         }, a.nextWord = function () {
           a.props.getWordsToRepeat();
         }, a.showResult = function (e, t) {
           a.props.nextStage(e, t);
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props.words;return o.a.createElement("div", null, o.a.createElement(A.a, { className: "repeat-page" }, o.a.createElement(A.a.Row, { centered: !0 }, o.a.createElement(A.a.Column, null, o.a.createElement("h1", null, "Memory check!"), o.a.createElement("div", { className: "repeat__list" }, e.length ? o.a.createElement(Ee, { text: e[0].text, translation: e[0].translation, _id: e[0]._id, key: e[0]._id, showResult: this.showResult, nextWord: this.nextWord }) : o.a.createElement("div", { className: "empty-message" }, "There is no words to repeat"))))));
         } }]), t;
     }(r.Component),
         ye = Object(d.b)(function (e) {
       return { words: e.words };
-    }, Object(E.a)({}, n))(be);a.e(1).then(a.bind(null, 439));var Oe = function Oe() {
+    }, Object(E.a)({}, n))(be);a.e(1).then(a.bind(null, 439));var Oe = function () {
       return o.a.createElement("canvas", { id: "c" });
     },
-        we = function we() {
+        we = function () {
       return o.a.createElement("div", { className: "home-page" }, o.a.createElement(A.a, null, o.a.createElement(A.a.Row, { className: "home-page__header" }, o.a.createElement(A.a.Column, null, o.a.createElement("h1", null, "Repemorizer"), o.a.createElement("h3", null, "Translate, repeat and memorize new words"))), o.a.createElement(A.a.Row, null, o.a.createElement(Oe, null))));
     },
         xe = function (e) {
       function t() {
         return Object(S.a)(this, t), Object(R.a)(this, Object(C.a)(t).apply(this, arguments));
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           return o.a.createElement("div", null, "This page doesn't exist", o.a.createElement("hr", null), o.a.createElement(P.a, { to: "/dashboard" }, "Go to dashboard"));
         } }]), t;
     }(r.Component),
@@ -496,7 +480,7 @@
     })(function (e) {
       var t = e.isAuthenticated,
           a = e.component,
-          n = Object(_e.a)(e, ["isAuthenticated", "component"]);return o.a.createElement(u.a, Object.assign({}, n, { render: function render(e) {
+          n = Object(_e.a)(e, ["isAuthenticated", "component"]);return o.a.createElement(u.a, Object.assign({}, n, { render: function (e) {
           return t ? o.a.createElement(a, e) : o.a.createElement(Te.a, { to: "/confirmation" });
         } }));
     });var je = Object(d.b)(function (e) {
@@ -511,7 +495,7 @@
     })(function (e) {
       var t = e.isConfirmed,
           a = e.component,
-          n = Object(_e.a)(e, ["isConfirmed", "component"]);return o.a.createElement(u.a, Object.assign({}, n, { render: function render(e) {
+          n = Object(_e.a)(e, ["isConfirmed", "component"]);return o.a.createElement(u.a, Object.assign({}, n, { render: function (e) {
           return t ? o.a.createElement(a, e) : o.a.createElement(Te.a, { to: "/confirmation" });
         } }));
     });var Ce = Object(d.b)(function (e) {
@@ -519,15 +503,13 @@
     })(function (e) {
       var t = e.isAuthenticated,
           a = e.component,
-          n = Object(_e.a)(e, ["isAuthenticated", "component"]);return o.a.createElement(u.a, Object.assign({}, n, { render: function render(e) {
+          n = Object(_e.a)(e, ["isAuthenticated", "component"]);return o.a.createElement(u.a, Object.assign({}, n, { render: function (e) {
           return t ? o.a.createElement(Te.a, { to: "/dashboard" }) : o.a.createElement(a, e);
         } }));
     }),
         Ne = (a(425), a(428), function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { email: "" }, error: { email: "" } }, a.componentDidUpdate = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { email: "" }, error: { email: "" } }, a.componentDidUpdate = function () {
           var e = a.props,
               t = e.history;e.messages.success && setTimeout(function () {
             t.push("/");
@@ -543,7 +525,7 @@
         }, a.validate = function (e) {
           var t = {};return Object(ie.isEmail)(e.email) || (t.email = "Not valid email"), a.setState({ error: Object(E.a)({}, t) }), !t.email;
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props.messages,
               t = this.state,
               a = t.error,
@@ -555,9 +537,7 @@
     }, { forgotPassword: q, clearMessage: Z })(Ne),
         ke = function (e) {
       function t() {
-        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) {
-          r[o] = arguments[o];
-        }return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { password1: "", password2: "" }, error: { password: "" } }, a.componentDidUpdate = function () {
+        var e, a;Object(S.a)(this, t);for (var n = arguments.length, r = new Array(n), o = 0; o < n; o++) r[o] = arguments[o];return (a = Object(R.a)(this, (e = Object(C.a)(t)).call.apply(e, [this].concat(r)))).state = { data: { password1: "", password2: "" }, error: { password: "" } }, a.componentDidUpdate = function () {
           a.props.messages.success && setTimeout(function () {
             a.props.history.push("/login");
           }, 3e3);
@@ -572,7 +552,7 @@
         }, a.validate = function (e) {
           var t = {};return e.password1 !== e.password2 && (t.password = "Not equal passwords"), (!Object(ie.isAlphanumeric)(e.password1) || !Object(ie.isAlphanumeric)(e.password2) || e.password1.length < 4 || e.password1.length > 16 || e.password2.length < 4 || e.password2.length > 16) && (t.password = "Not valid password"), a.setState({ error: Object(E.a)({}, t) }), !t.password;
         }, a;
-      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function value() {
+      }return Object(N.a)(t, e), Object(j.a)(t, [{ key: "render", value: function () {
           var e = this.props.messages,
               t = this.state,
               a = t.error,
@@ -585,7 +565,7 @@
         We = p()(),
         De = Object(h.d)(b, Object(h.a)(_));if (localStorage.JWT) {
       var Pe = We.location.pathname;"/signup" !== Pe && "/login" !== Pe && (w(localStorage.JWT), De.dispatch(B()));
-    } else De.dispatch(K());var Ie = function Ie() {
+    } else De.dispatch(K());var Ie = function () {
       return o.a.createElement(d.a, { store: De }, o.a.createElement(s.a, { history: We }, o.a.createElement(r.Fragment, null, o.a.createElement(oe, { history: We }), o.a.createElement(i.a, null, o.a.createElement(u.a, { path: "/", exact: !0, component: we }), o.a.createElement(Se, { path: "/dashboard", exact: !0, component: ne }), o.a.createElement(u.a, { path: "/login", exact: !0, component: me }), o.a.createElement(u.a, { path: "/signup", exact: !0, component: he }), o.a.createElement(u.a, { path: "/confirmation", exact: !0, component: je }), o.a.createElement(Re, { path: "/dictionary", exact: !0, component: ge }), o.a.createElement(Re, { path: "/repeat", exact: !0, component: ye }), o.a.createElement(Ce, { path: "/forgot_password", exact: !0, component: Ae }), o.a.createElement(Ce, { path: "/reset_password/:token", component: Ge }), o.a.createElement(u.a, { component: xe })))));
     };c.a.render(o.a.createElement(Ie, null), document.getElementById("root"));
   } }, [[213, 3, 2]]]);
