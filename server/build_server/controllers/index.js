@@ -240,7 +240,7 @@ function resetPassword(req, res) {
       user.save().then(u => {
         const userWithToken = u.withToken();
         res.send(_extends({}, userWithToken, {
-          message: "Password has cheanged",
+          message: "Password has changed",
           success: true
         }));
       });

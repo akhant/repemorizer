@@ -222,7 +222,7 @@ export function resetPassword(req, res) {
         const userWithToken = u.withToken();
         res.send({
           ...userWithToken,
-          message: "Password has cheanged",
+          message: "Password has changed",
           success: true
         });
       });
