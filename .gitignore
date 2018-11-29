@@ -7,5 +7,3 @@ client/src/assets/fonts
 build/
 test/
 errorLog.txt
-build_client
-build_server
