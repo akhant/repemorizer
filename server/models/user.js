@@ -59,14 +59,14 @@ User.methods.generateJWT = function() {
 };
 
 User.methods.generateConfirmationUrl = function () {
-  return `${process.env.SERVER_API}/confirmation/${this.confirmationToken}`;
+  return `https://repemorizer.herokuapp.com/api/confirmation/${this.confirmationToken}`;
 };
 User.methods.setResetPasswordToken = function () {
   this.resetPasswordToken = this.generateJWT();
 };
 
 User.methods.generateResetPasswordUrl = function () {
-  return `${process.env.HOST}/reset_password/${this.resetPasswordToken}`;
+  return `https://repemorizer.herokuapp.com/reset_password/${this.resetPasswordToken}`;
 };
 
 export default mongoose.model("User", User);

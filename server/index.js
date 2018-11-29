@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import * as route from "./controllers";
 import authenticate from "./utils/authenticate";
 import path from "path";
-dotenv.config();
+
 const app = express();
 app.use(express.static(path.resolve(__dirname + "/build")));
 mongoose.connect(
@@ -42,5 +42,5 @@ app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname + "/build/index.html"));
 });
 
-app.listen(process.env.PORT, () => console.log("server running"));
+app.listen(process.env.PORT || 3000, () => console.log("server running"));
 module.exports = app;

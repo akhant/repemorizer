@@ -1,5 +1,4 @@
 import axios from "axios";
-require("dotenv").config();
 import Dictionary from "../models/dictionary";
 import User from "../models/user";
 import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
