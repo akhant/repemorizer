@@ -17,7 +17,7 @@ import {
   SHOW_MESSAGE
 } from "../constants";
 
-const serverUrl = "http://localhost:3000/api";
+const serverUrl = "https://repemorizer.herokuapp.com/api/";
 
 const Data = store => next => action => {
   const { type, payload } = action;

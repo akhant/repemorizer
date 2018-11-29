@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "e8c322de9658cbeb8a774b6624167c2c",
-    "url": "/static/media/brand-icons.e8c322de.woff2"
+    "revision": "a046592bac8f2fd96e994733faf3858c",
+    "url": "/static/media/brand-icons.a046592b.woff"
   },
   {
-    "revision": "0db51fdfe940f1f7bc39",
+    "revision": "de15dc22ee69b7b33634",
     "url": "/static/css/main.d4d26425.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = [
     "url": "/static/media/Florentia-Regular-trial.89a1d495.ttf"
   },
   {
-    "revision": "62fa14ad73c253ba0ec2",
-    "url": "/static/js/2.62fa14ad.chunk.js"
+    "revision": "070b8a8344c59d438a37",
+    "url": "/static/js/2.070b8a83.chunk.js"
   },
   {
     "revision": "6bbb6f136f1b55281777",
@@ -48,24 +48,24 @@ self.__precacheManifest = [
     "url": "/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "0db51fdfe940f1f7bc39",
-    "url": "/static/js/main.0db51fdf.chunk.js"
+    "revision": "de15dc22ee69b7b33634",
+    "url": "/static/js/main.de15dc22.chunk.js"
   },
   {
-    "revision": "a046592bac8f2fd96e994733faf3858c",
-    "url": "/static/media/brand-icons.a046592b.woff"
+    "revision": "e8c322de9658cbeb8a774b6624167c2c",
+    "url": "/static/media/brand-icons.e8c322de.woff2"
   },
   {
     "revision": "9c74e172f87984c48ddf5c8108cabe67",
     "url": "/static/media/flags.9c74e172.png"
   },
   {
-    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
-    "url": "/static/media/icons.8e3c7f55.eot"
-  },
-  {
     "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
     "url": "/static/media/icons.b87b9ba5.ttf"
+  },
+  {
+    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
+    "url": "/static/media/icons.8e3c7f55.eot"
   },
   {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
@@ -92,11 +92,11 @@ self.__precacheManifest = [
     "url": "/static/media/KolnMesseDeutz.00146952.otf"
   },
   {
-    "revision": "62fa14ad73c253ba0ec2",
+    "revision": "070b8a8344c59d438a37",
     "url": "/static/css/2.5aa1767f.chunk.css"
   },
   {
-    "revision": "6e32a07ea1d4403f52d2d319a5fb038b",
+    "revision": "56e8156ed7f6a706ab9a0ab9b486741d",
     "url": "/index.html"
   }
 ];
