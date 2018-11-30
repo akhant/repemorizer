@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import express from "express";
@@ -7,8 +6,9 @@ import * as route from "./controllers";
 import authenticate from "./utils/authenticate";
 import path from "path";
 
+
 const app = express();
-app.use(express.static(path.resolve(__dirname + "/build")));
+app.use(express.static(path.resolve(__dirname + "/build_client")));
 mongoose.connect(
   process.env.MONGODB_URI,
   {
@@ -39,7 +39,7 @@ app.post("/api/reset_password", route.resetPassword);
 app.post("/api/error", route.errorHandler);
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname + "/build/index.html"));
+  res.sendFile(path.resolve(__dirname + "/build_client/index.html"));
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("server running"));

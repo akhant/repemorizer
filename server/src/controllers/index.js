@@ -1,3 +1,4 @@
+
 import axios from "axios";
 import Dictionary from "../models/dictionary";
 import User from "../models/user";
@@ -187,7 +188,7 @@ export function confirmation(req, res) {
     { confirmationToken: "", confirmed: true }
   ).then(user => {
     if (user) {
-      res.redirect(`${process.env.HOST}/confirmation`);
+      res.redirect(`https://repemorizer.herokuapp.com/confirmation`);
     } else {
       res.status(401).send({ message: "Invalid confirmation", success: false });
     }
@@ -221,7 +222,7 @@ export function resetPassword(req, res) {
         const userWithToken = u.withToken();
         res.send({
           ...userWithToken,
-          message: "Password has cheanged",
+          message: "Password has changed",
           success: true
         });
       });

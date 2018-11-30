@@ -1,1 +1,1 @@
-web: node server/index.js --exec babel-node
+web: node server/build_server/index.js
