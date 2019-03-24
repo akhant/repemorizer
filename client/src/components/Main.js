@@ -114,7 +114,7 @@ if (prevProps.words.length !== words.length ) {
 
   render() {
     const { formValue, translation, lang, hidden } = this.state;
-    const { dictionary, words } = this.props;
+    const { dictionary } = this.props;
 
     return (
       <Grid className="main-page">

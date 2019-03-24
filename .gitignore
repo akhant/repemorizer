@@ -10,3 +10,5 @@ errorLog.txt
 build_server
 build_client
 Procfile
+error.log
+combined.log

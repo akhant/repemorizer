@@ -2,7 +2,7 @@ export const isError = errors => Object.values(errors).some(val => val !== "");
 
 export const showNotification = (title, options) => {
   const HOST = process.env.NODE_ENV === "development"
-      ? "http://localhost:8000/repeat"
+      ? "http://localhost:8000"
       : "https://repemorizer.herokuapp.com";
 
   // Проверим, поддерживает ли браузер HTML5 Notifications
@@ -29,7 +29,7 @@ export const showNotification = (title, options) => {
       if (permission === "granted") {
         const notification = new Notification(title, options);
       } else {
-        alert("Вы запретили показывать уведомления"); // Юзер отклонил наш запрос на показ уведомлений
+      /*   alert("Вы запретили показывать уведомления"); */ // Юзер отклонил наш запрос на показ уведомлений
       }
     });
   } else {
