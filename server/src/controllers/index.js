@@ -240,11 +240,15 @@ export function resetPassword(req, res) {
 
 export function errorHandler(req, res) {
   const { config, response } = req.body.error;
-  console.log(response);
+  console.log("response", response);
   const url = config.url;
   const headers = JSON.stringify(config.headers);
   const data = config.data;
-  const status = `${response.status} - ${response.statusText}`;
+  let status;
+  if (response) {
+    status = `${response.status} - ${response.statusText}`;
+  }
+
   fs.appendFile(
     "errorLog.txt",
     `Date: ${new Date().toLocaleString()}

@@ -48,7 +48,7 @@ const App = () => (
           <Route path="/signup" exact component={SignupPage} />
           <Route path="/confirmation" exact component={ConfirmationPage} />
           <ConfirmedRoute path="/dictionary" exact component={Dictionary} />
-          <ConfirmedRoute path="/repeat" exact component={RepeatPage} />
+          <Route path="/repeat" exact component={RepeatPage} />
           <OnlyNotAuthRoute
             path="/forgot_password"
             exact

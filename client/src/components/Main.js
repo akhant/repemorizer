@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Grid, Form, Button, Icon, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import _ from "lodash";
 import * as actions from "../actions";
 import Card from "./Card";
 import { languages } from "../constants";
+import { showNotification } from "../utils";
 
 // TODO: protect form
 // TODO: separate the component
@@ -23,7 +23,13 @@ class Main extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const { dictionary } = this.props;
+    const { dictionary, words } = this.props;
+if (prevProps.words.length !== words.length ) {
+  showNotification("You have new words to repeat", {
+    body: `${words.length} word${words.length > 1 ? "s" : ''} ready to repeat`,
+    dir: "auto"
+  });
+}
     if (dictionary) {
       if (
         this.state.formValue
@@ -43,6 +49,7 @@ class Main extends Component {
     checkWordsToRepeat();
 
     getWordsToRepeat();
+   
     if (window.innerWidth < 768) {
       this.setState({
         hidden: true
@@ -98,7 +105,6 @@ class Main extends Component {
       return (
         // render a name of Language by using a language code
         <div className="message_translated-from">
-
           Translated from
           {_.find(languages, o => o.value === word.langFrom).text}
         </div>
@@ -158,7 +164,6 @@ class Main extends Component {
                 />
 
                 <Button type="sumbit" className="main__btn_translate" primary>
-
                   Translate
                 </Button>
               </Form.Group>
@@ -176,7 +181,6 @@ class Main extends Component {
                           lang.to
                         }&text=${formValue}`}
                       >
-
                         Google translation
                       </a>
 
@@ -186,7 +190,6 @@ class Main extends Component {
                           rel="noopener noreferrer"
                           href={`https://dictionary.cambridge.org/dictionary/english/${formValue}`}
                         >
-
                           Cambridge vocabulary
                         </a>
                       ) : null}
@@ -207,7 +210,6 @@ class Main extends Component {
                   }));
                 }}
               >
-
                 Last words
               </Button>
             </div>
@@ -216,21 +218,18 @@ class Main extends Component {
           </Grid.Column>
         </Grid.Row>
 
-        {words.length ? (
+        {/* {words.length ? (
           <div className="main__link_repeat">
             <span>
-
               You have
-              {words.length}
-              {' '}
-words to repeat
+              {words.length} words to repeat
             </span>
             <Icon name="long arrow alternate right" />
             <Link to="/repeat"> Repeat words</Link>
           </div>
         ) : (
           <div />
-        )}
+        )} */}
       </Grid>
     );
   }
