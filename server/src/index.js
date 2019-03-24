@@ -5,10 +5,12 @@ import bodyParser from "body-parser";
 import * as route from "./controllers";
 import authenticate from "./utils/authenticate";
 import path from "path";
+require('dotenv').config()
 
 
 const app = express();
 app.use(express.static(path.resolve(__dirname + "/build_client")));
+
 mongoose.connect(
   process.env.MONGODB_URI,
   {
@@ -38,9 +40,12 @@ app.post("/api/forgot_password", route.forgotPassword);
 app.post("/api/reset_password", route.resetPassword);
 app.post("/api/error", route.errorHandler);
 
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname + "/build_client/index.html"));
-});
+if (process.env.NODE_ENV === "production") {
+  app.get("/*", (req, res) => {
+    res.sendFile(path.resolve(__dirname + "/build_client/index.html"));
+  });
+  
+}
 
 app.listen(process.env.PORT || 3000, () => console.log("server running"));
 module.exports = app;

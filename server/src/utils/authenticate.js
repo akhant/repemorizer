@@ -9,7 +9,7 @@ export default function(req, res, next) {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        res.status(500).send({ message: "Invakid token", success: false });
+        res.status(500).send({ message: "Invalid token", success: false });
       } else {
         User.findOne({ email: decoded.email })
           .then(user => {

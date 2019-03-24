@@ -7,3 +7,6 @@ client/src/assets/fonts
 build/
 test/
 errorLog.txt
+build_server
+build_client
+Procfile

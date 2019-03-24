@@ -8,8 +8,8 @@ import * as actions from "../actions";
 import Card from "./Card";
 import { languages } from "../constants";
 
-//TODO: protect form
-//TODO: separate the component
+// TODO: protect form
+// TODO: separate the component
 class Main extends Component {
   state = {
     formValue: "",
@@ -26,9 +26,9 @@ class Main extends Component {
     const { dictionary } = this.props;
     if (dictionary) {
       if (
-        this.state.formValue &&
-        dictionary.length &&
-        dictionary.length !== prevProps.dictionary.length
+        this.state.formValue
+        && dictionary.length
+        && dictionary.length !== prevProps.dictionary.length
       ) {
         this.setState({
           translation: dictionary[dictionary.length - 1].translation,
@@ -96,9 +96,10 @@ class Main extends Component {
     const { word, lang } = this.state;
     if (word && word.langFrom !== lang.from) {
       return (
-        //render a name of Language by using a language code
+        // render a name of Language by using a language code
         <div className="message_translated-from">
-          Translated from{" "}
+
+          Translated from
           {_.find(languages, o => o.value === word.langFrom).text}
         </div>
       );
@@ -157,43 +158,73 @@ class Main extends Component {
                 />
 
                 <Button type="sumbit" className="main__btn_translate" primary>
+
                   Translate
                 </Button>
               </Form.Group>
               <div className="main__output">
-                <div className="main__output_translation">{translation}</div>
+                <div className="main__output_translation">
+                  {translation}
+                  {translation && (
+                    <div className="vocabulary-links">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={`https://translate.google.com/?hl=${
+                          lang.to
+                        }&tab=TT#view=home&op=translate&sl=${lang.from}&tl=${
+                          lang.to
+                        }&text=${formValue}`}
+                      >
+
+                        Google translation
+                      </a>
+
+                      {lang.from === "en" ? (
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={`https://dictionary.cambridge.org/dictionary/english/${formValue}`}
+                        >
+
+                          Cambridge vocabulary
+                        </a>
+                      ) : null}
+                    </div>
+                  )}
+                </div>
                 {this.renderTranslatedFromAnotherLanguage()}
               </div>
             </Form>
           </Grid.Column>
-          <Grid.Column
-            mobile={16}
-            tablet={7}
-            computer={5}
-            largeScreen={4}
-            widescreen={4}
-          >
-          <div className="main__button-turn_wrapper">
-          
-          <Button
-              className="main__button-turn"
-              onClick={() => {
-                this.setState(prevState => ({
-                  hidden: !prevState.hidden
-                }));
-              }}
-            >
-              Last words
-            </Button>
+          <Grid.Column mobile={16} tablet={7} computer={5} largeScreen={4} widescreen={4}>
+            <div className="main__button-turn_wrapper">
+              <Button
+                className="main__button-turn"
+                onClick={() => {
+                  this.setState(prevState => ({
+                    hidden: !prevState.hidden
+                  }));
+                }}
+              >
+
+                Last words
+              </Button>
             </div>
-            
+
             {!hidden && <Card dictionary={dictionary} />}
           </Grid.Column>
         </Grid.Row>
 
         {words.length ? (
           <div className="main__link_repeat">
-            <span>You have {words.length} words to repeat</span>
+            <span>
+
+              You have
+              {words.length}
+              {' '}
+words to repeat
+            </span>
             <Icon name="long arrow alternate right" />
             <Link to="/repeat"> Repeat words</Link>
           </div>

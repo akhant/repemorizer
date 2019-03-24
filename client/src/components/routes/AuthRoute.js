@@ -10,7 +10,7 @@ const AuthRoute = ({ isAuthenticated, component: Component, ...rest }) => (
       isAuthenticated ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/confirmation" />
+        <Redirect to="/dashboard" />
       )
     }
   />

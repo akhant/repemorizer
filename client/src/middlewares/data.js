@@ -17,7 +17,9 @@ import {
   SHOW_MESSAGE
 } from "../constants";
 
-const serverUrl = "https://repemorizer.herokuapp.com/api";
+const serverUrl = process.env.NODE_ENV === "development"
+    ? "http://localhost:3000/api"
+    : "https://repemorizer.herokuapp.com/api";
 
 const Data = store => next => action => {
   const { type, payload } = action;
@@ -26,15 +28,19 @@ const Data = store => next => action => {
     case TRANSLATE:
       return axios
         .post(`${serverUrl}/translate`, { ...payload })
-        .then(res =>
+        .then(res => {
+          console.log(res);
           next({
             type: TRANSLATE,
             data: {
               ...res.data
             }
-          })
-        )
-        .catch(error => axios.post(`${serverUrl}/error`, { error }));
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          axios.post(`${serverUrl}/error`, { error });
+        });
 
     case GET_FIFTY:
       return axios

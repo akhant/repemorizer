@@ -130,27 +130,33 @@ body
                 width: 60% !important
                 font-size: 1rem !important
                 padding: 10px !important
-    
-    .main__output_translation 
-        padding: 30px !important
-        font-size: 2rem !important
-        width: 80% !important
-        max-height: 330px
-        position: absolute
-        top: 150px
-        left: -5%
-        text-align: center
-        margin: auto
-        overflow: auto
-        word-wrap: break-word
-        transition: 0.3s
-        @media (max-width: 997px)
-            left: 5%
-            top: 100px
-        .message_translated-from
+    .main__output
+        .main__output_translation 
+            padding: 30px !important
+            font-size: 2rem !important
+            width: 80% !important
+            max-height: 330px
             position: absolute
-            top: 0
-            left: 40%
+            z-index: 1
+            top: 150px
+            left: -5%
+            text-align: center
+            margin: auto
+            overflow: auto
+            word-wrap: break-word
+            transition: 0.3s
+            @media (max-width: 997px)
+                left: 5%
+                top: 100px
+            .vocabulary-links
+                font-size: 1rem
+                margin-top: 20px
+                a 
+                    margin-left: 10px
+            .message_translated-from
+                position: absolute
+                top: 0
+                left: 40%
     .main__btn_translate
         position: absolute
         left: 75%
@@ -175,7 +181,7 @@ body
         cursor: pointer
     .last-words
         height: 400px
-        filter: drop-shadow(10px 10px 15px #00000099)
+        filter: drop-shadow(10px 10px 15px #000099)
         @media (max-width: 767px)
             margin-top: 200px 
         .card

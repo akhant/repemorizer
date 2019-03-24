@@ -73,27 +73,25 @@ class CanvasAnimation {
     ];
 
     const font_size = 16;
-   
-    let columns = this.c.width / font_size;
-    let drops = [];
 
-    for (let x = 0; x < columns; x++)
-      drops[x] = Math.floor(Math.random() * this.c.height);
-  
+    const columns = this.c.width / font_size;
+    const drops = [];
+
+    for (let x = 0; x < columns; x++) drops[x] = Math.floor(Math.random() * this.c.height);
+
     function draw() {
       this.ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
       this.ctx.fillRect(0, 0, this.c.width, this.c.height);
 
       this.ctx.fillStyle = "#0074E8";
-      this.ctx.font = font_size + "px arial";
+      this.ctx.font = `${font_size}px arial`;
 
       for (let i = 0; i < drops.length; i++) {
-        let text = matrixWords[Math.floor(Math.random() * matrixWords.length)];
+        const text = matrixWords[Math.floor(Math.random() * matrixWords.length)];
 
         this.ctx.fillText(text, i * font_size, drops[i] * font_size);
 
-        if (drops[i] * font_size > this.c.height && Math.random() > 0.995)
-          drops[i] = 0;
+        if (drops[i] * font_size > this.c.height && Math.random() > 0.995) drops[i] = 0;
 
         drops[i]++;
       }
@@ -108,16 +106,17 @@ class CanvasAnimation {
   }
 }
 
-const anim = new CanvasAnimation();
-anim.go();
-
-window.onresize = function () {
-  anim.stop();
+if (document.getElementById("c")) {
+  const anim = new CanvasAnimation();
   anim.go();
-};
 
+  window.onresize = function () {
+    anim.stop();
+    anim.go();
+  };
+}
 
-//notification prototype
+// notification prototype
 /* (function() {
   function sendNotification(title, options) {
 // Проверим, поддерживает ли браузер HTML5 Notifications
@@ -150,7 +149,6 @@ alert('Вы запретили показывать уведомления'); //
 // Пользователь ранее отклонил наш запрос на показ уведомлений
 // В этом месте мы можем, но не будем его беспокоить. Уважайте решения своих пользователей.
 }
-
 
 
 sendNotification('Верните Линуса!', {

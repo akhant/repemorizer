@@ -4,6 +4,7 @@ import Dictionary from "../models/dictionary";
 import User from "../models/user";
 import { sendConfirmationEmail, sendResetPasswordEmail } from "../mailer";
 import fs from "fs";
+require('dotenv').config()
 
 const urlTranslate = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${
   process.env.YANDEX_API_KEY
@@ -11,15 +12,18 @@ const urlTranslate = `https://translate.yandex.net/api/v1.5/tr.json/translate?ke
 const urlDetect = `https://translate.yandex.net/api/v1.5/tr.json/detect?key=${
   process.env.YANDEX_API_KEY
 }`;
+const HOST = process.env.NODE_ENV === "development" ? 'http://localhost:8000' : "https://repemorizer.herokuapp.com"
 
 export async function translateText(req, res) {
+
   const reqText = req.body.text.toLowerCase();
   let from = req.body.lang.from;
   const to = req.body.lang.to;
 
   const resDetectLang = await axios.get(
     `${urlDetect}&text=${encodeURI(reqText)}$hint=${from}`
-  );
+    ).catch(error=> console.log(error))
+
   const { code, lang } = resDetectLang.data;
 
   if (code === 200) {
@@ -188,7 +192,7 @@ export function confirmation(req, res) {
     { confirmationToken: "", confirmed: true }
   ).then(user => {
     if (user) {
-      res.redirect(`https://repemorizer.herokuapp.com/confirmation`);
+      res.redirect(`${HOST}/confirmation`);
     } else {
       res.status(401).send({ message: "Invalid confirmation", success: false });
     }
@@ -236,7 +240,7 @@ export function resetPassword(req, res) {
 
 export function errorHandler(req, res) {
   const { config, response } = req.body.error;
-  console.log(config.headers);
+  console.log(response);
   const url = config.url;
   const headers = JSON.stringify(config.headers);
   const data = config.data;

@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const { Schema } = mongoose;
-
+const HOST = process.env.NODE_ENV === "development" ? 'http://localhost:3000' : "https://repemorizer.herokuapp.com"
 const User = new Schema({
   email: {
     type: String,
@@ -59,14 +59,14 @@ User.methods.generateJWT = function() {
 };
 
 User.methods.generateConfirmationUrl = function () {
-  return `https://repemorizer.herokuapp.com/api/confirmation/${this.confirmationToken}`;
+  return `${HOST}/api/confirmation/${this.confirmationToken}`;
 };
 User.methods.setResetPasswordToken = function () {
   this.resetPasswordToken = this.generateJWT();
 };
 
 User.methods.generateResetPasswordUrl = function () {
-  return `https://repemorizer.herokuapp.com/reset_password/${this.resetPasswordToken}`;
+  return `${HOST}/reset_password/${this.resetPasswordToken}`;
 };
 
 export default mongoose.model("User", User);
